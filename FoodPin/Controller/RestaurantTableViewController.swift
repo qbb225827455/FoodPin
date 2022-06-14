@@ -42,6 +42,8 @@ class RestaurantTableViewController: UITableViewController {
         
         super.viewDidLoad()
         
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
         tableView.dataSource = dataSource
         
         var snapshot = NSDiffableDataSourceSnapshot<Section, Restaurant>()
@@ -52,8 +54,6 @@ class RestaurantTableViewController: UITableViewController {
         
         tableView.separatorStyle = .none
         tableView.cellLayoutMarginsFollowReadableWidth = true
-        
-        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     // MARK: - UITableView 差異性資料源
@@ -181,5 +181,23 @@ class RestaurantTableViewController: UITableViewController {
         // 設定分享＆刪除為滑動動作
         let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, shareAction])       
         return swipeConfiguration
+    }
+    
+    // MARK: - 使用Segue傳遞資料
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "showRestaurantDetail" {
+            
+            if let indexPath = tableView.indexPathForSelectedRow {
+                
+                let destnationController = segue.destination as! RestaurantDetailViewController
+                
+                destnationController.restaurantImageName = self.restaurants[indexPath.row].image
+                destnationController.restaurantName = self.restaurants[indexPath.row].name
+                destnationController.restaurantType = self.restaurants[indexPath.row].type
+                destnationController.restaurantLocation = self.restaurants[indexPath.row].location
+            }
+        }
     }
 }

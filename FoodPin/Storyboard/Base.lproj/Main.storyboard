@@ -56,7 +56,7 @@
                                                                     <rect key="frame" x="20" y="55.999999999999972" width="27.666666666666671" height="14.333333333333329"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                                    <nil key="textColor"/>
+                                                                    <color key="textColor" systemColor="systemGrayColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
@@ -88,7 +88,7 @@
                                     <outlet property="nameLabel" destination="e58-fT-w0m" id="1Il-1e-MEf"/>
                                     <outlet property="thumbnaiImageView" destination="Vqy-et-ZUQ" id="cRr-P4-T4C"/>
                                     <outlet property="typeLabel" destination="I01-vc-hKl" id="quW-PR-Y12"/>
-                                    <segue destination="Q3m-2t-nqZ" kind="show" id="6Iq-hL-ODS"/>
+                                    <segue destination="Q3m-2t-nqZ" kind="show" identifier="showRestaurantDetail" id="6Iq-hL-ODS"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -111,22 +111,57 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xWc-1x-IDs">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xWc-1x-IDs">
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="jB7-iq-mWe">
+                                <rect key="frame" x="20" y="108" width="350" height="100"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bvP-eQ-vAe">
+                                        <rect key="frame" x="150" y="0.0" width="50" height="20"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SuM-UY-5xZ">
+                                        <rect key="frame" x="158.33333333333334" y="40" width="33.333333333333343" height="20"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yan-g9-iEw">
+                                        <rect key="frame" x="146" y="80" width="58" height="20"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGrayColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="50P-fh-DT1"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Wyq-n0-nr8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="xWc-1x-IDs" firstAttribute="top" secondItem="mE8-ET-0rk" secondAttribute="top" id="VsP-jf-1o5"/>
-                            <constraint firstItem="xWc-1x-IDs" firstAttribute="leading" secondItem="Wyq-n0-nr8" secondAttribute="leading" id="WbK-8f-kqV"/>
-                            <constraint firstItem="xWc-1x-IDs" firstAttribute="trailing" secondItem="Wyq-n0-nr8" secondAttribute="trailing" id="h3A-Yh-NEm"/>
-                            <constraint firstAttribute="bottom" secondItem="xWc-1x-IDs" secondAttribute="bottom" id="zVv-zU-cXv"/>
+                            <constraint firstItem="jB7-iq-mWe" firstAttribute="top" secondItem="Wyq-n0-nr8" secondAttribute="top" constant="20" id="0td-jx-oK6"/>
+                            <constraint firstItem="jB7-iq-mWe" firstAttribute="leading" secondItem="Wyq-n0-nr8" secondAttribute="leading" constant="20" id="IJv-VA-H9v"/>
+                            <constraint firstItem="Wyq-n0-nr8" firstAttribute="trailing" secondItem="jB7-iq-mWe" secondAttribute="trailing" constant="20" id="NBm-Dv-6xI"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="UEM-Jf-osL"/>
                     <connections>
                         <outlet property="restaurantImageView" destination="xWc-1x-IDs" id="5vL-5O-SHP"/>
+                        <outlet property="restaurantLocationLabel" destination="yan-g9-iEw" id="hFw-lj-YSe"/>
+                        <outlet property="restaurantNameLabel" destination="bvP-eQ-vAe" id="qfj-sA-dQk"/>
+                        <outlet property="restaurantTypeLabel" destination="SuM-UY-5xZ" id="aa3-yL-4ER"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T3G-4n-5bW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -156,6 +191,9 @@
         <image name="heart.fill" catalog="system" width="128" height="109"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
