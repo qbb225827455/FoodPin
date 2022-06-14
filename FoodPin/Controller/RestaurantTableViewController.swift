@@ -139,7 +139,7 @@ class RestaurantTableViewController: UITableViewController {
             (action, sourceView, completionHandler) in
             
             var snapshot = self.dataSource.snapshot()
-            snapshot.appendItems([restaurant])
+            snapshot.deleteItems([restaurant])
             self.dataSource.apply(snapshot, animatingDifferences: true)
             
             completionHandler(true)
@@ -199,5 +199,29 @@ class RestaurantTableViewController: UITableViewController {
                 destnationController.restaurantLocation = self.restaurants[indexPath.row].location
             }
         }
+    }
+
+    // MARK: - 處理「向右滑動」動作
+    
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let addFavoriteAction = UIContextualAction(style: .destructive, title: "") {
+            (action, sourceView, completionHandler) in
+            
+            let cell = tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
+            cell.favoriteImage.isHidden = self.restaurants[indexPath.row].isFavorite
+            
+            self.restaurants[indexPath.row].isFavorite = cell.favoriteImage.isHidden ? false : true
+            
+            completionHandler(true)
+        }
+        addFavoriteAction.backgroundColor = UIColor.systemYellow
+        addFavoriteAction.image = UIImage(systemName: self.restaurants[indexPath.row].isFavorite ? "heart.slash.fill" : "heart.fill")
+        
+        
+        // 設定為滑動動作
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [addFavoriteAction])
+       
+        return swipeConfiguration
     }
 }
