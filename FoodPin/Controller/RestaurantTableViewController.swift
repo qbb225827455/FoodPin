@@ -43,8 +43,27 @@ class RestaurantTableViewController: UITableViewController {
         super.viewDidLoad()
         
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.backButtonTitle = ""
+        navigationController?.hidesBarsOnSwipe = true
+        
+        //custom navigation bar appearance
+        if let appearence = navigationController?.navigationBar.standardAppearance {
+            
+            appearence.configureWithTransparentBackground()
+            
+            if let customFont = UIFont(name: "Nunito-Bold", size: 45.0) {
+                
+                appearence.titleTextAttributes = [.foregroundColor: UIColor(red: 218/255, green: 96/255, blue: 51/255, alpha: 1)]
+                appearence.largeTitleTextAttributes = [.foregroundColor: UIColor(red: 218/255, green: 96/255, blue: 51/255, alpha: 1), .font: customFont]
+            }
+            
+            navigationController?.navigationBar.standardAppearance = appearence
+            navigationController?.navigationBar.compactAppearance = appearence
+            navigationController?.navigationBar.scrollEdgeAppearance = appearence
+        }
         
         tableView.dataSource = dataSource
+        tableView.separatorStyle = .none
         
         var snapshot = NSDiffableDataSourceSnapshot<Section, Restaurant>()
         snapshot.appendSections([.all])
@@ -52,11 +71,19 @@ class RestaurantTableViewController: UITableViewController {
     
         dataSource.apply(snapshot, animatingDifferences: false)
         
-        tableView.separatorStyle = .none
         tableView.cellLayoutMarginsFollowReadableWidth = true
     }
     
-    // MARK: - UITableView 差異性資料源
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.hidesBarsOnSwipe = true
+        
+        //ch.15=exercise1
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    // MARK: - UITableView Diffable Data Source
     
     func configureDataSource() -> RestaurantDiffableDataSource {
         
@@ -81,49 +108,6 @@ class RestaurantTableViewController: UITableViewController {
         return dataSource
     }
     
-//    // MARK: - UITableViewDelegate protocol
-//
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//
-//        let optionMenu = UIAlertController(title: nil, message: "What do you want to do?", preferredStyle: .actionSheet)
-//        if let popoverController = optionMenu.popoverPresentationController {
-//
-//            if let cell = tableView.cellForRow(at: indexPath) {
-//
-//                popoverController.sourceView = cell
-//                popoverController.sourceRect = cell.bounds
-//            }
-//        }
-//
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-//        optionMenu.addAction(cancelAction)
-//
-//        let reserveActionHandler = { (action:UIAlertAction!) -> Void in
-//
-//            let alertMesg = UIAlertController(title: "Not available yet", message: "Sorry, this feature is not available yet. Please retry later.", preferredStyle: .alert)
-//            alertMesg.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//
-//            self.present(alertMesg, animated: true)
-//        }
-//        let reserveAction = UIAlertAction(title: "Reserve a table", style: .default, handler:reserveActionHandler)
-//        optionMenu.addAction(reserveAction)
-//
-//        let favoriteAction = UIAlertAction(title: self.restaurants[indexPath.row].isFavorite ? "Remove from favorites" : "Mark as favorite", style: .default, handler: {
-//
-//            (action:UIAlertAction) -> Void in
-//
-//            let cell = tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
-//            cell.favoriteImage.isHidden = self.restaurants[indexPath.row].isFavorite
-//
-//            self.restaurants[indexPath.row].isFavorite = self.restaurants[indexPath.row].isFavorite ? false : true
-//        })
-//        optionMenu.addAction(favoriteAction)
-//
-//        present(optionMenu, animated: true, completion: nil)
-//
-//        tableView.deselectRow(at: indexPath, animated: false)
-//    }
-//
     // MARK: - 處理「向左滑動」動作
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -221,4 +205,47 @@ class RestaurantTableViewController: UITableViewController {
             }
         }
     }
+    
+    //    // MARK: - UITableViewDelegate protocol
+    //
+    //    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    //
+    //        let optionMenu = UIAlertController(title: nil, message: "What do you want to do?", preferredStyle: .actionSheet)
+    //        if let popoverController = optionMenu.popoverPresentationController {
+    //
+    //            if let cell = tableView.cellForRow(at: indexPath) {
+    //
+    //                popoverController.sourceView = cell
+    //                popoverController.sourceRect = cell.bounds
+    //            }
+    //        }
+    //
+    //        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+    //        optionMenu.addAction(cancelAction)
+    //
+    //        let reserveActionHandler = { (action:UIAlertAction!) -> Void in
+    //
+    //            let alertMesg = UIAlertController(title: "Not available yet", message: "Sorry, this feature is not available yet. Please retry later.", preferredStyle: .alert)
+    //            alertMesg.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+    //
+    //            self.present(alertMesg, animated: true)
+    //        }
+    //        let reserveAction = UIAlertAction(title: "Reserve a table", style: .default, handler:reserveActionHandler)
+    //        optionMenu.addAction(reserveAction)
+    //
+    //        let favoriteAction = UIAlertAction(title: self.restaurants[indexPath.row].isFavorite ? "Remove from favorites" : "Mark as favorite", style: .default, handler: {
+    //
+    //            (action:UIAlertAction) -> Void in
+    //
+    //            let cell = tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
+    //            cell.favoriteImage.isHidden = self.restaurants[indexPath.row].isFavorite
+    //
+    //            self.restaurants[indexPath.row].isFavorite = self.restaurants[indexPath.row].isFavorite ? false : true
+    //        })
+    //        optionMenu.addAction(favoriteAction)
+    //
+    //        present(optionMenu, animated: true, completion: nil)
+    //
+    //        tableView.deselectRow(at: indexPath, animated: false)
+    //    }
 }
