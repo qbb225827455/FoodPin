@@ -290,10 +290,10 @@
             </objects>
             <point key="canvasLocation" x="1656.9230769230769" y="54.739336492890992"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navgation Controller-->
         <scene sceneID="ZcI-Jr-MGH">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dUB-85-q5i" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dUB-85-q5i" customClass="NavgationController" customModule="FoodPin" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bUv-Ao-vWa">
                         <rect key="frame" x="0.0" y="44" width="390" height="44"/>
