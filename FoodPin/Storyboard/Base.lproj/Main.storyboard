@@ -112,7 +112,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="jT9-sA-6Lx">
-                                <rect key="frame" x="0.0" y="88" width="390" height="756"/>
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="AJV-UL-WOR" userLabel="Header View" customClass="RestaurantDetailHeaderView" customModule="FoodPin" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="390" height="445"/>
@@ -274,10 +274,10 @@
                         <viewLayoutGuide key="safeArea" id="Wyq-n0-nr8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="jT9-sA-6Lx" firstAttribute="top" secondItem="Wyq-n0-nr8" secondAttribute="top" id="J2n-fx-6Zy"/>
-                            <constraint firstItem="Wyq-n0-nr8" firstAttribute="trailing" secondItem="jT9-sA-6Lx" secondAttribute="trailing" id="PIW-j6-gBI"/>
-                            <constraint firstAttribute="bottom" secondItem="jT9-sA-6Lx" secondAttribute="bottom" id="SPV-y3-5OF"/>
-                            <constraint firstItem="jT9-sA-6Lx" firstAttribute="leading" secondItem="Wyq-n0-nr8" secondAttribute="leading" id="ezs-oY-Mgm"/>
+                            <constraint firstItem="jT9-sA-6Lx" firstAttribute="trailing" secondItem="Wyq-n0-nr8" secondAttribute="trailing" id="A2x-4s-B3g"/>
+                            <constraint firstItem="jT9-sA-6Lx" firstAttribute="top" secondItem="mE8-ET-0rk" secondAttribute="top" id="bkF-OR-8YH"/>
+                            <constraint firstItem="jT9-sA-6Lx" firstAttribute="leading" secondItem="Wyq-n0-nr8" secondAttribute="leading" id="idb-T3-P3V"/>
+                            <constraint firstAttribute="bottom" secondItem="jT9-sA-6Lx" secondAttribute="bottom" id="ou7-4E-ChR"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="UEM-Jf-osL"/>
