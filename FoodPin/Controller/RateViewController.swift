@@ -12,6 +12,7 @@ class RateViewController: UIViewController {
     var restaurant = Restaurant()
     
     @IBOutlet var backgroundImageView: UIImageView!
+    @IBOutlet var rateBtn: [UIButton]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,5 +25,36 @@ class RateViewController: UIViewController {
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = view.bounds
         backgroundImageView.addSubview(blurEffectView)
+        
+        let moveRightTransform = CGAffineTransform.init(translationX: 600, y: 0)
+        let scaleUpTransform = CGAffineTransform.init(scaleX: 5, y: 5)
+        let moveScaleTransform = scaleUpTransform.concatenating(moveRightTransform)
+        
+        // 隱藏RateBtn
+        for rateBtn in rateBtn {
+            rateBtn.alpha = 0
+            rateBtn.transform = moveScaleTransform
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+      
+        var delay = 0.1
+        
+        
+        for rateBtn in rateBtn {
+            
+            UIView.animate(withDuration: 0.4, delay: delay, options: [], animations: {
+                rateBtn.alpha = 1.0
+                rateBtn.transform = .identity
+            }, completion: nil)
+            
+//            UIView.animate(withDuration: 0.4, delay: delay, usingSpringWithDamping: 0.2, initialSpringVelocity: 0.3, options: [], animations: {
+//                rateBtn.alpha = 1.0
+//                rateBtn.transform = .identity
+//            }, completion: nil)
+            
+            delay = delay + 0.1
+        }
     }
 }
