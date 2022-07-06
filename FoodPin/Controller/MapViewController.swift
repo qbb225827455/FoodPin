@@ -32,10 +32,10 @@ class MapViewController: UIViewController {
             }
             
             if let placemarks = placemaarks {
-                //取得第一個地點標記
+                // 取得第一個地點標記
                 let placemark = placemarks[0]
                 
-                //加上標記
+                // 加上標記
                 let annotation = MKPointAnnotation()
                 annotation.title = self.resaurant.name
                 annotation.subtitle = self.resaurant.type
@@ -43,7 +43,7 @@ class MapViewController: UIViewController {
                 if let location = placemark.location {
                     annotation.coordinate = location.coordinate
                     
-                    //顯示標記
+                    // 顯示標記
                     self.mapView.showAnnotations([annotation], animated: true)
                     self.mapView.selectAnnotation(annotation, animated: true)
                 }

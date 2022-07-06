@@ -46,7 +46,7 @@ class RestaurantTableViewController: UITableViewController {
         navigationItem.backButtonTitle = ""
         navigationController?.hidesBarsOnSwipe = true
         
-        //custom navigation bar appearance
+        // custom navigation bar appearance
         if let appearence = navigationController?.navigationBar.standardAppearance {
             
             appearence.configureWithTransparentBackground()
@@ -79,7 +79,7 @@ class RestaurantTableViewController: UITableViewController {
         
         navigationController?.hidesBarsOnSwipe = true
         
-        //ch.15=exercise1
+        // ch.15=exercise1
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
