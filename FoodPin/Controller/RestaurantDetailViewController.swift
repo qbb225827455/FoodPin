@@ -14,6 +14,10 @@ class RestaurantDetailViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var headerView: RestaurantDetailHeaderView!
     
+    @IBAction func close(segue: UIStoryboardSegue) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,9 +55,18 @@ class RestaurantDetailViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showMap" {
+        switch segue.identifier {
+        
+        case "showMap":
             let destinationController = segue.destination as! MapViewController
             destinationController.resaurant = self.restaurant
+             
+        case "showRateView":
+            let destinationController = segue.destination as! RateViewController
+            destinationController.restaurant = self.restaurant
+            
+        default:
+            break
         }
     }
 }
