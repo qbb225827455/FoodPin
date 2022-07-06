@@ -126,6 +126,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="445"/>
                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6H0-cr-9o9">
+                                            <rect key="frame" x="320" y="373" width="50" height="52"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="52" id="RJQ-85-QWm"/>
+                                                <constraint firstAttribute="width" constant="50" id="oy0-by-YUH"/>
+                                            </constraints>
+                                        </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="uIs-L8-gu0">
                                             <rect key="frame" x="20" y="368" width="220" height="57"/>
                                             <subviews>
@@ -161,7 +168,9 @@
                                     <constraints>
                                         <constraint firstItem="uIs-L8-gu0" firstAttribute="leading" secondItem="AJV-UL-WOR" secondAttribute="leading" constant="20" id="2kH-MU-Is0"/>
                                         <constraint firstItem="SmI-Oc-ph2" firstAttribute="top" secondItem="AJV-UL-WOR" secondAttribute="top" id="44Y-Lv-IpA"/>
+                                        <constraint firstAttribute="bottom" secondItem="6H0-cr-9o9" secondAttribute="bottom" constant="20" id="5Pp-jm-COe"/>
                                         <constraint firstAttribute="bottom" secondItem="93V-bd-dsp" secondAttribute="bottom" id="5wc-Yj-ske"/>
+                                        <constraint firstAttribute="trailing" secondItem="6H0-cr-9o9" secondAttribute="trailing" constant="20" id="9hl-al-UY1"/>
                                         <constraint firstAttribute="bottom" secondItem="uIs-L8-gu0" secondAttribute="bottom" constant="20" id="G9I-eD-rK5"/>
                                         <constraint firstAttribute="trailing" secondItem="93V-bd-dsp" secondAttribute="trailing" id="IYD-4m-asP"/>
                                         <constraint firstItem="93V-bd-dsp" firstAttribute="top" secondItem="AJV-UL-WOR" secondAttribute="top" id="LAH-cv-Rw5"/>
@@ -338,6 +347,7 @@
                     <size key="freeformSize" width="390" height="1400"/>
                     <connections>
                         <outlet property="headerView" destination="AJV-UL-WOR" id="z1y-Gs-Cy3"/>
+                        <outlet property="rateImageView" destination="6H0-cr-9o9" id="g3m-ew-Hm4"/>
                         <outlet property="tableView" destination="jT9-sA-6Lx" id="tps-Vh-r2d"/>
                     </connections>
                 </viewController>
@@ -378,6 +388,9 @@
                                             <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle0"/>
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <segue destination="kie-WL-iNX" kind="unwind" identifier="awesome" unwindAction="rateRestaurantWithSegue:" id="zJO-Dt-Wp6"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nJG-75-Lyc">
                                         <rect key="frame" x="0.0" y="106" width="175.66666666666666" height="97"/>
@@ -386,6 +399,9 @@
                                             <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle0"/>
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <segue destination="kie-WL-iNX" kind="unwind" identifier="good" unwindAction="rateRestaurantWithSegue:" id="mA3-48-2fU"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xg0-3j-2DV">
                                         <rect key="frame" x="0.0" y="213" width="189.33333333333334" height="100"/>
@@ -394,6 +410,9 @@
                                             <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle0"/>
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <segue destination="kie-WL-iNX" kind="unwind" identifier="okay" unwindAction="rateRestaurantWithSegue:" id="Y8C-h8-4Cz"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgY-Yw-maN">
                                         <rect key="frame" x="0.0" y="323" width="154.66666666666666" height="101"/>
@@ -402,6 +421,9 @@
                                             <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle0"/>
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <segue destination="kie-WL-iNX" kind="unwind" identifier="bad" unwindAction="rateRestaurantWithSegue:" id="F3I-Mk-wVl"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZBC-PP-5Al">
                                         <rect key="frame" x="0.0" y="434" width="200" height="117"/>
@@ -410,6 +432,9 @@
                                             <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle0"/>
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <segue destination="kie-WL-iNX" kind="unwind" identifier="terrible" unwindAction="rateRestaurantWithSegue:" id="Yvu-59-N1y"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -429,6 +454,7 @@
                     </view>
                     <connections>
                         <outlet property="backgroundImageView" destination="8Uu-gs-vtu" id="Xuz-OM-XcD"/>
+                        <outlet property="closeBtn" destination="jrK-ZS-hF8" id="sgD-3g-XB0"/>
                         <outletCollection property="rateBtn" destination="fgC-qL-EbB" collectionClass="NSMutableArray" id="iNN-rC-8Ev"/>
                         <outletCollection property="rateBtn" destination="nJG-75-Lyc" collectionClass="NSMutableArray" id="Ev7-dC-BZM"/>
                         <outletCollection property="rateBtn" destination="Xg0-3j-2DV" collectionClass="NSMutableArray" id="zkf-FK-Hbq"/>

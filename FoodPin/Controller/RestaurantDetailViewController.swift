@@ -13,10 +13,7 @@ class RestaurantDetailViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var headerView: RestaurantDetailHeaderView!
-    
-    @IBAction func close(segue: UIStoryboardSegue) {
-        dismiss(animated: true, completion: nil)
-    }
+    @IBOutlet var rateImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +51,8 @@ class RestaurantDetailViewController: UIViewController {
         return .lightContent
     }
     
+    // MARK: - Navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         
@@ -68,6 +67,33 @@ class RestaurantDetailViewController: UIViewController {
         default:
             break
         }
+    }
+    
+    @IBAction func close(segue: UIStoryboardSegue) {
+        dismiss(animated: true, completion: nil)
+    }
+    @IBAction func rateRestaurant(segue: UIStoryboardSegue) {
+        
+        guard let identifier = segue.identifier else {
+            return
+        }
+        
+        dismiss(animated: true, completion: {
+            
+            if let rating = Restaurant.Rating(rawValue: identifier) {
+                self.restaurant.rating = rating
+                self.rateImageView.image = UIImage(named: rating.image)
+            }
+            
+            let scaleTransform = CGAffineTransform.init(scaleX: 0.1, y: 0.1)
+            self.rateImageView.transform = scaleTransform
+            self.rateImageView.alpha = 0
+            
+            UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.7, options: [], animations: {
+                self.rateImageView.transform = .identity
+                self.rateImageView.alpha = 1
+            }, completion: nil)
+        })
     }
 }
 

@@ -191,7 +191,7 @@ class RestaurantTableViewController: UITableViewController {
         return swipeConfiguration
     }
     
-    // MARK: - 使用Segue傳遞資料
+    // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         

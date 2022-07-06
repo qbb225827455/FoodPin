@@ -31,6 +31,7 @@ class RateViewController: UIViewController {
         let moveScaleTransform = scaleUpTransform.concatenating(moveRightTransform)
         
         // 隱藏RateBtn
+        // Make the button invisible and move off the screen
         for rateBtn in rateBtn {
             rateBtn.alpha = 0
             rateBtn.transform = moveScaleTransform
