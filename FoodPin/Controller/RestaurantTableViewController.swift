@@ -101,9 +101,16 @@ class RestaurantTableViewController: UITableViewController {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") {
             (action, sourceView, completionHandler) in
             
-            var snapshot = self.dataSource.snapshot()
-            snapshot.deleteItems([restaurant])
-            self.dataSource.apply(snapshot, animatingDifferences: true)
+            if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                let context = appDelegate.persistentContainer.viewContext
+                
+                // delete item
+                context.delete(restaurant)
+                appDelegate.saveContext()
+                
+                // update view
+                self.updateSnapshot(animatingChange: true)
+            }
             
             completionHandler(true)
         }
@@ -157,6 +164,10 @@ class RestaurantTableViewController: UITableViewController {
             cell.favoriteImage.isHidden = self.restaurants[indexPath.row].isFavorite
             
             self.restaurants[indexPath.row].isFavorite = cell.favoriteImage.isHidden ? false : true
+            
+            if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                appDelegate.saveContext()
+            }
             
             completionHandler(true)
         }
