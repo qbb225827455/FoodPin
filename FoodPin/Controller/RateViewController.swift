@@ -19,7 +19,7 @@ class RateViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        backgroundImageView.image = UIImage(named: restaurant.image)
+        backgroundImageView.image = UIImage(data: restaurant.image)
         
         // 背景模糊
         let blurEffect = UIBlurEffect(style: .dark)

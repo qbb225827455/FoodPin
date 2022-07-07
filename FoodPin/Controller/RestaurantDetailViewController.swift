@@ -25,13 +25,14 @@ class RestaurantDetailViewController: UIViewController {
         navigationItem.backButtonTitle = ""
         
         tableView.contentInsetAdjustmentBehavior = .never
+        tableView.separatorStyle = .none
 
         tableView.delegate = self
         tableView.dataSource = self
         
         headerView.nameLabel.text = restaurant.name
         headerView.typeLabel.text = restaurant.type
-        headerView.headerImageView.image = UIImage(named: restaurant.image)
+        headerView.headerImageView.image = UIImage(data: restaurant.image)
         
         let heartImage = restaurant.isFavorite ? "heart.fill" : "heart"
         headerView.heartButton.tintColor = restaurant.isFavorite ? .systemYellow : .white
@@ -72,6 +73,7 @@ class RestaurantDetailViewController: UIViewController {
     @IBAction func closeRateView(segue: UIStoryboardSegue) {
         dismiss(animated: true, completion: nil)
     }
+    
     @IBAction func rateRestaurant(segue: UIStoryboardSegue) {
         
         guard let identifier = segue.identifier else {
@@ -111,7 +113,7 @@ extension RestaurantDetailViewController: UITableViewDataSource, UITableViewDele
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailTextCell.self), for: indexPath) as! RestaurantDetailTextCell
             
-            cell.descriptionLabel.text = restaurant.description
+            cell.descriptionLabel.text = restaurant.summary
             
             return cell
         

@@ -64,6 +64,7 @@ class RestaurantTableViewController: UITableViewController {
         
         tableView.dataSource = dataSource
         tableView.separatorStyle = .none
+        tableView.cellLayoutMarginsFollowReadableWidth = true
         
         var snapshot = NSDiffableDataSourceSnapshot<Section, Restaurant>()
         snapshot.appendSections([.all])
@@ -98,7 +99,7 @@ class RestaurantTableViewController: UITableViewController {
                 cell.nameLabel?.text = restaurant.name
                 cell.locationLabel?.text = restaurant.location
                 cell.typeLabel?.text = restaurant.type
-                cell.thumbnaiImageView?.image = UIImage(named: restaurant.image)
+                cell.thumbnaiImageView?.image = UIImage(data: restaurant.image)
                 cell.favoriteImage.isHidden = restaurant.isFavorite ? false : true
                 
                 return cell
@@ -138,7 +139,7 @@ class RestaurantTableViewController: UITableViewController {
             let defaultText = "Just checking in at " + restaurant.name
             let activityController: UIActivityViewController
             
-            if let imageToShare = UIImage(named: restaurant.image) {
+            if let imageToShare = UIImage(data: restaurant.image) {
                 
                 activityController = UIActivityViewController(activityItems: [defaultText, imageToShare], applicationActivities: nil)
             }
