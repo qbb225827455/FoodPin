@@ -14,6 +14,7 @@ class RestaurantDetailViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var headerView: RestaurantDetailHeaderView!
     @IBOutlet var rateImageView: UIImageView!
+    @IBOutlet var favBarBtn: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,11 +35,14 @@ class RestaurantDetailViewController: UIViewController {
         headerView.typeLabel.text = restaurant.type
         headerView.headerImageView.image = UIImage(data: restaurant.image)
         
+        // configure favorite button
         let heartImage = restaurant.isFavorite ? "heart.fill" : "heart"
-        headerView.heartButton.tintColor = restaurant.isFavorite ? .systemYellow : .white
-        headerView.heartButton.setImage(UIImage(systemName: heartImage), for: .normal)
+        favBarBtn.tintColor = restaurant.isFavorite ? .systemYellow : .white
+        favBarBtn.image = UIImage(systemName: heartImage)
         
-        tableView.separatorStyle = .none
+        if let rating = restaurant.rating {
+            rateImageView.image = UIImage(named: rating.image)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -85,6 +89,10 @@ class RestaurantDetailViewController: UIViewController {
             if let rating = Restaurant.Rating(rawValue: identifier) {
                 self.restaurant.rating = rating
                 self.rateImageView.image = UIImage(named: rating.image)
+                
+                if let appDelegate = (UIApplication.shared.delegate as? AppDelegate){
+                    appDelegate.saveContext()
+                }
             }
             
             let scaleTransform = CGAffineTransform.init(scaleX: 0.1, y: 0.1)
@@ -96,6 +104,22 @@ class RestaurantDetailViewController: UIViewController {
                 self.rateImageView.alpha = 1
             }, completion: nil)
         })
+    }
+
+    @IBAction func favBtn(sender: UIBarButtonItem) {
+        
+        restaurant.isFavorite = !restaurant.isFavorite
+        
+        // save change
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            appDelegate.saveContext()
+        }
+        
+        // configure favorite button
+        let heartImage = restaurant.isFavorite ? "heart.fill" : "heart"
+        //let heartImageConfiguration = UIImage.SymbolConfiguration(pointSize: 25, weight: .semibold)
+        favBarBtn.tintColor = restaurant.isFavorite ? .systemYellow : .white
+        favBarBtn.image = UIImage(systemName: heartImage)
     }
 }
 
