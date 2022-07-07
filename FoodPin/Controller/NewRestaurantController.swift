@@ -46,6 +46,13 @@ class NewRestaurantController: UITableViewController {
         }
     }
     
+    @IBOutlet var photoImageView: UIImageView! {
+        didSet {
+            photoImageView.layer.cornerRadius = 10.0
+            photoImageView.layer.masksToBounds = true
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -63,6 +70,50 @@ class NewRestaurantController: UITableViewController {
             navigationController?.navigationBar.scrollEdgeAppearance = appearence
         }
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            
+            let photoSourceRequestController = UIAlertController(title: "", message: "Choose your photo source", preferredStyle: .actionSheet)
+            
+            let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: { action in
+                if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                    
+                    let imagePicker = UIImagePickerController()
+                    imagePicker.allowsEditing = false
+                    imagePicker.sourceType = .camera
+                    imagePicker.delegate = self
+                    
+                    self.present(imagePicker, animated: true, completion: nil)
+                }
+            })
+            
+            let photoLibaryAction = UIAlertAction(title: "Photo library", style: .default, handler: { action in
+                if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+                    
+                    let imagePicker = UIImagePickerController()
+                    imagePicker.allowsEditing = false
+                    imagePicker.sourceType = .photoLibrary
+                    imagePicker.delegate = self
+                    
+                    self.present(imagePicker, animated: true, completion: nil)
+                }
+            })
+            
+            photoSourceRequestController.addAction(cameraAction)
+            photoSourceRequestController.addAction(photoLibaryAction)
+            
+            // for ipad
+            if let popoverController = photoSourceRequestController.popoverPresentationController {
+                if let cell = tableView.cellForRow(at: indexPath) {
+                    popoverController.sourceView = cell
+                    popoverController.sourceRect = cell.bounds
+                }
+            }
+            
+            self.present(photoSourceRequestController, animated: true, completion: nil)
+        }
+    }
 
 }
 
@@ -74,5 +125,20 @@ extension NewRestaurantController: UITextFieldDelegate {
         }
         
         return true
+    }
+}
+
+extension NewRestaurantController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let selectImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            
+            photoImageView.image = selectImage
+            photoImageView.contentMode = .scaleToFill
+            photoImageView.clipsToBounds = true
+        }
+        
+        dismiss(animated: true, completion: nil)
     }
 }
