@@ -205,6 +205,10 @@ class RestaurantTableViewController: UITableViewController {
             }
         }
     }
+
+    @IBAction func closeBtn(segue: UIStoryboardSegue) {
+        dismiss(animated: true, completion: nil)
+    }
     
     //    // MARK: - UITableViewDelegate protocol
     //
