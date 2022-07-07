@@ -380,17 +380,12 @@
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="newphoto" translatesAutoresizingMaskIntoConstraints="NO" id="zGs-CH-RZi">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="newphoto" translatesAutoresizingMaskIntoConstraints="NO" id="zGs-CH-RZi">
                                                     <rect key="frame" x="20" y="11" width="350" height="178"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 </imageView>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="zGs-CH-RZi" secondAttribute="trailing" id="DJf-Nk-iM0"/>
-                                                <constraint firstItem="zGs-CH-RZi" firstAttribute="top" secondItem="85b-5y-M7U" secondAttribute="topMargin" id="IUb-sQ-feL"/>
-                                                <constraint firstItem="zGs-CH-RZi" firstAttribute="leading" secondItem="85b-5y-M7U" secondAttribute="leadingMargin" id="mcB-H4-XLf"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="zGs-CH-RZi" secondAttribute="bottom" id="nNh-lH-dke"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="90" id="bh7-Oy-Adh">

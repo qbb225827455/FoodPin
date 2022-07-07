@@ -69,6 +69,29 @@ class NewRestaurantController: UITableViewController {
             navigationController?.navigationBar.compactAppearance = appearence
             navigationController?.navigationBar.scrollEdgeAppearance = appearence
         }
+        
+        // get superview layout
+        let margins = photoImageView.superview!.layoutMarginsGuide
+        
+        // disable auto resizing to use auto layout programmatically
+        photoImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Pin the leading edge of the image view to the margin's leading edge
+        photoImageView.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+
+        // Pin the trailing edge of the image view to the margin's trailing edge
+        photoImageView.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+
+        // Pin the top edge of the image view to the margin's top edge
+        photoImageView.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
+
+        // Pin the bottom edge of the image view to the margin's bottom edge
+        photoImageView.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
+        
+        // hide keyboard
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
