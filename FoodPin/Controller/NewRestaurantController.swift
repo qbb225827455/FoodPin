@@ -53,6 +53,35 @@ class NewRestaurantController: UITableViewController {
         }
     }
     
+    // MARK: - NewRestaurantView saveBtn Action
+
+    @IBAction func saveNewRestaurant(sender: UIButton) {
+        
+        if nameTextField.text == "" || typeTextField.text == "" || addressTextField.text == "" || phoneTextField.text == "" || descriptionTextView.text == "" {
+            
+            let alertController = UIAlertController(title: "!", message: "We can't proceed because one of the fields is blank. Please note that all fields are required", preferredStyle: .alert)
+            
+            let alertAct = UIAlertAction(title: "OK", style: .default, handler: nil)
+            
+            alertController.addAction(alertAct)
+            self.present(alertController, animated: true, completion: nil)
+        }
+        else {
+            
+            print("Name: \(nameTextField.text!)")
+            print("Name: \(typeTextField.text!)")
+            print("Name: \(addressTextField.text!)")
+            print("Name: \(phoneTextField.text!)")
+            print("Name: \(descriptionTextView.text!)")
+            
+            dismiss(animated: true, completion: nil)
+        }
+        
+        
+    }
+    
+    // MARK: - View life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

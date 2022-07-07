@@ -206,7 +206,7 @@ class RestaurantTableViewController: UITableViewController {
         }
     }
 
-    @IBAction func closeBtn(segue: UIStoryboardSegue) {
+    @IBAction func closeAddView(segue: UIStoryboardSegue) {
         dismiss(animated: true, completion: nil)
     }
     

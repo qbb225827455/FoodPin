@@ -420,7 +420,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="90" id="vpv-Yj-lCd">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="90" id="vpv-Yj-lCd">
                                         <rect key="frame" x="0.0" y="334.66666603088379" width="390" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vpv-Yj-lCd" id="zGt-vw-Uez">
@@ -452,7 +452,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="90" id="TRG-Xm-Q7L">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="90" id="TRG-Xm-Q7L">
                                         <rect key="frame" x="0.0" y="424.66666603088379" width="390" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TRG-Xm-Q7L" id="Fiw-bj-EjW">
@@ -484,7 +484,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="90" id="tW3-jf-UIt">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="90" id="tW3-jf-UIt">
                                         <rect key="frame" x="0.0" y="514.66666603088379" width="390" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tW3-jf-UIt" id="Kcz-Wp-1aV">
@@ -516,7 +516,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="150" id="cPu-fx-7NC">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="150" id="cPu-fx-7NC">
                                         <rect key="frame" x="0.0" y="604.66666603088379" width="390" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cPu-fx-7NC" id="9rH-rG-07L">
@@ -562,7 +562,13 @@
                         <barButtonItem key="leftBarButtonItem" image="xmark" catalog="system" id="oCY-jM-JK1">
                             <color key="tintColor" systemColor="labelColor"/>
                             <connections>
-                                <segue destination="lkL-LA-Tel" kind="unwind" unwindAction="closeBtnWithSegue:" id="8nb-aS-0TC"/>
+                                <segue destination="lkL-LA-Tel" kind="unwind" unwindAction="closeAddViewWithSegue:" id="JAY-8Z-g5W"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="4UL-qC-3t2">
+                            <color key="tintColor" name="NavBarTitle"/>
+                            <connections>
+                                <action selector="saveNewRestaurantWithSender:" destination="6Js-pq-TKA" id="5gG-fP-28K"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -601,7 +607,7 @@
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="kie-WL-iNX" kind="unwind" unwindAction="closeWithSegue:" id="6eS-6c-tAg"/>
+                                    <segue destination="kie-WL-iNX" kind="unwind" unwindAction="closeRateViewWithSegue:" id="Tyi-eB-1oh"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="0Dp-7k-GGA">

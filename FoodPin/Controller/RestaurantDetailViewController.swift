@@ -69,7 +69,7 @@ class RestaurantDetailViewController: UIViewController {
         }
     }
     
-    @IBAction func close(segue: UIStoryboardSegue) {
+    @IBAction func closeRateView(segue: UIStoryboardSegue) {
         dismiss(animated: true, completion: nil)
     }
     @IBAction func rateRestaurant(segue: UIStoryboardSegue) {
