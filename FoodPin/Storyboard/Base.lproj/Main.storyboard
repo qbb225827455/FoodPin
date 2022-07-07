@@ -106,8 +106,23 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="emptyRestaurantView" destination="GMT-bB-CYO" id="jQQ-Gp-kPr"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eTm-I1-7jQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="Wh6-a7-czp">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="emptydata" translatesAutoresizingMaskIntoConstraints="NO" id="GMT-bB-CYO">
+                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="KmU-pg-fVh"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="854" y="55"/>
         </scene>
@@ -158,18 +173,6 @@
                                                 </label>
                                             </subviews>
                                         </stackView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MZC-2p-h96">
-                                            <rect key="frame" x="341" y="18" width="31" height="31"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="31" id="DC9-3J-0Fw"/>
-                                                <constraint firstAttribute="height" constant="31" id="t8n-qu-abg"/>
-                                            </constraints>
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system">
-                                                <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="30"/>
-                                            </buttonConfiguration>
-                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
@@ -183,15 +186,12 @@
                                         <constraint firstItem="93V-bd-dsp" firstAttribute="top" secondItem="AJV-UL-WOR" secondAttribute="top" id="LAH-cv-Rw5"/>
                                         <constraint firstItem="93V-bd-dsp" firstAttribute="leading" secondItem="AJV-UL-WOR" secondAttribute="leading" id="LDC-Xe-hEa"/>
                                         <constraint firstAttribute="trailing" secondItem="SmI-Oc-ph2" secondAttribute="trailing" id="Zcj-Rb-2Ev"/>
-                                        <constraint firstItem="MZC-2p-h96" firstAttribute="top" secondItem="AJV-UL-WOR" secondAttribute="topMargin" constant="10" id="aLG-VO-t7x"/>
                                         <constraint firstAttribute="trailing" secondItem="uIs-L8-gu0" secondAttribute="trailing" constant="150" id="bqx-Lo-fmn"/>
                                         <constraint firstAttribute="bottom" secondItem="SmI-Oc-ph2" secondAttribute="bottom" id="rUn-Ky-0YE"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="MZC-2p-h96" secondAttribute="trailing" constant="10" id="xLZ-WU-B0g"/>
                                         <constraint firstItem="SmI-Oc-ph2" firstAttribute="leading" secondItem="AJV-UL-WOR" secondAttribute="leading" id="yeL-WP-qYw"/>
                                     </constraints>
                                     <connections>
                                         <outlet property="headerImageView" destination="93V-bd-dsp" id="TF7-mE-EC4"/>
-                                        <outlet property="heartButton" destination="MZC-2p-h96" id="KFz-S3-yfg"/>
                                         <outlet property="nameLabel" destination="6KP-gz-kgO" id="EVJ-Gc-qQj"/>
                                         <outlet property="typeLabel" destination="SWC-C7-Q6N" id="MKY-mT-wkD"/>
                                     </connections>
@@ -350,9 +350,16 @@
                             <constraint firstAttribute="bottom" secondItem="jT9-sA-6Lx" secondAttribute="bottom" id="ou7-4E-ChR"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="UEM-Jf-osL"/>
+                    <navigationItem key="navigationItem" id="UEM-Jf-osL">
+                        <barButtonItem key="rightBarButtonItem" image="heart" catalog="system" id="0aA-1i-c7T">
+                            <connections>
+                                <action selector="favBtnWithSender:" destination="Q3m-2t-nqZ" id="31C-Wx-ses"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <size key="freeformSize" width="390" height="1400"/>
                     <connections>
+                        <outlet property="favBarBtn" destination="0aA-1i-c7T" id="u7K-UK-Y0Y"/>
                         <outlet property="headerView" destination="AJV-UL-WOR" id="z1y-Gs-Cy3"/>
                         <outlet property="rateImageView" destination="6H0-cr-9o9" id="g3m-ew-Hm4"/>
                         <outlet property="tableView" destination="jT9-sA-6Lx" id="tps-Vh-r2d"/>
@@ -360,7 +367,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T3G-4n-5bW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1658" y="77"/>
+            <point key="canvasLocation" x="1656.9230769230769" y="76.777251184834114"/>
         </scene>
         <!--New Restaurant-->
         <scene sceneID="73r-G2-gfR">
@@ -769,6 +776,7 @@
     <resources>
         <image name="angry" width="78" height="103"/>
         <image name="cool" width="78" height="83"/>
+        <image name="emptydata" width="1440" height="1024"/>
         <image name="happy" width="78" height="86"/>
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
