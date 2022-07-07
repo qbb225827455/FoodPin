@@ -49,6 +49,19 @@ class NewRestaurantController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // custom navigation bar appearance
+        if let appearence = navigationController?.navigationBar.standardAppearance {
+            
+            if let customFont = UIFont(name: "Nunito-Bold", size: 45.0) {
+                
+                appearence.titleTextAttributes = [.foregroundColor: UIColor(named: "NavBarTitle")!]
+                appearence.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "NavBarTitle")!, .font: customFont]
+            }
+            
+            navigationController?.navigationBar.standardAppearance = appearence
+            navigationController?.navigationBar.compactAppearance = appearence
+            navigationController?.navigationBar.scrollEdgeAppearance = appearence
+        }
     }
 
 }
