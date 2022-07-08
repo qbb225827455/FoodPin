@@ -12,6 +12,7 @@ class RestaurantTableViewController: UITableViewController {
 
     var restaurants: [Restaurant] = []
     var fetchResultController: NSFetchedResultsController<Restaurant>!
+    var searchController: UISearchController!
     
     lazy var dataSource = configureDataSource()
 
@@ -21,6 +22,8 @@ class RestaurantTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        searchController = UISearchController(searchResultsController: nil)
         
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.backButtonTitle = ""
@@ -41,11 +44,20 @@ class RestaurantTableViewController: UITableViewController {
         }
         
         tableView.dataSource = dataSource
+        tableView.tableHeaderView = searchController.searchBar
         tableView.separatorStyle = .none
         tableView.cellLayoutMarginsFollowReadableWidth = true
         
         tableView.backgroundView = emptyRestaurantView
         tableView.backgroundView?.isHidden = restaurants.count == 0 ? false : true
+        
+        searchController.searchResultsUpdater = self
+        // 控制底下內容於搜尋期間是否變為黯淡狀態
+        searchController.obscuresBackgroundDuringPresentation = false
+        
+        searchController.searchBar.tintColor = UIColor(named: "NavBarTitle")
+        searchController.searchBar.placeholder = "Search..."
+        //searchController.searchBar.prompt = "123"
         
         fetchRestaurantData()
     }
@@ -86,6 +98,11 @@ class RestaurantTableViewController: UITableViewController {
     // MARK: - 處理「向左滑動」動作
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        // 搜尋列使用時停用滑動動作
+        if searchController.isActive {
+            return UISwipeActionsConfiguration()
+        }
         
         // 取得所選餐廳
         guard let restaurant = self.dataSource.itemIdentifier(for: indexPath) else {
@@ -149,6 +166,11 @@ class RestaurantTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
+        // 搜尋列使用時停用滑動動作
+        if searchController.isActive {
+            return UISwipeActionsConfiguration()
+        }
+        
         let addFavoriteAction = UIContextualAction(style: .destructive, title: "") {
             (action, sourceView, completionHandler) in
             
@@ -188,12 +210,16 @@ class RestaurantTableViewController: UITableViewController {
     
     // MARK: - Core data
     
-    func fetchRestaurantData() {
+    func fetchRestaurantData(searchText: String = "") {
         
         // get data
         let fetchRequest: NSFetchRequest<Restaurant> = Restaurant.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        if !searchText.isEmpty {
+            fetchRequest.predicate = NSPredicate(format: "name CONTAINS[c] %@ OR location CONTAINS[c] %@", searchText, searchText)
+        }
         
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
             let context = appDelegate.persistentContainer.viewContext
@@ -203,7 +229,7 @@ class RestaurantTableViewController: UITableViewController {
             
             do {
                 try fetchResultController.performFetch()
-                updateSnapshot()
+                updateSnapshot(animatingChange: searchText.isEmpty ? false : true)
             }
             catch {
                 print(error)
@@ -272,5 +298,17 @@ extension RestaurantTableViewController: NSFetchedResultsControllerDelegate {
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         updateSnapshot()
+    }
+}
+
+extension RestaurantTableViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        
+        guard let searchText = searchController.searchBar.text else {
+            return
+        }
+        
+        fetchRestaurantData(searchText: searchText)
     }
 }
