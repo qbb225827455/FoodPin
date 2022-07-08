@@ -63,14 +63,12 @@ class NewRestaurantController: UITableViewController {
         if nameTextField.text == "" || typeTextField.text == "" || addressTextField.text == "" || phoneTextField.text == "" || descriptionTextView.text == "" {
             
             let alertController = UIAlertController(title: "!", message: "We can't proceed because one of the fields is blank. Please note that all fields are required", preferredStyle: .alert)
-            
             let alertAct = UIAlertAction(title: "OK", style: .default, handler: nil)
             
             alertController.addAction(alertAct)
             self.present(alertController, animated: true, completion: nil)
         }
         else {
-            
             if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
                 
                 restaurant = Restaurant(context: appDelegate.persistentContainer.viewContext)
@@ -102,9 +100,7 @@ class NewRestaurantController: UITableViewController {
 
         // custom navigation bar appearance
         if let appearence = navigationController?.navigationBar.standardAppearance {
-            
             if let customFont = UIFont(name: "Nunito-Bold", size: 45.0) {
-                
                 appearence.titleTextAttributes = [.foregroundColor: UIColor(named: "NavBarTitle")!]
                 appearence.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "NavBarTitle")!, .font: customFont]
             }
@@ -119,16 +115,12 @@ class NewRestaurantController: UITableViewController {
         
         // disable auto resizing to use auto layout programmatically
         photoImageView.translatesAutoresizingMaskIntoConstraints = false
-        
         // Pin the leading edge of the image view to the margin's leading edge
         photoImageView.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
-
         // Pin the trailing edge of the image view to the margin's trailing edge
         photoImageView.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
-
         // Pin the top edge of the image view to the margin's top edge
         photoImageView.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
-
         // Pin the bottom edge of the image view to the margin's bottom edge
         photoImageView.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
         
@@ -139,13 +131,13 @@ class NewRestaurantController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         if indexPath.row == 0 {
-            
             let photoSourceRequestController = UIAlertController(title: "", message: "Choose your photo source", preferredStyle: .actionSheet)
-            
+
             let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: { action in
+                
                 if UIImagePickerController.isSourceTypeAvailable(.camera) {
-                    
                     let imagePicker = UIImagePickerController()
                     imagePicker.allowsEditing = false
                     imagePicker.sourceType = .camera
@@ -154,10 +146,11 @@ class NewRestaurantController: UITableViewController {
                     self.present(imagePicker, animated: true, completion: nil)
                 }
             })
+            photoSourceRequestController.addAction(cameraAction)
             
             let photoLibaryAction = UIAlertAction(title: "Photo library", style: .default, handler: { action in
+                
                 if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-                    
                     let imagePicker = UIImagePickerController()
                     imagePicker.allowsEditing = false
                     imagePicker.sourceType = .photoLibrary
@@ -166,8 +159,6 @@ class NewRestaurantController: UITableViewController {
                     self.present(imagePicker, animated: true, completion: nil)
                 }
             })
-            
-            photoSourceRequestController.addAction(cameraAction)
             photoSourceRequestController.addAction(photoLibaryAction)
             
             // for ipad
@@ -185,7 +176,9 @@ class NewRestaurantController: UITableViewController {
 }
 
 extension NewRestaurantController: UITextFieldDelegate {
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
         if let nextTextField = view.viewWithTag(textField.tag + 1) {
             textField.resignFirstResponder()
             nextTextField.becomeFirstResponder()

@@ -193,6 +193,7 @@
                                     <connections>
                                         <outlet property="headerImageView" destination="93V-bd-dsp" id="TF7-mE-EC4"/>
                                         <outlet property="nameLabel" destination="6KP-gz-kgO" id="EVJ-Gc-qQj"/>
+                                        <outlet property="rateImageView" destination="6H0-cr-9o9" id="eov-h7-hgV"/>
                                         <outlet property="typeLabel" destination="SWC-C7-Q6N" id="MKY-mT-wkD"/>
                                     </connections>
                                 </view>
@@ -361,7 +362,6 @@
                     <connections>
                         <outlet property="favBarBtn" destination="0aA-1i-c7T" id="u7K-UK-Y0Y"/>
                         <outlet property="headerView" destination="AJV-UL-WOR" id="z1y-Gs-Cy3"/>
-                        <outlet property="rateImageView" destination="6H0-cr-9o9" id="g3m-ew-Hm4"/>
                         <outlet property="tableView" destination="jT9-sA-6Lx" id="tps-Vh-r2d"/>
                     </connections>
                 </viewController>

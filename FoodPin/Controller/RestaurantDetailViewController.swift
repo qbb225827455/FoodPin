@@ -13,16 +13,15 @@ class RestaurantDetailViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var headerView: RestaurantDetailHeaderView!
-    @IBOutlet var rateImageView: UIImageView!
     @IBOutlet var favBarBtn: UIBarButtonItem!
+    
+    // MARK: - View life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.hidesBarsOnSwipe = false
-        
-        // ch.16=exercise3
         navigationItem.backButtonTitle = ""
         
         tableView.contentInsetAdjustmentBehavior = .never
@@ -41,7 +40,7 @@ class RestaurantDetailViewController: UIViewController {
         favBarBtn.image = UIImage(systemName: heartImage)
         
         if let rating = restaurant.rating {
-            rateImageView.image = UIImage(named: rating.image)
+            self.headerView.rateImageView.image = UIImage(named: rating.image)
         }
     }
     
@@ -53,14 +52,15 @@ class RestaurantDetailViewController: UIViewController {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
+        
         return .lightContent
     }
     
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
         
+        switch segue.identifier {
         case "showMap":
             let destinationController = segue.destination as! MapViewController
             destinationController.resaurant = self.restaurant
@@ -88,7 +88,7 @@ class RestaurantDetailViewController: UIViewController {
             
             if let rating = Restaurant.Rating(rawValue: identifier) {
                 self.restaurant.rating = rating
-                self.rateImageView.image = UIImage(named: rating.image)
+                self.headerView.rateImageView.image = UIImage(named: rating.image)
                 
                 if let appDelegate = (UIApplication.shared.delegate as? AppDelegate){
                     appDelegate.saveContext()
@@ -96,12 +96,12 @@ class RestaurantDetailViewController: UIViewController {
             }
             
             let scaleTransform = CGAffineTransform.init(scaleX: 0.1, y: 0.1)
-            self.rateImageView.transform = scaleTransform
-            self.rateImageView.alpha = 0
+            self.headerView.rateImageView.transform = scaleTransform
+            self.headerView.rateImageView.alpha = 0
             
             UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.7, options: [], animations: {
-                self.rateImageView.transform = .identity
-                self.rateImageView.alpha = 1
+                self.headerView.rateImageView.transform = .identity
+                self.headerView.rateImageView.alpha = 1
             }, completion: nil)
         })
     }
@@ -126,24 +126,20 @@ class RestaurantDetailViewController: UIViewController {
 extension RestaurantDetailViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch indexPath.row {
-            
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailTextCell.self), for: indexPath) as! RestaurantDetailTextCell
-            
             cell.descriptionLabel.text = restaurant.summary
             
             return cell
         
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TwoColumnCell.self), for: indexPath) as! TwoColumnCell
-            
             cell.column1TitleLabel.text = "Address"
             cell.column1TextLabel.text = restaurant.location
             cell.column2TitleLabel.text = "Phone"

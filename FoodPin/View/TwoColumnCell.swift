@@ -9,32 +9,35 @@ import UIKit
 
 class TwoColumnCell: UITableViewCell {
 
+    // address title label
     @IBOutlet var column1TitleLabel: UILabel! {
         didSet {
-            
             column1TitleLabel.text = column1TitleLabel.text?.uppercased()
             column1TitleLabel.numberOfLines = 0
             column1TitleLabel.adjustsFontForContentSizeCategory = true
         }
     }
+    
+    // full address text label
     @IBOutlet var column1TextLabel: UILabel! {
         didSet {
-
             column1TextLabel.numberOfLines = 0
             column1TextLabel.adjustsFontForContentSizeCategory = true
         }
     }
+    
+    // phone title label
     @IBOutlet var column2TitleLabel: UILabel! {
         didSet {
-            
             column2TitleLabel.text = column2TitleLabel.text?.uppercased()
             column2TitleLabel.numberOfLines = 0
             column2TitleLabel.adjustsFontForContentSizeCategory = true
         }
     }
+    
+    // phone number text label
     @IBOutlet var column2TextLabel: UILabel! {
         didSet {
-            
             column2TextLabel.numberOfLines = 0
             column2TextLabel.adjustsFontForContentSizeCategory = true
         }

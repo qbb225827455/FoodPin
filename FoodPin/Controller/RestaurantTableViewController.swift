@@ -20,7 +20,6 @@ class RestaurantTableViewController: UITableViewController {
     // MARK: - 視圖控制生命週期
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -29,11 +28,9 @@ class RestaurantTableViewController: UITableViewController {
         
         // custom navigation bar appearance
         if let appearence = navigationController?.navigationBar.standardAppearance {
-            
             appearence.configureWithTransparentBackground()
             
             if let customFont = UIFont(name: "Nunito-Bold", size: 45.0) {
-                
                 appearence.titleTextAttributes = [.foregroundColor: UIColor(named: "NavBarTitle")!]
                 appearence.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "NavBarTitle")!, .font: customFont]
             }
@@ -57,8 +54,6 @@ class RestaurantTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         navigationController?.hidesBarsOnSwipe = true
-        
-        // ch.15=exercise1
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
@@ -72,6 +67,7 @@ class RestaurantTableViewController: UITableViewController {
             
             tableView: tableView,
             cellProvider: {tableView, IndexPath, restaurant in
+                
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellIDentifier, for: IndexPath) as! RestaurantTableViewCell
                 
                 cell.nameLabel?.text = restaurant.name
@@ -93,7 +89,6 @@ class RestaurantTableViewController: UITableViewController {
         
         // 取得所選餐廳
         guard let restaurant = self.dataSource.itemIdentifier(for: indexPath) else {
-            
             return UISwipeActionsConfiguration()
         }
         
@@ -125,18 +120,15 @@ class RestaurantTableViewController: UITableViewController {
             let activityController: UIActivityViewController
             
             if let imageToShare = UIImage(data: restaurant.image) {
-                
                 activityController = UIActivityViewController(activityItems: [defaultText, imageToShare], applicationActivities: nil)
             }
             else {
-                
                 activityController = UIActivityViewController(activityItems: [defaultText], applicationActivities: nil)
             }
             
+            // for ipad
             if let popoverController = activityController.popoverPresentationController {
-               
                 if let cell = tableView.cellForRow(at: indexPath) {
-                    
                     popoverController.sourceView = cell
                     popoverController.sourceRect = cell.bounds
                 }
@@ -174,23 +166,17 @@ class RestaurantTableViewController: UITableViewController {
         addFavoriteAction.backgroundColor = UIColor.systemYellow
         addFavoriteAction.image = UIImage(systemName: self.restaurants[indexPath.row].isFavorite ? "heart.slash.fill" : "heart.fill")
         
-        
         // 設定為滑動動作
         let swipeConfiguration = UISwipeActionsConfiguration(actions: [addFavoriteAction])
-       
         return swipeConfiguration
     }
     
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if segue.identifier == "showRestaurantDetail" {
-            
             if let indexPath = tableView.indexPathForSelectedRow {
-                
                 let destnationController = segue.destination as! RestaurantDetailViewController
-                
                 destnationController.restaurant = self.restaurants[indexPath.row]
             }
         }
@@ -210,8 +196,8 @@ class RestaurantTableViewController: UITableViewController {
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-            
             let context = appDelegate.persistentContainer.viewContext
+            
             fetchResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
             fetchResultController.delegate = self
             
@@ -237,12 +223,9 @@ class RestaurantTableViewController: UITableViewController {
         snapshot.appendItems(restaurants, toSection: .all)
         
         dataSource.apply(snapshot, animatingDifferences: animatingChange)
-      
         tableView.backgroundView?.isHidden = restaurants.count == 0 ? false : true
     }
-    
-    //    // MARK: - UITableViewDelegate protocol
-    //
+
     //    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     //
     //        let optionMenu = UIAlertController(title: nil, message: "What do you want to do?", preferredStyle: .actionSheet)

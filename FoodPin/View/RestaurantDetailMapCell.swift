@@ -33,8 +33,6 @@ class RestaurantDetailMapCell: UITableViewCell {
     func configure(location: String) {
         // 取得位置
         let geoCoder = CLGeocoder()
-        
-        print(location)
         geoCoder.geocodeAddressString(location, completionHandler: {placemaarks, error in
             if let error = error {
                 print(error.localizedDescription)
@@ -47,7 +45,6 @@ class RestaurantDetailMapCell: UITableViewCell {
                 
                 // 加上標記
                 let annotation = MKPointAnnotation()
-                
                 if let location = placemark.location {
                     // 顯示標記
                     annotation.coordinate = location.coordinate

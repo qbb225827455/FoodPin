@@ -11,8 +11,8 @@ class RestaurantTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         // Initialization code
-        self.tintColor = .systemYellow
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -20,7 +20,6 @@ class RestaurantTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
     
     @IBOutlet var nameLabel: UILabel! {
         didSet {
@@ -28,12 +27,14 @@ class RestaurantTableViewCell: UITableViewCell {
             nameLabel.numberOfLines = 0
         }
     }
+    
     @IBOutlet var locationLabel: UILabel! {
         didSet {
             locationLabel.adjustsFontForContentSizeCategory = true
             locationLabel.numberOfLines = 0
         }
     }
+    
     @IBOutlet var typeLabel: UILabel! {
         didSet {
             typeLabel.adjustsFontForContentSizeCategory = true
@@ -47,6 +48,7 @@ class RestaurantTableViewCell: UITableViewCell {
             thumbnaiImageView.clipsToBounds = true
         }
     }
+    
     @IBOutlet var favoriteImage: UIImageView!
     
 }

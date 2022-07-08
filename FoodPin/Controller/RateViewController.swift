@@ -18,7 +18,6 @@ class RateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
         backgroundImageView.image = UIImage(data: restaurant.image)
         
         // 背景模糊
@@ -46,19 +45,15 @@ class RateViewController: UIViewController {
       
         var delay = 0.1
         
-        
         for rateBtn in rateBtn {
-            
             UIView.animate(withDuration: 0.4, delay: delay, options: [], animations: {
                 rateBtn.alpha = 1.0
                 rateBtn.transform = .identity
             }, completion: nil)
-            
 //            UIView.animate(withDuration: 0.4, delay: delay, usingSpringWithDamping: 0.2, initialSpringVelocity: 0.3, options: [], animations: {
 //                rateBtn.alpha = 1.0
 //                rateBtn.transform = .identity
 //            }, completion: nil)
-            
             delay = delay + 0.1
         }
         

@@ -24,7 +24,6 @@ class MapViewController: UIViewController {
         mapView.showsTraffic = true
 
         let geoCoder = CLGeocoder()
-        
         geoCoder.geocodeAddressString(resaurant.location, completionHandler: {placemaarks, error in
             if let error = error {
                 print(error)
@@ -69,7 +68,7 @@ extension MapViewController: MKMapViewDelegate {
             annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
         }
         
-        annotationView?.glyphText = "👾"
+        annotationView?.glyphText = "🍽"
         //annotationView?.glyphImage = UIImage(systemName: "arrowtriangle.down.circle")
         annotationView?.markerTintColor = UIColor.orange
         

@@ -21,7 +21,6 @@ public class Restaurant: NSManagedObject {
     @NSManaged public var image: Data
     @NSManaged public var ratingText: String?
     @NSManaged public var isFavorite: Bool
-    
 }
 
 extension Restaurant {
