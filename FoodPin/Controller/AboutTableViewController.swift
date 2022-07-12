@@ -6,84 +6,90 @@
 //
 
 import UIKit
+import SafariServices
 
 class AboutTableViewController: UITableViewController {
+    
+    enum Section {
+        case feedback
+        case followus
+    }
+    
+    struct LinkItem: Hashable {
+        var text: String
+        var link: String
+        var image: String
+    }
+    
+    var sectionContent = [ [LinkItem(text: "Rate us on App Store", link: "https://www.apple.com/ios/app-store/", image: "store"),
+                            LinkItem(text: "Tell us your feedback", link: "http://www.appcoda.com/contact", image: "chat")],
+                           
+                           [LinkItem(text: "Twitter", link: "https://twitter.com/", image: "twitter"),
+                            LinkItem(text: "Facebook", link: "https://facebook.com/", image: "facebook"),
+                            LinkItem(text: "Instagram", link: "https://www.instagram.com/", image: "instagram")]
+                            ]
 
+    lazy var dataSource = configureDataSource()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        if let appearence = navigationController?.navigationBar.standardAppearance {
+            appearence.configureWithTransparentBackground()
+            
+            if let customFont = UIFont(name: "Nunito-Bold", size: 45.0) {
+                appearence.titleTextAttributes = [.foregroundColor: UIColor(named: "NavBarTitle")!]
+                appearence.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "NavBarTitle")!, .font: customFont]
+            }
+            
+            navigationController?.navigationBar.standardAppearance = appearence
+            navigationController?.navigationBar.compactAppearance = appearence
+            navigationController?.navigationBar.scrollEdgeAppearance = appearence
+        }
+        
+        tableView.dataSource = dataSource
+        updateSnapshot()
+    }
     }
 
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+    // MARK: - Diffable Data Source
+    
+    func configureDataSource() -> UITableViewDiffableDataSource<Section, LinkItem> {
+        
+        let cellIdentifier = "aboutcell"
+        
+        let dataSource = UITableViewDiffableDataSource<Section, LinkItem>(
+            
+            tableView: tableView,
+            cellProvider: {tableView, indexPath, linkItem in
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        
+                cell.textLabel?.text = linkItem.text
+                cell.imageView?.image = UIImage(named: linkItem.image)
+                
+                return cell
+            })
+        
+        return dataSource
     }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+    
+    func updateSnapshot() {
+        
+        // create snapshot and populate the data
+        var snapshot = NSDiffableDataSourceSnapshot<Section, LinkItem>()
+        snapshot.appendSections([.feedback, .followus])
+        snapshot.appendItems(sectionContent[0], toSection: .feedback)
+        snapshot.appendItems(sectionContent[1], toSection: .followus)
+        
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
+    
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
     }
-    */
 
 }
