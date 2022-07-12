@@ -212,6 +212,7 @@ class RestaurantTableViewController: UITableViewController {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destnationController = segue.destination as! RestaurantDetailViewController
                 destnationController.restaurant = self.restaurants[indexPath.row]
+                destnationController.hidesBottomBarWhenPushed = true
             }
         }
     }

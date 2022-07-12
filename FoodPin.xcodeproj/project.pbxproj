@@ -23,6 +23,8 @@
 		EE3C1D9E287D5EF000823D6B /* WalkthroughContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3C1D9D287D5EF000823D6B /* WalkthroughContentViewController.swift */; };
 		EE3C1DA0287D60D900823D6B /* WalkthroughPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3C1D9F287D60D900823D6B /* WalkthroughPageViewController.swift */; };
 		EE3C1DA2287D680700823D6B /* WalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3C1DA1287D680700823D6B /* WalkthroughViewController.swift */; };
+		EE3C1DA5287DD33C00823D6B /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE3C1DA3287DD33C00823D6B /* About.storyboard */; };
+		EE3C1DA7287DD59600823D6B /* Discover.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE3C1DA6287DD59600823D6B /* Discover.storyboard */; };
 		EE417E1428732BA900274C66 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE417E1328732BA900274C66 /* UIColor+Ext.swift */; };
 		EE417E162873300400274C66 /* NavgationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE417E152873300400274C66 /* NavgationController.swift */; };
 		EE417E192874513100274C66 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE417E182874513100274C66 /* MapKit.framework */; };
@@ -56,6 +58,8 @@
 		EE3C1D9D287D5EF000823D6B /* WalkthroughContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughContentViewController.swift; sourceTree = "<group>"; };
 		EE3C1D9F287D60D900823D6B /* WalkthroughPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughPageViewController.swift; sourceTree = "<group>"; };
 		EE3C1DA1287D680700823D6B /* WalkthroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughViewController.swift; sourceTree = "<group>"; };
+		EE3C1DA4287DD33C00823D6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = FoodPin/Storyboard/Base.lproj/About.storyboard; sourceTree = "<group>"; };
+		EE3C1DA6287DD59600823D6B /* Discover.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Discover.storyboard; sourceTree = "<group>"; };
 		EE417E1328732BA900274C66 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		EE417E152873300400274C66 /* NavgationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavgationController.swift; sourceTree = "<group>"; };
 		EE417E182874513100274C66 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -192,6 +196,8 @@
 			isa = PBXGroup;
 			children = (
 				EE1300102848BD0E00F5EB49 /* Main.storyboard */,
+				EE3C1DA3287DD33C00823D6B /* About.storyboard */,
+				EE3C1DA6287DD59600823D6B /* Discover.storyboard */,
 				EE3C1D9B287C4FA000823D6B /* Onboarding.storyboard */,
 				EE1300152848BD0E00F5EB49 /* LaunchScreen.storyboard */,
 			);
@@ -257,6 +263,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE4409AC2858D59C0059AAB2 /* Nunito-Bold.ttf in Resources */,
+				EE3C1DA7287DD59600823D6B /* Discover.storyboard in Resources */,
+				EE3C1DA5287DD33C00823D6B /* About.storyboard in Resources */,
 				EE4409AB2858D59C0059AAB2 /* Nunito-Regular.ttf in Resources */,
 				EE1300172848BD0E00F5EB49 /* LaunchScreen.storyboard in Resources */,
 				EE3C1D9C287C4FA000823D6B /* Onboarding.storyboard in Resources */,
@@ -313,6 +321,14 @@
 				EE1300162848BD0E00F5EB49 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		EE3C1DA3287DD33C00823D6B /* About.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EE3C1DA4287DD33C00823D6B /* Base */,
+			);
+			name = About.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
