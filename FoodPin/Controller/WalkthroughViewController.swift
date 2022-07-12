@@ -43,6 +43,7 @@ class WalkthroughViewController: UIViewController {
     }
     
     @IBAction func skipBtnTapped(sender: UIButton) {
+        UserDefaults.standard.set(true, forKey: "hasViewedWalkthrough")
         dismiss(animated: true, completion: nil)
     }
     
