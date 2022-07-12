@@ -26,6 +26,7 @@
 		EE3C1DA5287DD33C00823D6B /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE3C1DA3287DD33C00823D6B /* About.storyboard */; };
 		EE3C1DA7287DD59600823D6B /* Discover.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE3C1DA6287DD59600823D6B /* Discover.storyboard */; };
 		EE3C1DA9287DD97400823D6B /* AboutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3C1DA8287DD97400823D6B /* AboutTableViewController.swift */; };
+		EE3C1DAB287DE9C600823D6B /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3C1DAA287DE9C600823D6B /* WebViewController.swift */; };
 		EE417E1428732BA900274C66 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE417E1328732BA900274C66 /* UIColor+Ext.swift */; };
 		EE417E162873300400274C66 /* NavgationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE417E152873300400274C66 /* NavgationController.swift */; };
 		EE417E192874513100274C66 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE417E182874513100274C66 /* MapKit.framework */; };
@@ -62,6 +63,7 @@
 		EE3C1DA4287DD33C00823D6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = FoodPin/Storyboard/Base.lproj/About.storyboard; sourceTree = "<group>"; };
 		EE3C1DA6287DD59600823D6B /* Discover.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Discover.storyboard; sourceTree = "<group>"; };
 		EE3C1DA8287DD97400823D6B /* AboutTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTableViewController.swift; sourceTree = "<group>"; };
+		EE3C1DAA287DE9C600823D6B /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		EE417E1328732BA900274C66 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		EE417E152873300400274C66 /* NavgationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavgationController.swift; sourceTree = "<group>"; };
 		EE417E182874513100274C66 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -169,6 +171,7 @@
 				EE3C1D9F287D60D900823D6B /* WalkthroughPageViewController.swift */,
 				EE3C1DA1287D680700823D6B /* WalkthroughViewController.swift */,
 				EE3C1DA8287DD97400823D6B /* AboutTableViewController.swift */,
+				EE3C1DAA287DE9C600823D6B /* WebViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				EEDF6AC5285772A000D44A18 /* RestaurantDiffableDataSource.swift in Sources */,
 				EE4409A028587C900059AAB2 /* RestaurantDetailViewController.swift in Sources */,
 				EE4409A82858A93A0059AAB2 /* RestaurantDetailHeaderView.swift in Sources */,
+				EE3C1DAB287DE9C600823D6B /* WebViewController.swift in Sources */,
 				EE3C1D9E287D5EF000823D6B /* WalkthroughContentViewController.swift in Sources */,
 				EE3C1D952876E72600823D6B /* RoundedTextField.swift in Sources */,
 				EE3C1DA2287D680700823D6B /* WalkthroughViewController.swift in Sources */,

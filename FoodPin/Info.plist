@@ -32,9 +32,16 @@
 			</array>
 		</dict>
 	</dict>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoadsInWebContent</key>
+		<true/>
+	</dict>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleLightContent</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>CFBundleIdentifier</key>
+	<string>View controller-based status bar appearance</string>
 </dict>
 </plist>
