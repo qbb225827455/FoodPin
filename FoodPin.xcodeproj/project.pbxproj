@@ -25,6 +25,7 @@
 		EE3C1DA2287D680700823D6B /* WalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3C1DA1287D680700823D6B /* WalkthroughViewController.swift */; };
 		EE3C1DA5287DD33C00823D6B /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE3C1DA3287DD33C00823D6B /* About.storyboard */; };
 		EE3C1DA7287DD59600823D6B /* Discover.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE3C1DA6287DD59600823D6B /* Discover.storyboard */; };
+		EE3C1DA9287DD97400823D6B /* AboutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3C1DA8287DD97400823D6B /* AboutTableViewController.swift */; };
 		EE417E1428732BA900274C66 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE417E1328732BA900274C66 /* UIColor+Ext.swift */; };
 		EE417E162873300400274C66 /* NavgationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE417E152873300400274C66 /* NavgationController.swift */; };
 		EE417E192874513100274C66 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE417E182874513100274C66 /* MapKit.framework */; };
@@ -60,6 +61,7 @@
 		EE3C1DA1287D680700823D6B /* WalkthroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughViewController.swift; sourceTree = "<group>"; };
 		EE3C1DA4287DD33C00823D6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = FoodPin/Storyboard/Base.lproj/About.storyboard; sourceTree = "<group>"; };
 		EE3C1DA6287DD59600823D6B /* Discover.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Discover.storyboard; sourceTree = "<group>"; };
+		EE3C1DA8287DD97400823D6B /* AboutTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTableViewController.swift; sourceTree = "<group>"; };
 		EE417E1328732BA900274C66 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		EE417E152873300400274C66 /* NavgationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavgationController.swift; sourceTree = "<group>"; };
 		EE417E182874513100274C66 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -166,6 +168,7 @@
 				EE3C1D9D287D5EF000823D6B /* WalkthroughContentViewController.swift */,
 				EE3C1D9F287D60D900823D6B /* WalkthroughPageViewController.swift */,
 				EE3C1DA1287D680700823D6B /* WalkthroughViewController.swift */,
+				EE3C1DA8287DD97400823D6B /* AboutTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				EEDF6ABD2857549400D44A18 /* Restaurant.swift in Sources */,
 				EE80DB4C2858D7EB00DEE292 /* RestaurantDetailTextCell.swift in Sources */,
 				EE3C1DA0287D60D900823D6B /* WalkthroughPageViewController.swift in Sources */,
+				EE3C1DA9287DD97400823D6B /* AboutTableViewController.swift in Sources */,
 				EE3C1D972876E9EE00823D6B /* NewRestaurantController.swift in Sources */,
 				EE1300212848F92600F5EB49 /* RestaurantTableViewCell.swift in Sources */,
 				EE3C1D932875A1BF00823D6B /* RateViewController.swift in Sources */,

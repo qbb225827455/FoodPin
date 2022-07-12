@@ -85,14 +85,14 @@ class RestaurantTableViewController: UITableViewController {
     
     func configureDataSource() -> RestaurantDiffableDataSource {
         
-        let cellIDentifier = "datacell"
+        let cellIdentifier = "datacell"
         
         let dataSource = RestaurantDiffableDataSource(
             
             tableView: tableView,
             cellProvider: {tableView, IndexPath, restaurant in
                 
-                let cell = tableView.dequeueReusableCell(withIdentifier: cellIDentifier, for: IndexPath) as! RestaurantTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: IndexPath) as! RestaurantTableViewCell
                 
                 cell.nameLabel?.text = restaurant.name
                 cell.locationLabel?.text = restaurant.location
