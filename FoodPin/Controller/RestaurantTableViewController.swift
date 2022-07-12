@@ -69,6 +69,18 @@ class RestaurantTableViewController: UITableViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+        if UserDefaults.standard.bool(forKey: "hasViewedWalkthrough") {
+            return
+        }
+        
+        let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+        if let walkthoroughViewController = storyboard.instantiateViewController(withIdentifier: "WalkthroughViewController") as? WalkthroughViewController {
+            present(walkthoroughViewController, animated: true, completion: nil)
+        }
+    }
+    
     // MARK: - UITableView Diffable Data Source
     
     func configureDataSource() -> RestaurantDiffableDataSource {
