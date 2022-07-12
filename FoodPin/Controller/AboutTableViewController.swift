@@ -52,6 +52,29 @@ class AboutTableViewController: UITableViewController {
         tableView.dataSource = dataSource
         updateSnapshot()
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+//        // get selected row url
+//        guard let linkItem = self.dataSource.itemIdentifier(for: indexPath) else {
+//            return
+//        }
+//
+//        if let url = URL(string: linkItem.link) {
+//            UIApplication.shared.open(url)
+//        }
+        switch indexPath.section {
+        case 0:
+            performSegue(withIdentifier: "showWebView", sender: self)
+            
+        case 1:
+            openWithSafariViewController(indexPath: indexPath)
+        
+        default:
+            break
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
     // MARK: - Diffable Data Source
@@ -90,6 +113,24 @@ class AboutTableViewController: UITableViewController {
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showWebView" {
+            if let indexPath = tableView.indexPathForSelectedRow,
+               let destnationController = segue.destination as? WebViewController,
+               let linkItem = self.dataSource.itemIdentifier(for: indexPath) {
+                
+                destnationController.targetURL = linkItem.link
+            }
+        }
     }
 
+    func openWithSafariViewController(indexPath: IndexPath) {
+        guard let linkItem = self.dataSource.itemIdentifier(for: indexPath) else {
+            return
+        }
+        
+        if let url = URL(string: linkItem.link) {
+            let safariController = SFSafariViewController(url: url)
+            present(safariController, animated: true, completion: nil)
+        }
+    }
 }
