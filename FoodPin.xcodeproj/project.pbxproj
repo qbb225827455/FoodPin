@@ -103,7 +103,7 @@
 			children = (
 				EE4409A12858A3DC0059AAB2 /* Resources */,
 				EEDF6AC128575C7200D44A18 /* Storyboard */,
-				EEDF6ABF28575C2A00D44A18 /* Modle */,
+				EEDF6ABF28575C2A00D44A18 /* Model */,
 				EEDF6AC028575C5100D44A18 /* View */,
 				EEDF6ABE28575BFB00D44A18 /* Controller */,
 				EE417E1228732B7700274C66 /* Extensions */,
@@ -176,13 +176,13 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		EEDF6ABF28575C2A00D44A18 /* Modle */ = {
+		EEDF6ABF28575C2A00D44A18 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				EEDF6ABC2857549400D44A18 /* Restaurant.swift */,
 				EEDF6AC4285772A000D44A18 /* RestaurantDiffableDataSource.swift */,
 			);
-			path = Modle;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		EEDF6AC028575C5100D44A18 /* View */ = {
