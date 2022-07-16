@@ -21,6 +21,8 @@ class AboutTableViewController: UITableViewController {
         var image: String
     }
     
+    // MARK: Properties
+    
     var sectionContent = [ [LinkItem(text: "Rate us on App Store", link: "https://www.apple.com/ios/app-store/", image: "store"),
                             LinkItem(text: "Tell us your feedback", link: "http://www.appcoda.com/contact", image: "chat")],
                            
@@ -30,6 +32,8 @@ class AboutTableViewController: UITableViewController {
                             ]
 
     lazy var dataSource = configureDataSource()
+    
+    // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,7 +81,7 @@ class AboutTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    // MARK: - Diffable Data Source
+    // MARK: UITableView Diffable Data Source
     
     func configureDataSource() -> UITableViewDiffableDataSource<Section, LinkItem> {
         

@@ -14,6 +14,11 @@ protocol WalkthroughPageViewControllerDelegate: AnyObject {
 
 class WalkthroughPageViewController: UIPageViewController {
 
+    // MARK : Properties
+    
+    
+    weak var walkthroughDelegate: WalkthroughPageViewControllerDelegate?
+    
     var pageImages = ["onboarding-1", "onboarding-2", "onboarding-3"]
     
     var pageHeadings = ["CREATE YOUR OWN FOOD GUIDE",
@@ -26,7 +31,7 @@ class WalkthroughPageViewController: UIPageViewController {
     
     var currentIndex = 0
     
-    weak var walkthroughDelegate: WalkthroughPageViewControllerDelegate?
+    // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +45,8 @@ class WalkthroughPageViewController: UIPageViewController {
         }
     }
     
+    // MARK: Function
+    
     func forwardPage() {
         
         currentIndex += 1
@@ -48,6 +55,8 @@ class WalkthroughPageViewController: UIPageViewController {
         }
     }
 }
+
+// MARK: - UIPageViewControllerDataSource
 
 extension WalkthroughPageViewController: UIPageViewControllerDataSource {
     
@@ -65,6 +74,11 @@ extension WalkthroughPageViewController: UIPageViewControllerDataSource {
         return contentViewController(at: index)
     }
     
+    // MARK: Function
+    
+    /// 設定導覽頁面中各頁的顯示內容
+    /// - Parameter index: 導覽頁面的目前頁數
+    /// - Returns: 顯示內容
     func contentViewController(at index: Int) -> WalkthroughContentViewController? {
         
         if index < 0 || index >= pageHeadings.count {
@@ -85,6 +99,8 @@ extension WalkthroughPageViewController: UIPageViewControllerDataSource {
         return nil
     }
 }
+
+// MARK: - UIPageViewControllerDelegate
 
 extension WalkthroughPageViewController: UIPageViewControllerDelegate {
     

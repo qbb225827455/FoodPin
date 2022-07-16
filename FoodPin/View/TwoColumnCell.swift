@@ -9,6 +9,8 @@ import UIKit
 
 class TwoColumnCell: UITableViewCell {
 
+    // MARK: IBOutlet
+
     // address title label
     @IBOutlet var column1TitleLabel: UILabel! {
         didSet {
@@ -45,13 +47,10 @@ class TwoColumnCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }

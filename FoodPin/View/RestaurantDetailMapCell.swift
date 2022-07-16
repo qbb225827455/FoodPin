@@ -10,6 +10,7 @@ import MapKit
 
 class RestaurantDetailMapCell: UITableViewCell {
 
+    // MARK: IBOutlet
     
     @IBOutlet var mapView: MKMapView! {
         didSet {
@@ -21,15 +22,16 @@ class RestaurantDetailMapCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
+
+    //MARK: Function
     
+    /// 在 Restaurant Detail View 的 地圖上顯示所選餐廳的位置
+    /// - Parameter location: 所選餐廳的地址
     func configure(location: String) {
         // 取得位置
         let geoCoder = CLGeocoder()

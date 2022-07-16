@@ -10,8 +10,12 @@ import CoreData
 
 class NewRestaurantController: UITableViewController {
     
+    // MARK: Properties
+    
     var restaurant: Restaurant!
 
+    // MARK: IBOutlet
+    
     @IBOutlet var nameTextField: RoundedTextField! {
         didSet {
             nameTextField.tag = 1
@@ -56,7 +60,7 @@ class NewRestaurantController: UITableViewController {
         }
     }
     
-    // MARK: - NewRestaurantView saveBtn Action
+    // MARK: IBAction
 
     @IBAction func saveNewRestaurant(sender: UIButton) {
         
@@ -89,11 +93,9 @@ class NewRestaurantController: UITableViewController {
             
             dismiss(animated: true, completion: nil)
         }
-        
-        
     }
     
-    // MARK: - View life cycle
+    // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -161,6 +163,9 @@ class NewRestaurantController: UITableViewController {
             })
             photoSourceRequestController.addAction(photoLibaryAction)
             
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            photoSourceRequestController.addAction(cancelAction)
+            
             // for ipad
             if let popoverController = photoSourceRequestController.popoverPresentationController {
                 if let cell = tableView.cellForRow(at: indexPath) {
@@ -175,6 +180,8 @@ class NewRestaurantController: UITableViewController {
 
 }
 
+// MARK: - UITextFieldDelegate
+
 extension NewRestaurantController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -188,6 +195,8 @@ extension NewRestaurantController: UITextFieldDelegate {
     }
 }
 
+// MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
+
 extension NewRestaurantController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -195,7 +204,7 @@ extension NewRestaurantController: UIImagePickerControllerDelegate, UINavigation
         if let selectImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             
             photoImageView.image = selectImage
-            photoImageView.contentMode = .scaleToFill
+            photoImageView.contentMode = .scaleAspectFill
             photoImageView.clipsToBounds = true
         }
         

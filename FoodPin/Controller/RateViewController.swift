@@ -9,11 +9,17 @@ import UIKit
 
 class RateViewController: UIViewController {
 
+    // MARK: Properties
+    
     var restaurant = Restaurant()
+    
+    // MARK: IBOutlet
     
     @IBOutlet var backgroundImageView: UIImageView!
     @IBOutlet var rateBtn: [UIButton]!
     @IBOutlet var closeBtn: UIButton!
+    
+    // MARK: Livecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,18 +32,20 @@ class RateViewController: UIViewController {
         blurEffectView.frame = view.bounds
         backgroundImageView.addSubview(blurEffectView)
         
+        
+        // RateBtn tranform
         let moveRightTransform = CGAffineTransform.init(translationX: 600, y: 0)
         let scaleUpTransform = CGAffineTransform.init(scaleX: 5, y: 5)
         let moveScaleTransform = scaleUpTransform.concatenating(moveRightTransform)
         
-        let moveTopTransform = CGAffineTransform.init(translationX: 0, y: -600)
-        
-        // Make the button invisible and move off the screen
         for rateBtn in rateBtn {
             rateBtn.alpha = 0
             rateBtn.transform = moveScaleTransform
         }
         
+        // closeBtn transform
+        let moveTopTransform = CGAffineTransform.init(translationX: 0, y: -600)
+    
         closeBtn.transform = moveTopTransform
     }
     
@@ -50,10 +58,6 @@ class RateViewController: UIViewController {
                 rateBtn.alpha = 1.0
                 rateBtn.transform = .identity
             }, completion: nil)
-//            UIView.animate(withDuration: 0.4, delay: delay, usingSpringWithDamping: 0.2, initialSpringVelocity: 0.3, options: [], animations: {
-//                rateBtn.alpha = 1.0
-//                rateBtn.transform = .identity
-//            }, completion: nil)
             delay = delay + 0.1
         }
         

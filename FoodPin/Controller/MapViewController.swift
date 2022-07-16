@@ -10,9 +10,15 @@ import MapKit
 
 class MapViewController: UIViewController {
 
+    // MARK: Properties
+    
     var resaurant = Restaurant()
     
+    // MARK: IBOutlet
+    
     @IBOutlet var mapView: MKMapView!
+    
+    // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +57,8 @@ class MapViewController: UIViewController {
     }
     
 }
+
+// MARK: - MKMapViewDelegate
 
 extension MapViewController: MKMapViewDelegate {
     

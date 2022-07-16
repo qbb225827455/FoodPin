@@ -9,10 +9,14 @@ import UIKit
 
 class WalkthroughContentViewController: UIViewController {
 
+    // MARK: Properties
+    
     var pageIndex = 0
     var headingText = ""
     var subheadingText = ""
     var imageFile = ""
+    
+    // MARK: IBOutlet
     
     @IBOutlet var contentImageView: UIImageView!
     
@@ -27,6 +31,8 @@ class WalkthroughContentViewController: UIViewController {
             subheadingLabel.numberOfLines = 0
         }
     }
+    
+    // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()

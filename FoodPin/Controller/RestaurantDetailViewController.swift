@@ -9,13 +9,35 @@ import UIKit
 
 class RestaurantDetailViewController: UIViewController {
 
+    // MARK: Properties
+    
     var restaurant: Restaurant = Restaurant()
+    
+    // MARK: IBOutlet
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var headerView: RestaurantDetailHeaderView!
     @IBOutlet var favBarBtn: UIBarButtonItem!
     
-    // MARK: - View life cycle
+    // MARK: IBAction
+    
+    @IBAction func favBtn(sender: UIBarButtonItem) {
+        
+        restaurant.isFavorite = !restaurant.isFavorite
+        
+        // save change
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            appDelegate.saveContext()
+        }
+        
+        // configure favorite button
+        let heartImage = restaurant.isFavorite ? "heart.fill" : "heart"
+        //let heartImageConfiguration = UIImage.SymbolConfiguration(pointSize: 25, weight: .semibold)
+        favBarBtn.tintColor = restaurant.isFavorite ? .systemYellow : .white
+        favBarBtn.image = UIImage(systemName: heartImage)
+    }
+    
+    // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +78,7 @@ class RestaurantDetailViewController: UIViewController {
         return .lightContent
     }
     
-    // MARK: - Navigation
+    // MARK: Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -105,23 +127,9 @@ class RestaurantDetailViewController: UIViewController {
             }, completion: nil)
         })
     }
-
-    @IBAction func favBtn(sender: UIBarButtonItem) {
-        
-        restaurant.isFavorite = !restaurant.isFavorite
-        
-        // save change
-        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-            appDelegate.saveContext()
-        }
-        
-        // configure favorite button
-        let heartImage = restaurant.isFavorite ? "heart.fill" : "heart"
-        //let heartImageConfiguration = UIImage.SymbolConfiguration(pointSize: 25, weight: .semibold)
-        favBarBtn.tintColor = restaurant.isFavorite ? .systemYellow : .white
-        favBarBtn.image = UIImage(systemName: heartImage)
-    }
 }
+
+// MARK: - UITableViewDataSource, UITableViewDelegate
 
 extension RestaurantDetailViewController: UITableViewDataSource, UITableViewDelegate {
     

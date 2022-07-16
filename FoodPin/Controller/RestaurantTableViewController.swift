@@ -10,15 +10,19 @@ import CoreData
 
 class RestaurantTableViewController: UITableViewController {
 
+    // MARK: Properties
+    
     var restaurants: [Restaurant] = []
     var fetchResultController: NSFetchedResultsController<Restaurant>!
     var searchController: UISearchController!
     
     lazy var dataSource = configureDataSource()
 
+    // MARK: IBOutlet
+    
     @IBOutlet var emptyRestaurantView: UIView!
     
-    // MARK: - 視圖控制生命週期
+    // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +56,7 @@ class RestaurantTableViewController: UITableViewController {
         tableView.backgroundView?.isHidden = restaurants.count == 0 ? false : true
         
         searchController.searchResultsUpdater = self
+        
         // 控制底下內容於搜尋期間是否變為黯淡狀態
         searchController.obscuresBackgroundDuringPresentation = false
         
@@ -81,7 +86,7 @@ class RestaurantTableViewController: UITableViewController {
         }
     }
     
-    // MARK: - UITableView Diffable Data Source
+    // MARK: UITableView Diffable Data Source
     
     func configureDataSource() -> RestaurantDiffableDataSource {
         
@@ -107,7 +112,7 @@ class RestaurantTableViewController: UITableViewController {
         return dataSource
     }
     
-    // MARK: - 處理「向左滑動」動作
+    // MARK: 處理「向左滑動」動作
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
@@ -174,7 +179,7 @@ class RestaurantTableViewController: UITableViewController {
         return swipeConfiguration
     }
     
-    // MARK: - 處理「向右滑動」動作
+    // MARK: 處理「向右滑動」動作
     
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
@@ -205,7 +210,7 @@ class RestaurantTableViewController: UITableViewController {
         return swipeConfiguration
     }
     
-    // MARK: - Navigation
+    // MARK: Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showRestaurantDetail" {
@@ -221,7 +226,7 @@ class RestaurantTableViewController: UITableViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    // MARK: - Core data
+    // MARK: Core Data
     
     func fetchRestaurantData(searchText: String = "") {
         
@@ -264,48 +269,50 @@ class RestaurantTableViewController: UITableViewController {
         dataSource.apply(snapshot, animatingDifferences: animatingChange)
         tableView.backgroundView?.isHidden = restaurants.count == 0 ? false : true
     }
-
-    //    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    //
-    //        let optionMenu = UIAlertController(title: nil, message: "What do you want to do?", preferredStyle: .actionSheet)
-    //        if let popoverController = optionMenu.popoverPresentationController {
-    //
-    //            if let cell = tableView.cellForRow(at: indexPath) {
-    //
-    //                popoverController.sourceView = cell
-    //                popoverController.sourceRect = cell.bounds
-    //            }
-    //        }
-    //
-    //        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-    //        optionMenu.addAction(cancelAction)
-    //
-    //        let reserveActionHandler = { (action:UIAlertAction!) -> Void in
-    //
-    //            let alertMesg = UIAlertController(title: "Not available yet", message: "Sorry, this feature is not available yet. Please retry later.", preferredStyle: .alert)
-    //            alertMesg.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-    //
-    //            self.present(alertMesg, animated: true)
-    //        }
-    //        let reserveAction = UIAlertAction(title: "Reserve a table", style: .default, handler:reserveActionHandler)
-    //        optionMenu.addAction(reserveAction)
-    //
-    //        let favoriteAction = UIAlertAction(title: self.restaurants[indexPath.row].isFavorite ? "Remove from favorites" : "Mark as favorite", style: .default, handler: {
-    //
-    //            (action:UIAlertAction) -> Void in
-    //
-    //            let cell = tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
-    //            cell.favoriteImage.isHidden = self.restaurants[indexPath.row].isFavorite
-    //
-    //            self.restaurants[indexPath.row].isFavorite = self.restaurants[indexPath.row].isFavorite ? false : true
-    //        })
-    //        optionMenu.addAction(favoriteAction)
-    //
-    //        present(optionMenu, animated: true, completion: nil)
-    //
-    //        tableView.deselectRow(at: indexPath, animated: false)
-    //    }
+    
+    // MARK: - UIAlertController
+//
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//        let optionMenu = UIAlertController(title: nil, message: "What do you want to do?", preferredStyle: .actionSheet)
+//        if let popoverController = optionMenu.popoverPresentationController {
+//
+//            if let cell = tableView.cellForRow(at: indexPath) {
+//
+//                popoverController.sourceView = cell
+//                popoverController.sourceRect = cell.bounds
+//            }
+//        }
+//
+//        let reserveActionHandler = { (action:UIAlertAction!) -> Void in
+//            let alertMesg = UIAlertController(title: "Not available yet", message: "Sorry, this feature is not available yet. Please retry later.", preferredStyle: .alert)
+//            alertMesg.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//
+//            self.present(alertMesg, animated: true)
+//        }
+//        let reserveAction = UIAlertAction(title: "Reserve a table", style: .default, handler:reserveActionHandler)
+//        optionMenu.addAction(reserveAction)
+//
+//        let favoriteAction = UIAlertAction(title: self.restaurants[indexPath.row].isFavorite ? "Remove from favorites" : "Mark as favorite", style: .default, handler: {
+//
+//            (action:UIAlertAction) -> Void in
+//
+//            let cell = tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
+//            cell.favoriteImage.isHidden = self.restaurants[indexPath.row].isFavorite
+//
+//            self.restaurants[indexPath.row].isFavorite = self.restaurants[indexPath.row].isFavorite ? false : true
+//        })
+//        optionMenu.addAction(favoriteAction)
+//
+//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+//        optionMenu.addAction(cancelAction)
+//
+//        present(optionMenu, animated: true, completion: nil)
+//        tableView.deselectRow(at: indexPath, animated: false)
+//    }
 }
+
+// MARK: - NSFetchedResultsControllerDelegate
 
 extension RestaurantTableViewController: NSFetchedResultsControllerDelegate {
     
@@ -313,6 +320,8 @@ extension RestaurantTableViewController: NSFetchedResultsControllerDelegate {
         updateSnapshot()
     }
 }
+
+// MARK: - UISearchResultsUpdating
 
 extension RestaurantTableViewController: UISearchResultsUpdating {
     

@@ -8,19 +8,9 @@
 import UIKit
 
 class RestaurantTableViewCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
     
+    // MARK: IBOutlet
+
     @IBOutlet var nameLabel: UILabel! {
         didSet {
             nameLabel.adjustsFontForContentSizeCategory = true
@@ -50,5 +40,12 @@ class RestaurantTableViewCell: UITableViewCell {
     }
     
     @IBOutlet var favoriteImage: UIImageView!
-    
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
 }

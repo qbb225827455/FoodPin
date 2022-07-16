@@ -10,9 +10,15 @@ import WebKit
 
 class WebViewController: UIViewController {
 
+    // MARK: Properties
+    
     var targetURL = ""
     
+    // MARK: IBOutlet
+    
     @IBOutlet var webView: WKWebView!
+    
+    // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()

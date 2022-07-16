@@ -138,6 +138,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="Byp-fv-gGS"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="ghj-ny-n0f" firstAttribute="top" secondItem="jbQ-Mj-Gb9" secondAttribute="topMargin" constant="50" id="Hjz-3t-4d2"/>
