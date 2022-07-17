@@ -16,7 +16,6 @@ class WalkthroughPageViewController: UIPageViewController {
 
     // MARK : Properties
     
-    
     weak var walkthroughDelegate: WalkthroughPageViewControllerDelegate?
     
     var pageImages = ["onboarding-1", "onboarding-2", "onboarding-3"]
