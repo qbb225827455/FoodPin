@@ -32,7 +32,6 @@ class RateViewController: UIViewController {
         blurEffectView.frame = view.bounds
         backgroundImageView.addSubview(blurEffectView)
         
-        
         // RateBtn tranform
         let moveRightTransform = CGAffineTransform.init(translationX: 600, y: 0)
         let scaleUpTransform = CGAffineTransform.init(scaleX: 5, y: 5)
@@ -64,5 +63,23 @@ class RateViewController: UIViewController {
         UIView.animate(withDuration: 0.4, delay: 0.1, options: [], animations: {
             self.closeBtn.transform = .identity
         }, completion: nil)
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        updateblurEffectView()
+    }
+    
+    func updateblurEffectView() {
+        
+        for subview in backgroundImageView.subviews {
+            if subview is UIVisualEffectView {
+                subview.removeFromSuperview()
+            }
+        }
+        
+        let blurEffect = UIBlurEffect(style: .dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = CGRect(x: 0, y: 0, width: view.frame.height, height: view.frame.width)
+        backgroundImageView.addSubview(blurEffectView)
     }
 }
