@@ -606,7 +606,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jrK-ZS-hF8">
-                                <rect key="frame" x="332.33333333333331" y="44" width="37.666666666666686" height="37.666666666666657"/>
+                                <rect key="frame" x="332.33333333333331" y="64" width="37.666666666666686" height="37.666666666666657"/>
                                 <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" image="xmark" catalog="system" cornerStyle="capsule">
@@ -617,14 +617,13 @@
                                     <segue destination="kie-WL-iNX" kind="unwind" unwindAction="closeRateViewWithSegue:" id="Tyi-eB-1oh"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="0Dp-7k-GGA">
-                                <rect key="frame" x="78.333333333333329" y="146.66666666666663" width="233.33333333333337" height="551"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="0Dp-7k-GGA">
+                                <rect key="frame" x="130.33333333333337" y="71.666666666666686" width="129.66666666666663" height="701"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fgC-qL-EbB">
-                                        <rect key="frame" x="0.0" y="0.0" width="233.33333333333334" height="96"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="love" title="Awesome">
-                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle0"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fgC-qL-EbB">
+                                        <rect key="frame" x="0.0" y="0.0" width="129.66666666666666" height="126"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="love" imagePlacement="top" title="Awesome">
+                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
                                         <connections>
@@ -632,10 +631,10 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nJG-75-Lyc">
-                                        <rect key="frame" x="0.0" y="106" width="175.66666666666666" height="97"/>
+                                        <rect key="frame" x="13.666666666666657" y="136" width="102" height="127"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="cool" title="Good">
-                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="cool" imagePlacement="top" title="Good">
+                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
                                         <connections>
@@ -643,10 +642,10 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xg0-3j-2DV">
-                                        <rect key="frame" x="0.0" y="213" width="189.33333333333334" height="100"/>
+                                        <rect key="frame" x="13.666666666666657" y="273" width="102" height="130"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="happy" title="Happy">
-                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="happy" imagePlacement="top" title="Okay">
+                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
                                         <connections>
@@ -654,10 +653,10 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgY-Yw-maN">
-                                        <rect key="frame" x="0.0" y="323" width="154.66666666666666" height="101"/>
+                                        <rect key="frame" x="13.666666666666657" y="413" width="102" height="131"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="sad" title="Bad">
-                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="sad" imagePlacement="top" title="Bad">
+                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
                                         <connections>
@@ -665,10 +664,10 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZBC-PP-5Al">
-                                        <rect key="frame" x="0.0" y="434" width="200" height="117"/>
+                                        <rect key="frame" x="12.999999999999993" y="554" width="103.33333333333331" height="147"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="angry" title="Terrible">
-                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="angry" imagePlacement="top" title="Terrible">
+                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
                                         <connections>
@@ -676,19 +675,20 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <variation key="heightClass=compact" alignment="bottom" axis="horizontal"/>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qui-bO-VxB"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="8Uu-gs-vtu" firstAttribute="leading" secondItem="qui-bO-VxB" secondAttribute="leading" id="1aE-RI-qbq"/>
-                            <constraint firstItem="8Uu-gs-vtu" firstAttribute="top" secondItem="hMv-FO-JNK" secondAttribute="top" id="C3M-TT-iJu"/>
-                            <constraint firstItem="0Dp-7k-GGA" firstAttribute="centerY" secondItem="hMv-FO-JNK" secondAttribute="centerY" id="F0o-lz-dvo"/>
-                            <constraint firstItem="0Dp-7k-GGA" firstAttribute="centerX" secondItem="hMv-FO-JNK" secondAttribute="centerX" id="Sok-kc-6KB"/>
-                            <constraint firstItem="qui-bO-VxB" firstAttribute="trailing" secondItem="jrK-ZS-hF8" secondAttribute="trailing" constant="20" id="VKX-ez-73k"/>
-                            <constraint firstItem="qui-bO-VxB" firstAttribute="trailing" secondItem="8Uu-gs-vtu" secondAttribute="trailing" id="jYU-UX-lmc"/>
-                            <constraint firstAttribute="bottom" secondItem="8Uu-gs-vtu" secondAttribute="bottom" id="lG2-6G-SXi"/>
-                            <constraint firstItem="jrK-ZS-hF8" firstAttribute="top" secondItem="qui-bO-VxB" secondAttribute="top" id="xYl-v7-1iX"/>
+                            <constraint firstItem="jrK-ZS-hF8" firstAttribute="top" secondItem="qui-bO-VxB" secondAttribute="top" constant="20" id="B8h-dp-YAO"/>
+                            <constraint firstItem="qui-bO-VxB" firstAttribute="trailing" secondItem="jrK-ZS-hF8" secondAttribute="trailing" constant="20" id="TKC-Sh-yWm"/>
+                            <constraint firstItem="0Dp-7k-GGA" firstAttribute="centerX" secondItem="hMv-FO-JNK" secondAttribute="centerX" id="a3D-R1-7Ti"/>
+                            <constraint firstItem="0Dp-7k-GGA" firstAttribute="centerY" secondItem="hMv-FO-JNK" secondAttribute="centerY" id="b2x-Ft-YlM"/>
+                            <constraint firstAttribute="bottom" secondItem="8Uu-gs-vtu" secondAttribute="bottom" id="doa-Ye-jf7"/>
+                            <constraint firstItem="8Uu-gs-vtu" firstAttribute="top" secondItem="hMv-FO-JNK" secondAttribute="top" id="fjK-zc-Qam"/>
+                            <constraint firstAttribute="trailing" secondItem="8Uu-gs-vtu" secondAttribute="trailing" id="rYU-wM-4IG"/>
+                            <constraint firstItem="8Uu-gs-vtu" firstAttribute="leading" secondItem="hMv-FO-JNK" secondAttribute="leading" id="vyQ-dC-ar5"/>
                         </constraints>
                     </view>
                     <connections>
@@ -721,10 +721,10 @@
                         <viewLayoutGuide key="safeArea" id="8Hr-XG-LC5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="8Hr-XG-LC5" firstAttribute="trailing" secondItem="jDW-vL-AiE" secondAttribute="trailing" id="Ww9-eg-p83"/>
-                            <constraint firstItem="jDW-vL-AiE" firstAttribute="leading" secondItem="8Hr-XG-LC5" secondAttribute="leading" id="YS7-Jq-3aZ"/>
-                            <constraint firstItem="jDW-vL-AiE" firstAttribute="top" secondItem="WWx-Qe-Lg9" secondAttribute="top" id="gkp-hI-PqX"/>
-                            <constraint firstAttribute="bottom" secondItem="jDW-vL-AiE" secondAttribute="bottom" id="sG6-zF-lf8"/>
+                            <constraint firstAttribute="bottom" secondItem="jDW-vL-AiE" secondAttribute="bottom" id="5va-iS-AKN"/>
+                            <constraint firstAttribute="trailing" secondItem="jDW-vL-AiE" secondAttribute="trailing" id="MJm-TR-C4s"/>
+                            <constraint firstItem="jDW-vL-AiE" firstAttribute="leading" secondItem="WWx-Qe-Lg9" secondAttribute="leading" id="cMi-Sa-GZy"/>
+                            <constraint firstItem="jDW-vL-AiE" firstAttribute="top" secondItem="WWx-Qe-Lg9" secondAttribute="top" id="utx-Fz-TzM"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="F79-bB-2n5"/>
