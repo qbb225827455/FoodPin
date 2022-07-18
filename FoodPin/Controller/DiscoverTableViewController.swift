@@ -38,26 +38,62 @@ class DiscoverTableViewController: UITableViewController {
             navigationController?.navigationBar.scrollEdgeAppearance = appearence
         }
         
-        Task.init(priority: .high) {
-            do {
-                try await fetchRecordFromCloud()
-            }
-            catch{
-                print(error)
-            }
-        }
+//        Task.init(priority: .high) {
+//            do {
+//                try await fetchRecordFromCloudConvenienceAPI()
+//            } catch{
+//                print(error)
+//            }
+//        }
+        
+        fetchRecordFromCloudOperationalAPI()
         
         tableView.dataSource = dataSource
     }
     
     // MARK: Fetch record from Cloud
     
-    func fetchRecordFromCloud() async throws {
+    func fetchRecordFromCloudOperationalAPI() {
+        
+        // fetch date use Operational API
+        let cloudContainer = CKContainer.default()
+        let pubDatabase = cloudContainer.publicCloudDatabase
+        let predicate = NSPredicate(value: true)
+        let query = CKQuery(recordType: "Restaurant", predicate: predicate)
+        
+        let queryOperation = CKQueryOperation(query: query)
+        queryOperation.desiredKeys = ["name", "image"]
+        queryOperation.queuePriority = .veryHigh
+        queryOperation.resultsLimit = 50
+        queryOperation.recordMatchedBlock = {recordID, result -> Void in
+            do {
+                self.restaurants.append(try result.get())
+            } catch {
+                print(error)
+            }
+        }
+        
+        queryOperation.queryCompletionBlock = { [unowned self] cursor, error -> Void in
+            
+            if let error = error {
+                print("Failed to get data from iCloud - \(error.localizedDescription)")
+                
+                return
+            }
+            
+            print("Successfully retrieve the data from iCloud")
+            
+            updateSnapshot()
+        }
+        
+        pubDatabase.add(queryOperation)
+    }
+    
+    func fetchRecordFromCloudConvenienceAPI() async throws {
         
         // fetch date use Convenience API
         let cloudContainer = CKContainer.default()
         let pubDatabase = cloudContainer.publicCloudDatabase
-        
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: "Restaurant", predicate: predicate)
         
