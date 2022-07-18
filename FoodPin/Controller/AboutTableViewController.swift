@@ -81,7 +81,7 @@ class AboutTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    // MARK: UITableView Diffable Data Source
+    // MARK: Diffable Data Source
     
     func configureDataSource() -> UITableViewDiffableDataSource<Section, LinkItem> {
         
@@ -102,6 +102,8 @@ class AboutTableViewController: UITableViewController {
         
         return dataSource
     }
+    
+    // MARK: Snapshot
     
     func updateSnapshot() {
         
