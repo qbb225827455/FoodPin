@@ -6,14 +6,16 @@
 //
 
 import UIKit
-import ClockKit
 import CloudKit
 
 class DiscoverTableViewController: UITableViewController {
 
     // MARK: Properties
     
+    private var imageCache = NSCache<CKRecord.ID, NSURL>()
+    
     lazy var dataSource = configureDataSource()
+    
     var restaurants: [CKRecord] = []
     var spinner = UIActivityIndicatorView()
     
@@ -143,36 +145,50 @@ class DiscoverTableViewController: UITableViewController {
                 cell.imageView?.image = UIImage(systemName: "photo.fill")
                 cell.imageView?.tintColor = .black
                 
-                // 背景取得圖片
-                let cloudContainer = CKContainer.default()
-                let pubDatabase = cloudContainer.publicCloudDatabase
-                
-                let fetchRecordsImageOperation = CKFetchRecordsOperation(recordIDs: [restaurant.recordID])
-                fetchRecordsImageOperation.desiredKeys = ["image"]
-                fetchRecordsImageOperation.queuePriority = .veryHigh
-                
-                fetchRecordsImageOperation.perRecordResultBlock = { recordID, result in
+                // 確認圖片有無快取
+                if let imageURL = self.imageCache.object(forKey: restaurant.recordID) {
                     
-                    do {
-                        let restaurantRecord = try result.get()
-                        
-                        if let image = restaurantRecord.object(forKey: "image"),
-                           let imageAsset = image as? CKAsset {
-                            
-                            if let imageData = try? Data.init(contentsOf: imageAsset.fileURL!) {
-                                DispatchQueue.main.async {
-                                    cell.imageView?.image = UIImage(data: imageData)
-                                    cell.setNeedsLayout()
-                                }
-                            }
-                        }
-                    } catch {
-                        print("Fail to get image - \(error.localizedDescription)")
+                    print("Get image from cache")
+                    if let imageData = try? Data.init(contentsOf: imageURL as URL) {
+                        cell.imageView?.image = UIImage(data: imageData)
                     }
                 }
-                
-                pubDatabase.add(fetchRecordsImageOperation)
-            
+                else {
+                    
+                    // 背景取得圖片
+                    let cloudContainer = CKContainer.default()
+                    let pubDatabase = cloudContainer.publicCloudDatabase
+                    
+                    let fetchRecordsImageOperation = CKFetchRecordsOperation(recordIDs: [restaurant.recordID])
+                    fetchRecordsImageOperation.desiredKeys = ["image"]
+                    fetchRecordsImageOperation.queuePriority = .veryHigh
+                    
+                    fetchRecordsImageOperation.perRecordResultBlock = { recordID, result in
+                        
+                        do {
+                            let restaurantRecord = try result.get()
+                            
+                            if let image = restaurantRecord.object(forKey: "image"),
+                               let imageAsset = image as? CKAsset {
+                                
+                                if let imageData = try? Data.init(contentsOf: imageAsset.fileURL!) {
+                                    DispatchQueue.main.async {
+                                        cell.imageView?.image = UIImage(data: imageData)
+                                        cell.setNeedsLayout()
+                                    }
+                                    
+                                    // 加入圖片URL至快取
+                                    self.imageCache.setObject(imageAsset.fileURL! as NSURL, forKey: restaurant.recordID)
+                                }
+                            }
+                        } catch {
+                            print("Fail to get image - \(error.localizedDescription)")
+                        }
+                    }
+                    
+                    pubDatabase.add(fetchRecordsImageOperation)
+                }
+
                 return cell
             })
         
