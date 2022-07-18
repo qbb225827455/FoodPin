@@ -79,13 +79,13 @@ class DiscoverTableViewController: UITableViewController {
         // fetch date use Operational API
         let cloudContainer = CKContainer.default()
         let pubDatabase = cloudContainer.publicCloudDatabase
+        
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: "Restaurant", predicate: predicate)
-        
         let queryOperation = CKQueryOperation(query: query)
         queryOperation.desiredKeys = ["name"]
         queryOperation.queuePriority = .veryHigh
-        queryOperation.resultsLimit = 50
+        queryOperation.resultsLimit = 5
         queryOperation.recordMatchedBlock = {recordID, result -> Void in
             do {
                 if let _ = self.restaurants.first(where: {$0.recordID == recordID}) {
@@ -106,7 +106,19 @@ class DiscoverTableViewController: UITableViewController {
                 return
             }
             
-            print("Successfully retrieve the data from iCloud")
+            
+            // TODO: 改成上滑繼續更新資料
+//            if cursor != nil {
+//
+//                let nextQueryOperation = CKQueryOperation(cursor: cursor!)
+//                nextQueryOperation.recordMatchedBlock = queryOperation.recordMatchedBlock
+//                nextQueryOperation.queryCompletionBlock = queryOperation.queryCompletionBlock
+//                nextQueryOperation.resultsLimit = queryOperation.resultsLimit
+//
+//                queryOperation = nextQueryOperation
+//
+//                pubDatabase.add(queryOperation)
+//            }
             
             updateSnapshot()
             
