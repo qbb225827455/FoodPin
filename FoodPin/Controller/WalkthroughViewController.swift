@@ -9,11 +9,11 @@ import UIKit
 
 class WalkthroughViewController: UIViewController {
 
-    // MARK: Properties
+    // MARK: - Properties
     
     var walkthroughPageViewController: WalkthroughPageViewController?
     
-    // MARK: IBOutlet
+    // MARK: - IBOutlet
     
     @IBOutlet var pageControl: UIPageControl!
     
@@ -26,7 +26,7 @@ class WalkthroughViewController: UIViewController {
     
     @IBOutlet var skipBtn: UIButton!
     
-    // MARK: IBAction
+    // MARK: - IBAction
     
     @IBAction func nextBtnTapped(sender: UIButton) {
         
@@ -53,13 +53,13 @@ class WalkthroughViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    // MARK: Lifecycle
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    // MARK: Navigation
+    // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination = segue.destination
@@ -69,7 +69,7 @@ class WalkthroughViewController: UIViewController {
         }
     }
     
-    // MARK: Function
+    // MARK: - Function
     
     func updateUI() {
 

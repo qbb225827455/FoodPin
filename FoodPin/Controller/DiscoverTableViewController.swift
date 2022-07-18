@@ -10,7 +10,7 @@ import CloudKit
 
 class DiscoverTableViewController: UITableViewController {
 
-    // MARK: Properties
+    // MARK: - Properties
     
     private var imageCache = NSCache<CKRecord.ID, NSURL>()
     
@@ -19,7 +19,7 @@ class DiscoverTableViewController: UITableViewController {
     var restaurants: [CKRecord] = []
     var spinner = UIActivityIndicatorView()
     
-    // MARK: Lifecycle
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +66,7 @@ class DiscoverTableViewController: UITableViewController {
         spinner.startAnimating()
     }
     
-    // MARK: Fetch record from Cloud
+    // MARK: - Fetch record from Cloud
     
     func fetchRecordFromCloudOperationalAPI() {
         
@@ -126,7 +126,7 @@ class DiscoverTableViewController: UITableViewController {
         updateSnapshot()
     }
     
-    // MARK: Diffable Data Source
+    // MARK: - Diffable Data Source
     
     func configureDataSource() -> UITableViewDiffableDataSource<Section, CKRecord> {
         
@@ -195,7 +195,7 @@ class DiscoverTableViewController: UITableViewController {
         return dataSource
     }
     
-    // MARK: Snapshot
+    // MARK: - Snapshot
     
     func updateSnapshot(animatingChange: Bool = false) {
         

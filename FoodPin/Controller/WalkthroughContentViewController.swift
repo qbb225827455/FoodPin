@@ -9,14 +9,14 @@ import UIKit
 
 class WalkthroughContentViewController: UIViewController {
 
-    // MARK: Properties
+    // MARK: - Properties
     
     var pageIndex = 0
     var headingText = ""
     var subheadingText = ""
     var imageFile = ""
     
-    // MARK: IBOutlet
+    // MARK: - IBOutlet
     
     @IBOutlet var contentImageView: UIImageView!
     
@@ -32,7 +32,7 @@ class WalkthroughContentViewController: UIViewController {
         }
     }
     
-    // MARK: Lifecycle
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()

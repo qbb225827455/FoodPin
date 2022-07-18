@@ -10,7 +10,7 @@ import MapKit
 
 class RestaurantDetailMapCell: UITableViewCell {
 
-    // MARK: IBOutlet
+    // MARK: - IBOutlet
     
     @IBOutlet var mapView: MKMapView! {
         didSet {
@@ -28,7 +28,7 @@ class RestaurantDetailMapCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    //MARK: Function
+    //MARK: - Function
     
     /// 在 Restaurant Detail View 的 地圖上顯示所選餐廳的位置
     /// - Parameter location: 所選餐廳的地址

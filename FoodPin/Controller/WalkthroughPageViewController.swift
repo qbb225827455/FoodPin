@@ -14,7 +14,7 @@ protocol WalkthroughPageViewControllerDelegate: AnyObject {
 
 class WalkthroughPageViewController: UIPageViewController {
 
-    // MARK : Properties
+    // MARK : - Properties
     
     weak var walkthroughDelegate: WalkthroughPageViewControllerDelegate?
     
@@ -30,7 +30,7 @@ class WalkthroughPageViewController: UIPageViewController {
     
     var currentIndex = 0
     
-    // MARK: Lifecycle
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +44,7 @@ class WalkthroughPageViewController: UIPageViewController {
         }
     }
     
-    // MARK: Function
+    // MARK: - Function
     
     func forwardPage() {
         

@@ -10,11 +10,11 @@ import CoreData
 
 class NewRestaurantController: UITableViewController {
     
-    // MARK: Properties
+    // MARK: - Properties
     
     var restaurant: Restaurant!
 
-    // MARK: IBOutlet
+    // MARK: - IBOutlet
     
     @IBOutlet var nameTextField: RoundedTextField! {
         didSet {
@@ -60,7 +60,7 @@ class NewRestaurantController: UITableViewController {
         }
     }
     
-    // MARK: IBAction
+    // MARK: - IBAction
 
     @IBAction func saveNewRestaurant(sender: UIButton) {
         
@@ -95,7 +95,7 @@ class NewRestaurantController: UITableViewController {
         }
     }
     
-    // MARK: Lifecycle
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()

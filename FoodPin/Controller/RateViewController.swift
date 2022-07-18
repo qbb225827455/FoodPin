@@ -9,17 +9,17 @@ import UIKit
 
 class RateViewController: UIViewController {
 
-    // MARK: Properties
+    // MARK: - Properties
     
     var restaurant = Restaurant()
     
-    // MARK: IBOutlet
+    // MARK: - IBOutlet
     
     @IBOutlet var backgroundImageView: UIImageView!
     @IBOutlet var rateBtn: [UIButton]!
     @IBOutlet var closeBtn: UIButton!
     
-    // MARK: Livecycle
+    // MARK: - Livecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +65,7 @@ class RateViewController: UIViewController {
         }, completion: nil)
     }
     
-    // MARK: 裝置有無旋轉
+    // MARK: - 裝置有無旋轉
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         print("viewWillTransition -> width:\(view.frame.width), height:\(view.frame.height)")
@@ -75,7 +75,7 @@ class RateViewController: UIViewController {
         print("viewWillLayoutSubviews -> width:\(view.frame.width), height:\(view.frame.height)")
     }
     
-    // MARK: 更新背景圖片大小
+    // MARK: - 更新背景圖片大小
     
     func updateblurEffectView() {
         

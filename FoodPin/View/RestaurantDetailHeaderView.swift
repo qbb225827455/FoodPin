@@ -9,7 +9,7 @@ import UIKit
 
 class RestaurantDetailHeaderView: UIView {
 
-    // MARK: IBOutlet
+    // MARK: - IBOutlet
 
     @IBOutlet var headerImageView: UIImageView!
     @IBOutlet var rateImageView: UIImageView!

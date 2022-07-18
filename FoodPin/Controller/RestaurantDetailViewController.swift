@@ -9,17 +9,17 @@ import UIKit
 
 class RestaurantDetailViewController: UIViewController {
 
-    // MARK: Properties
+    // MARK: - Properties
     
     var restaurant: Restaurant = Restaurant()
     
-    // MARK: IBOutlet
+    // MARK: - IBOutlet
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var headerView: RestaurantDetailHeaderView!
     @IBOutlet var favBarBtn: UIBarButtonItem!
     
-    // MARK: IBAction
+    // MARK: - IBAction
     
     @IBAction func favBtn(sender: UIBarButtonItem) {
         
@@ -37,7 +37,7 @@ class RestaurantDetailViewController: UIViewController {
         favBarBtn.image = UIImage(systemName: heartImage)
     }
     
-    // MARK: Lifecycle
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,7 +78,7 @@ class RestaurantDetailViewController: UIViewController {
         return .lightContent
     }
     
-    // MARK: Navigation
+    // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         

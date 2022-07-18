@@ -10,7 +10,7 @@ import CoreData
 
 class RestaurantTableViewController: UITableViewController {
 
-    // MARK: Properties
+    // MARK: - Properties
     
     var restaurants: [Restaurant] = []
     var fetchResultController: NSFetchedResultsController<Restaurant>!
@@ -38,11 +38,11 @@ class RestaurantTableViewController: UITableViewController {
         Rest(name: "Petite Oyster", type: "French", location: "24 Tai Ping Shan Road SOHO, Sheung Wan, Hong Kong", phone: "983-284334", description: "An upscale dining venue, features premium and seasonal imported oysters, and delicate yet creative modern European cuisines. Its oyster bar displays a full array of freshest oysters imported from all over the world including France, Australia, USA and Japan.", image: "petiteoyster", isFavorite: false)
     ]
 
-    // MARK: IBOutlet
+    // MARK: - IBOutlet
     
     @IBOutlet var emptyRestaurantView: UIView!
     
-    // MARK: Lifecycle
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,7 +106,7 @@ class RestaurantTableViewController: UITableViewController {
         }
     }
     
-    // MARK: UITableView Diffable Data Source
+    // MARK: - Diffable Data Source
     
     func configureDataSource() -> RestaurantDiffableDataSource {
         
@@ -132,7 +132,24 @@ class RestaurantTableViewController: UITableViewController {
         return dataSource
     }
     
-    // MARK: 處理「向左滑動」動作
+    // MARK: - Snapshot
+    
+    func updateSnapshot(animatingChange: Bool = false) {
+        
+        if let fetchedObjects = fetchResultController.fetchedObjects {
+            restaurants = fetchedObjects
+        }
+        
+        // create snapshot and populate the data
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Restaurant>()
+        snapshot.appendSections([.all])
+        snapshot.appendItems(restaurants, toSection: .all)
+        
+        dataSource.apply(snapshot, animatingDifferences: animatingChange)
+        tableView.backgroundView?.isHidden = restaurants.count == 0 ? false : true
+    }
+    
+    // MARK: - 處理「向左滑動」動作
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
@@ -199,7 +216,7 @@ class RestaurantTableViewController: UITableViewController {
         return swipeConfiguration
     }
     
-    // MARK: 處理「向右滑動」動作
+    // MARK: - 處理「向右滑動」動作
     
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
@@ -230,7 +247,7 @@ class RestaurantTableViewController: UITableViewController {
         return swipeConfiguration
     }
     
-    // MARK: Navigation
+    // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showRestaurantDetail" {
@@ -246,7 +263,7 @@ class RestaurantTableViewController: UITableViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    // MARK: Core Data
+    // MARK: - Core Data
     
     func fetchRestaurantData(searchText: String = "") {
         
@@ -273,21 +290,6 @@ class RestaurantTableViewController: UITableViewController {
                 print(error)
             }
         }
-    }
-    
-    func updateSnapshot(animatingChange: Bool = false) {
-        
-        if let fetchedObjects = fetchResultController.fetchedObjects {
-            restaurants = fetchedObjects
-        }
-        
-        // create snapshot and populate the data
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Restaurant>()
-        snapshot.appendSections([.all])
-        snapshot.appendItems(restaurants, toSection: .all)
-        
-        dataSource.apply(snapshot, animatingDifferences: animatingChange)
-        tableView.backgroundView?.isHidden = restaurants.count == 0 ? false : true
     }
     
     // MARK: Function
