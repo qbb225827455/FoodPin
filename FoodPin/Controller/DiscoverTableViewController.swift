@@ -64,11 +64,17 @@ class DiscoverTableViewController: UITableViewController {
         spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 
         spinner.startAnimating()
+        
+        // 下拉更新控制元件
+        refreshControl = UIRefreshControl()
+        refreshControl?.backgroundColor = UIColor.white
+        refreshControl?.tintColor = UIColor.gray
+        refreshControl?.addTarget(self, action: #selector(fetchRecordFromCloudOperationalAPI), for: UIControl.Event.valueChanged)
     }
     
     // MARK: - Fetch record from Cloud
     
-    func fetchRecordFromCloudOperationalAPI() {
+    @objc func fetchRecordFromCloudOperationalAPI() {
         
         // fetch date use Operational API
         let cloudContainer = CKContainer.default()
@@ -82,6 +88,10 @@ class DiscoverTableViewController: UITableViewController {
         queryOperation.resultsLimit = 50
         queryOperation.recordMatchedBlock = {recordID, result -> Void in
             do {
+                if let _ = self.restaurants.first(where: {$0.recordID == recordID}) {
+                    return
+                }
+                
                 self.restaurants.append(try result.get())
             } catch {
                 print(error)
@@ -103,6 +113,12 @@ class DiscoverTableViewController: UITableViewController {
             // explain "https://ithelp.ithome.com.tw/articles/10204233"
             DispatchQueue.main.async {
                 self.spinner.stopAnimating()
+                
+                if let refreshControl = self.refreshControl {
+                    if refreshControl.isRefreshing {
+                        refreshControl.endRefreshing()
+                    }
+                }
             }
         }
         
@@ -163,7 +179,7 @@ class DiscoverTableViewController: UITableViewController {
                     fetchRecordsImageOperation.desiredKeys = ["image"]
                     fetchRecordsImageOperation.queuePriority = .veryHigh
                     
-                    fetchRecordsImageOperation.perRecordResultBlock = { recordID, result in
+                    fetchRecordsImageOperation.perRecordResultBlock = {recordID, result in
                         
                         do {
                             let restaurantRecord = try result.get()
