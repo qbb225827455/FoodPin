@@ -15,6 +15,7 @@ class DiscoverTableViewController: UITableViewController {
     
     lazy var dataSource = configureDataSource()
     var restaurants: [CKRecord] = []
+    var spinner = UIActivityIndicatorView()
     
     // MARK: Lifecycle
     
@@ -49,6 +50,18 @@ class DiscoverTableViewController: UITableViewController {
         fetchRecordFromCloudOperationalAPI()
         
         tableView.dataSource = dataSource
+        
+        // add activity indicator
+        spinner.style = .medium
+        spinner.hidesWhenStopped = true
+        view.addSubview(spinner)
+
+        // spinner layout
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        spinner.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 150.0).isActive = true
+        spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+
+        spinner.startAnimating()
     }
     
     // MARK: Fetch record from Cloud
@@ -84,6 +97,11 @@ class DiscoverTableViewController: UITableViewController {
             print("Successfully retrieve the data from iCloud")
             
             updateSnapshot()
+            
+            // explain "https://ithelp.ithome.com.tw/articles/10204233"
+            DispatchQueue.main.async {
+                spinner.stopAnimating()
+            }
         }
         
         pubDatabase.add(queryOperation)
