@@ -75,7 +75,7 @@ class DiscoverTableViewController: UITableViewController {
         let query = CKQuery(recordType: "Restaurant", predicate: predicate)
         
         let queryOperation = CKQueryOperation(query: query)
-        queryOperation.desiredKeys = ["name", "image"]
+        queryOperation.desiredKeys = ["name"]
         queryOperation.queuePriority = .veryHigh
         queryOperation.resultsLimit = 50
         queryOperation.recordMatchedBlock = {recordID, result -> Void in
@@ -100,7 +100,7 @@ class DiscoverTableViewController: UITableViewController {
             
             // explain "https://ithelp.ithome.com.tw/articles/10204233"
             DispatchQueue.main.async {
-                spinner.stopAnimating()
+                self.spinner.stopAnimating()
             }
         }
         
@@ -139,13 +139,39 @@ class DiscoverTableViewController: UITableViewController {
         
                 cell.textLabel?.text = restaurant.object(forKey: "name")  as? String
                 
-                if let image = restaurant.object(forKey: "image"),
-                   let imageAsset = image as? CKAsset {
+                // 預設圖片設定
+                cell.imageView?.image = UIImage(systemName: "photo.fill")
+                cell.imageView?.tintColor = .black
+                
+                // 背景取得圖片
+                let cloudContainer = CKContainer.default()
+                let pubDatabase = cloudContainer.publicCloudDatabase
+                
+                let fetchRecordsImageOperation = CKFetchRecordsOperation(recordIDs: [restaurant.recordID])
+                fetchRecordsImageOperation.desiredKeys = ["image"]
+                fetchRecordsImageOperation.queuePriority = .veryHigh
+                
+                fetchRecordsImageOperation.perRecordResultBlock = { recordID, result in
                     
-                    if let imageData = try? Data.init(contentsOf: imageAsset.fileURL!) {
-                        cell.imageView?.image = UIImage(data: imageData)
+                    do {
+                        let restaurantRecord = try result.get()
+                        
+                        if let image = restaurantRecord.object(forKey: "image"),
+                           let imageAsset = image as? CKAsset {
+                            
+                            if let imageData = try? Data.init(contentsOf: imageAsset.fileURL!) {
+                                DispatchQueue.main.async {
+                                    cell.imageView?.image = UIImage(data: imageData)
+                                    cell.setNeedsLayout()
+                                }
+                            }
+                        }
+                    } catch {
+                        print("Fail to get image - \(error.localizedDescription)")
                     }
                 }
+                
+                pubDatabase.add(fetchRecordsImageOperation)
             
                 return cell
             })
