@@ -27,6 +27,8 @@
 		EE3C1DA7287DD59600823D6B /* Discover.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE3C1DA6287DD59600823D6B /* Discover.storyboard */; };
 		EE3C1DA9287DD97400823D6B /* AboutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3C1DA8287DD97400823D6B /* AboutTableViewController.swift */; };
 		EE3C1DAB287DE9C600823D6B /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3C1DAA287DE9C600823D6B /* WebViewController.swift */; };
+		EE3C1DAE288575E300823D6B /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3C1DAD288575E300823D6B /* CloudKit.framework */; };
+		EE3C1DB0288580FA00823D6B /* DiscoverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3C1DAF288580FA00823D6B /* DiscoverTableViewController.swift */; };
 		EE417E1428732BA900274C66 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE417E1328732BA900274C66 /* UIColor+Ext.swift */; };
 		EE417E162873300400274C66 /* NavgationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE417E152873300400274C66 /* NavgationController.swift */; };
 		EE417E192874513100274C66 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE417E182874513100274C66 /* MapKit.framework */; };
@@ -64,6 +66,9 @@
 		EE3C1DA6287DD59600823D6B /* Discover.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Discover.storyboard; sourceTree = "<group>"; };
 		EE3C1DA8287DD97400823D6B /* AboutTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTableViewController.swift; sourceTree = "<group>"; };
 		EE3C1DAA287DE9C600823D6B /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		EE3C1DAC288575DB00823D6B /* FoodPin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FoodPin.entitlements; sourceTree = "<group>"; };
+		EE3C1DAD288575E300823D6B /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		EE3C1DAF288580FA00823D6B /* DiscoverTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverTableViewController.swift; sourceTree = "<group>"; };
 		EE417E1328732BA900274C66 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		EE417E152873300400274C66 /* NavgationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavgationController.swift; sourceTree = "<group>"; };
 		EE417E182874513100274C66 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -84,6 +89,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE417E192874513100274C66 /* MapKit.framework in Frameworks */,
+				EE3C1DAE288575E300823D6B /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,6 +107,7 @@
 		EE1300092848BD0E00F5EB49 /* FoodPin */ = {
 			isa = PBXGroup;
 			children = (
+				EE3C1DAC288575DB00823D6B /* FoodPin.entitlements */,
 				EE4409A12858A3DC0059AAB2 /* Resources */,
 				EEDF6AC128575C7200D44A18 /* Storyboard */,
 				EEDF6ABF28575C2A00D44A18 /* Model */,
@@ -136,6 +143,7 @@
 		EE417E172874513100274C66 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EE3C1DAD288575E300823D6B /* CloudKit.framework */,
 				EE417E182874513100274C66 /* MapKit.framework */,
 			);
 			name = Frameworks;
@@ -172,6 +180,7 @@
 				EE3C1DA1287D680700823D6B /* WalkthroughViewController.swift */,
 				EE3C1DA8287DD97400823D6B /* AboutTableViewController.swift */,
 				EE3C1DAA287DE9C600823D6B /* WebViewController.swift */,
+				EE3C1DAF288580FA00823D6B /* DiscoverTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -308,6 +317,7 @@
 				EE80DB4E2858DA7900DEE292 /* TwoColumnCell.swift in Sources */,
 				EE13001F2848BF3B00F5EB49 /* RestaurantTableViewController.swift in Sources */,
 				EE3C1D912874668E00823D6B /* MapViewController.swift in Sources */,
+				EE3C1DB0288580FA00823D6B /* DiscoverTableViewController.swift in Sources */,
 				EE3C1D9A28770B9200823D6B /* FoodPin.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -461,6 +471,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FoodPin/FoodPin.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Y6QUADNDDA;
@@ -489,6 +500,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FoodPin/FoodPin.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Y6QUADNDDA;
