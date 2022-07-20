@@ -19,6 +19,14 @@ class DiscoverTableViewController: UITableViewController {
     var restaurants: [CKRecord] = []
     var spinner = UIActivityIndicatorView()
     
+    var nowCursor: CKQueryOperation.Cursor?
+    var tempCursor: CKQueryOperation.Cursor?
+    var fetchTime: Int = 0
+    
+    // MARK: - IBOutlet
+    
+    @IBOutlet var btnLoadMore: UIButton!
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -70,11 +78,11 @@ class DiscoverTableViewController: UITableViewController {
         refreshControl?.backgroundColor = UIColor.white
         refreshControl?.tintColor = UIColor.gray
         refreshControl?.addTarget(self, action: #selector(fetchRecordFromCloudOperationalAPI), for: UIControl.Event.valueChanged)
+        
+        btnLoadMore.addTarget(self, action: #selector(loadMoreFromCloud), for: .touchUpInside)
     }
     
-    // MARK: - Fetch record from Cloud
-    
-    @objc func fetchRecordFromCloudOperationalAPI() {
+    @objc func loadMoreFromCloud() {
         
         // fetch date use Operational API
         let cloudContainer = CKContainer.default()
@@ -82,6 +90,71 @@ class DiscoverTableViewController: UITableViewController {
         
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: "Restaurant", predicate: predicate)
+        query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        
+        if nowCursor == nil {
+            nowCursor = tempCursor
+        }
+        
+        if let cursor = self.nowCursor {
+            
+            let nextQueryOperation = CKQueryOperation(cursor: cursor)
+            nextQueryOperation.desiredKeys = ["name"]
+            nextQueryOperation.queuePriority = .veryHigh
+            nextQueryOperation.resultsLimit = 5
+            nextQueryOperation.recordMatchedBlock = {recordID, result -> Void in
+                do {
+                    if let _ = self.restaurants.first(where: {$0.recordID == recordID}) {
+                        return
+                    }
+                    print(try? result.get().object(forKey: "name"))
+                    self.restaurants.append(try result.get())
+                } catch {
+                    print(error)
+                }
+            }
+            
+            nextQueryOperation.queryCompletionBlock = { [unowned self] cursor, error -> Void in
+                
+                if let error = error {
+                    print("Failed to get data from iCloud - \(error.localizedDescription)")
+                    
+                    return
+                }
+                if cursor != nil {
+                    self.tempCursor = cursor
+                }
+                self.nowCursor = cursor
+                
+                updateSnapshot()
+                
+                // explain "https://ithelp.ithome.com.tw/articles/10204233"
+                DispatchQueue.main.async {
+                    if let refreshControl = self.refreshControl {
+                        if refreshControl.isRefreshing {
+                            refreshControl.endRefreshing()
+                        }
+                    }
+                }
+            }
+            
+            pubDatabase.add(nextQueryOperation)
+        }
+    }
+    
+    // MARK: - Fetch record from Cloud
+    
+    @objc func fetchRecordFromCloudOperationalAPI() {
+        
+        self.fetchTime += 1
+        
+        // fetch date use Operational API
+        let cloudContainer = CKContainer.default()
+        let pubDatabase = cloudContainer.publicCloudDatabase
+        
+        let predicate = NSPredicate(value: true)
+        let query = CKQuery(recordType: "Restaurant", predicate: predicate)
+        query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         let queryOperation = CKQueryOperation(query: query)
         queryOperation.desiredKeys = ["name"]
         queryOperation.queuePriority = .veryHigh
@@ -91,7 +164,7 @@ class DiscoverTableViewController: UITableViewController {
                 if let _ = self.restaurants.first(where: {$0.recordID == recordID}) {
                     return
                 }
-                
+                print(try? result.get().object(forKey: "name"))
                 self.restaurants.append(try result.get())
             } catch {
                 print(error)
@@ -105,20 +178,12 @@ class DiscoverTableViewController: UITableViewController {
                 
                 return
             }
-            
-            
-            // TODO: 改成上滑繼續更新資料
-//            if cursor != nil {
-//
-//                let nextQueryOperation = CKQueryOperation(cursor: cursor!)
-//                nextQueryOperation.recordMatchedBlock = queryOperation.recordMatchedBlock
-//                nextQueryOperation.queryCompletionBlock = queryOperation.queryCompletionBlock
-//                nextQueryOperation.resultsLimit = queryOperation.resultsLimit
-//
-//                queryOperation = nextQueryOperation
-//
-//                pubDatabase.add(queryOperation)
-//            }
+            if fetchTime == 1 {
+                if cursor != nil {
+                    self.tempCursor = cursor
+                }
+                self.nowCursor = cursor
+            }
             
             updateSnapshot()
             
