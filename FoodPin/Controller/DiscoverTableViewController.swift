@@ -130,15 +130,6 @@ class DiscoverTableViewController: UITableViewController {
                 self.nowCursor = cursor
                 
                 updateSnapshot()
-                
-                // explain "https://ithelp.ithome.com.tw/articles/10204233"
-                DispatchQueue.main.async {
-                    if let refreshControl = self.refreshControl {
-                        if refreshControl.isRefreshing {
-                            refreshControl.endRefreshing()
-                        }
-                    }
-                }
             }
             
             pubDatabase.add(nextQueryOperation)
