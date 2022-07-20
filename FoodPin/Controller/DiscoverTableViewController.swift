@@ -87,6 +87,9 @@ class DiscoverTableViewController: UITableViewController {
     
     @objc func loadMoreFromCloud() {
         
+        btnLoadMore.configuration?.showsActivityIndicator = true
+        btnLoadMore.setTitle("", for: .normal)
+        
         // fetch date use Operational API
         let cloudContainer = CKContainer.default()
         let pubDatabase = cloudContainer.publicCloudDatabase
@@ -128,6 +131,11 @@ class DiscoverTableViewController: UITableViewController {
                     self.tempCursor = cursor
                 }
                 self.nowCursor = cursor
+                
+                DispatchQueue.main.async {
+                    btnLoadMore.configuration?.showsActivityIndicator = false
+                    btnLoadMore.setTitle("Load more ...", for: .normal)
+                }
                 
                 updateSnapshot()
             }
