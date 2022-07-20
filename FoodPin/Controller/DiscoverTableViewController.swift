@@ -234,20 +234,24 @@ class DiscoverTableViewController: UITableViewController {
             tableView: tableView,
             cellProvider: {tableView, indexPath, restaurant in
                 
-                let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+                let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! DiscoverTableViewCell
         
-                cell.textLabel?.text = restaurant.object(forKey: "name")  as? String
+                cell.nameLabel.text = restaurant.object(forKey: "name")  as? String
+                cell.typeLabel.text = restaurant.object(forKey: "type")  as? String
+                cell.locationLabel.text = restaurant.object(forKey: "location")  as? String
+                cell.descriptionLabel.text = restaurant.object(forKey: "description")  as? String
+                
                 
                 // 預設圖片設定
-                cell.imageView?.image = UIImage(systemName: "photo.fill")
-                cell.imageView?.tintColor = .black
+                cell.thumbnailImageView.image = UIImage(systemName: "photo.fill")
+                cell.thumbnailImageView.tintColor = .black
                 
                 // 確認圖片有無快取
                 if let imageURL = self.imageCache.object(forKey: restaurant.recordID) {
                     
                     print("Get image from cache")
                     if let imageData = try? Data.init(contentsOf: imageURL as URL) {
-                        cell.imageView?.image = UIImage(data: imageData)
+                        cell.thumbnailImageView.image = UIImage(data: imageData)
                     }
                 }
                 else {
@@ -270,7 +274,7 @@ class DiscoverTableViewController: UITableViewController {
                                 
                                 if let imageData = try? Data.init(contentsOf: imageAsset.fileURL!) {
                                     DispatchQueue.main.async {
-                                        cell.imageView?.image = UIImage(data: imageData)
+                                        cell.thumbnailImageView.image = UIImage(data: imageData)
                                         cell.setNeedsLayout()
                                     }
                                     
