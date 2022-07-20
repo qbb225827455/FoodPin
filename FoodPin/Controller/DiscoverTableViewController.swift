@@ -98,10 +98,11 @@ class DiscoverTableViewController: UITableViewController {
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: "Restaurant", predicate: predicate)
         query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        
         let queryOperation = CKQueryOperation(query: query)
-        queryOperation.desiredKeys = ["name"]
+        queryOperation.desiredKeys = ["name", "location", "type", "description"]
         queryOperation.queuePriority = .veryHigh
-        queryOperation.resultsLimit = 5
+        queryOperation.resultsLimit = 10
         queryOperation.recordMatchedBlock = {recordID, result -> Void in
             do {
                 if let _ = self.restaurants.first(where: {$0.recordID == recordID}) {
@@ -184,9 +185,9 @@ class DiscoverTableViewController: UITableViewController {
         if let cursor = self.nowCursor {
             
             let nextQueryOperation = CKQueryOperation(cursor: cursor)
-            nextQueryOperation.desiredKeys = ["name"]
+            nextQueryOperation.desiredKeys = ["name", "location", "type", "description"]
             nextQueryOperation.queuePriority = .veryHigh
-            nextQueryOperation.resultsLimit = 5
+            nextQueryOperation.resultsLimit = 10
             nextQueryOperation.recordMatchedBlock = {recordID, result -> Void in
                 do {
                     if let _ = self.restaurants.first(where: {$0.recordID == recordID}) {
