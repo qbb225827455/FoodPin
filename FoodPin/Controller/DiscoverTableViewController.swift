@@ -85,65 +85,6 @@ class DiscoverTableViewController: UITableViewController {
         }
     }
     
-    @objc func loadMoreFromCloud() {
-        
-        btnLoadMore.configuration?.showsActivityIndicator = true
-        btnLoadMore.setTitle("", for: .normal)
-        
-        // fetch date use Operational API
-        let cloudContainer = CKContainer.default()
-        let pubDatabase = cloudContainer.publicCloudDatabase
-        
-        let predicate = NSPredicate(value: true)
-        let query = CKQuery(recordType: "Restaurant", predicate: predicate)
-        query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        
-        if nowCursor == nil {
-            nowCursor = tempCursor
-        }
-        
-        if let cursor = self.nowCursor {
-            
-            let nextQueryOperation = CKQueryOperation(cursor: cursor)
-            nextQueryOperation.desiredKeys = ["name"]
-            nextQueryOperation.queuePriority = .veryHigh
-            nextQueryOperation.resultsLimit = 5
-            nextQueryOperation.recordMatchedBlock = {recordID, result -> Void in
-                do {
-                    if let _ = self.restaurants.first(where: {$0.recordID == recordID}) {
-                        return
-                    }
-                    print("Load more ---\(try? result.get().object(forKey: "name"))")
-                    self.restaurants.append(try result.get())
-                } catch {
-                    print(error)
-                }
-            }
-            
-            nextQueryOperation.queryCompletionBlock = { [unowned self] cursor, error -> Void in
-                
-                if let error = error {
-                    print("Failed to get data from iCloud - \(error.localizedDescription)")
-                    
-                    return
-                }
-                if cursor != nil {
-                    self.tempCursor = cursor
-                }
-                self.nowCursor = cursor
-                
-                DispatchQueue.main.async {
-                    btnLoadMore.configuration?.showsActivityIndicator = false
-                    btnLoadMore.setTitle("Load more ...", for: .normal)
-                }
-                
-                updateSnapshot()
-            }
-            
-            pubDatabase.add(nextQueryOperation)
-        }
-    }
-    
     // MARK: - Fetch record from Cloud
     
     @objc func fetchRecordFromCloudOperationalAPI() {
@@ -223,6 +164,63 @@ class DiscoverTableViewController: UITableViewController {
         }
         
         updateSnapshot()
+    }
+    
+    // MARK: - Load more from Cloud
+    
+    @objc func loadMoreFromCloud() {
+        
+        btnLoadMore.configuration?.showsActivityIndicator = true
+        btnLoadMore.setTitle("", for: .normal)
+        
+        // fetch date use Operational API
+        let cloudContainer = CKContainer.default()
+        let pubDatabase = cloudContainer.publicCloudDatabase
+        
+        if nowCursor == nil {
+            nowCursor = tempCursor
+        }
+        
+        if let cursor = self.nowCursor {
+            
+            let nextQueryOperation = CKQueryOperation(cursor: cursor)
+            nextQueryOperation.desiredKeys = ["name"]
+            nextQueryOperation.queuePriority = .veryHigh
+            nextQueryOperation.resultsLimit = 5
+            nextQueryOperation.recordMatchedBlock = {recordID, result -> Void in
+                do {
+                    if let _ = self.restaurants.first(where: {$0.recordID == recordID}) {
+                        return
+                    }
+                    print("Load more ---\(try? result.get().object(forKey: "name"))")
+                    self.restaurants.append(try result.get())
+                } catch {
+                    print(error)
+                }
+            }
+            
+            nextQueryOperation.queryCompletionBlock = { [unowned self] cursor, error -> Void in
+                
+                if let error = error {
+                    print("Failed to get data from iCloud - \(error.localizedDescription)")
+                    
+                    return
+                }
+                if cursor != nil {
+                    self.tempCursor = cursor
+                }
+                self.nowCursor = cursor
+                
+                DispatchQueue.main.async {
+                    btnLoadMore.configuration?.showsActivityIndicator = false
+                    btnLoadMore.setTitle("Load more ...", for: .normal)
+                }
+                
+                updateSnapshot()
+            }
+            
+            pubDatabase.add(nextQueryOperation)
+        }
     }
     
     // MARK: - Diffable Data Source
