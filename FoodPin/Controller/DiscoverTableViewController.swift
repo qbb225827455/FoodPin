@@ -80,6 +80,9 @@ class DiscoverTableViewController: UITableViewController {
         refreshControl?.addTarget(self, action: #selector(fetchRecordFromCloudOperationalAPI), for: UIControl.Event.valueChanged)
         
         btnLoadMore.addTarget(self, action: #selector(loadMoreFromCloud), for: .touchUpInside)
+        if restaurants.count == 0 {
+            btnLoadMore.isHidden = true
+        }
     }
     
     @objc func loadMoreFromCloud() {
@@ -107,7 +110,7 @@ class DiscoverTableViewController: UITableViewController {
                     if let _ = self.restaurants.first(where: {$0.recordID == recordID}) {
                         return
                     }
-                    print(try? result.get().object(forKey: "name"))
+                    print("Load more ---\(try? result.get().object(forKey: "name"))")
                     self.restaurants.append(try result.get())
                 } catch {
                     print(error)
@@ -195,6 +198,10 @@ class DiscoverTableViewController: UITableViewController {
                     if refreshControl.isRefreshing {
                         refreshControl.endRefreshing()
                     }
+                }
+                
+                if self.restaurants.count != 0 {
+                    self.btnLoadMore.isHidden = false
                 }
             }
         }
