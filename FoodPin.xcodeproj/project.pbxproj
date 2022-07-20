@@ -41,6 +41,7 @@
 		EE80DB4E2858DA7900DEE292 /* TwoColumnCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE80DB4D2858DA7900DEE292 /* TwoColumnCell.swift */; };
 		EEDF6ABD2857549400D44A18 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDF6ABC2857549400D44A18 /* Restaurant.swift */; };
 		EEDF6AC5285772A000D44A18 /* RestaurantDiffableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDF6AC4285772A000D44A18 /* RestaurantDiffableDataSource.swift */; };
+		EEE4063C288872C50085EB75 /* DiscoverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE4063B288872C50085EB75 /* DiscoverTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +82,7 @@
 		EE80DB4D2858DA7900DEE292 /* TwoColumnCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoColumnCell.swift; sourceTree = "<group>"; };
 		EEDF6ABC2857549400D44A18 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		EEDF6AC4285772A000D44A18 /* RestaurantDiffableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDiffableDataSource.swift; sourceTree = "<group>"; };
+		EEE4063B288872C50085EB75 /* DiscoverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +205,7 @@
 				EE80DB4D2858DA7900DEE292 /* TwoColumnCell.swift */,
 				EE417E1A2874542E00274C66 /* RestaurantDetailMapCell.swift */,
 				EE3C1D942876E72600823D6B /* RoundedTextField.swift */,
+				EEE4063B288872C50085EB75 /* DiscoverTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEDF6ABD2857549400D44A18 /* Restaurant.swift in Sources */,
+				EEE4063C288872C50085EB75 /* DiscoverTableViewCell.swift in Sources */,
 				EE80DB4C2858D7EB00DEE292 /* RestaurantDetailTextCell.swift in Sources */,
 				EE3C1DA0287D60D900823D6B /* WalkthroughPageViewController.swift in Sources */,
 				EE3C1DA9287DD97400823D6B /* AboutTableViewController.swift in Sources */,

@@ -93,6 +93,10 @@
                                 </connections>
                             </tableViewCell>
                         </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="WeG-C0-Kqj" id="Hw2-5X-EdX"/>
+                            <outlet property="delegate" destination="WeG-C0-Kqj" id="mdT-ru-A01"/>
+                        </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="FoodPin" id="ege-i6-2MR">
                         <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="mLN-LH-VQh">

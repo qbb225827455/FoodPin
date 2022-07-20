@@ -85,66 +85,6 @@ class DiscoverTableViewController: UITableViewController {
         }
     }
     
-    @objc func loadMoreFromCloud() {
-        
-        // fetch date use Operational API
-        let cloudContainer = CKContainer.default()
-        let pubDatabase = cloudContainer.publicCloudDatabase
-        
-        let predicate = NSPredicate(value: true)
-        let query = CKQuery(recordType: "Restaurant", predicate: predicate)
-        query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        
-        if nowCursor == nil {
-            nowCursor = tempCursor
-        }
-        
-        if let cursor = self.nowCursor {
-            
-            let nextQueryOperation = CKQueryOperation(cursor: cursor)
-            nextQueryOperation.desiredKeys = ["name"]
-            nextQueryOperation.queuePriority = .veryHigh
-            nextQueryOperation.resultsLimit = 5
-            nextQueryOperation.recordMatchedBlock = {recordID, result -> Void in
-                do {
-                    if let _ = self.restaurants.first(where: {$0.recordID == recordID}) {
-                        return
-                    }
-                    print("Load more ---\(try? result.get().object(forKey: "name"))")
-                    self.restaurants.append(try result.get())
-                } catch {
-                    print(error)
-                }
-            }
-            
-            nextQueryOperation.queryCompletionBlock = { [unowned self] cursor, error -> Void in
-                
-                if let error = error {
-                    print("Failed to get data from iCloud - \(error.localizedDescription)")
-                    
-                    return
-                }
-                if cursor != nil {
-                    self.tempCursor = cursor
-                }
-                self.nowCursor = cursor
-                
-                updateSnapshot()
-                
-                // explain "https://ithelp.ithome.com.tw/articles/10204233"
-                DispatchQueue.main.async {
-                    if let refreshControl = self.refreshControl {
-                        if refreshControl.isRefreshing {
-                            refreshControl.endRefreshing()
-                        }
-                    }
-                }
-            }
-            
-            pubDatabase.add(nextQueryOperation)
-        }
-    }
-    
     // MARK: - Fetch record from Cloud
     
     @objc func fetchRecordFromCloudOperationalAPI() {
@@ -158,10 +98,11 @@ class DiscoverTableViewController: UITableViewController {
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: "Restaurant", predicate: predicate)
         query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        
         let queryOperation = CKQueryOperation(query: query)
-        queryOperation.desiredKeys = ["name"]
+        queryOperation.desiredKeys = ["name", "location", "type", "description"]
         queryOperation.queuePriority = .veryHigh
-        queryOperation.resultsLimit = 5
+        queryOperation.resultsLimit = 10
         queryOperation.recordMatchedBlock = {recordID, result -> Void in
             do {
                 if let _ = self.restaurants.first(where: {$0.recordID == recordID}) {
@@ -226,6 +167,63 @@ class DiscoverTableViewController: UITableViewController {
         updateSnapshot()
     }
     
+    // MARK: - Load more from Cloud
+    
+    @objc func loadMoreFromCloud() {
+        
+        btnLoadMore.configuration?.showsActivityIndicator = true
+        btnLoadMore.setTitle("", for: .normal)
+        
+        // fetch date use Operational API
+        let cloudContainer = CKContainer.default()
+        let pubDatabase = cloudContainer.publicCloudDatabase
+        
+        if nowCursor == nil {
+            nowCursor = tempCursor
+        }
+        
+        if let cursor = self.nowCursor {
+            
+            let nextQueryOperation = CKQueryOperation(cursor: cursor)
+            nextQueryOperation.desiredKeys = ["name", "location", "type", "description"]
+            nextQueryOperation.queuePriority = .veryHigh
+            nextQueryOperation.resultsLimit = 10
+            nextQueryOperation.recordMatchedBlock = {recordID, result -> Void in
+                do {
+                    if let _ = self.restaurants.first(where: {$0.recordID == recordID}) {
+                        return
+                    }
+                    print("Load more ---\(try? result.get().object(forKey: "name"))")
+                    self.restaurants.append(try result.get())
+                } catch {
+                    print(error)
+                }
+            }
+            
+            nextQueryOperation.queryCompletionBlock = { [unowned self] cursor, error -> Void in
+                
+                if let error = error {
+                    print("Failed to get data from iCloud - \(error.localizedDescription)")
+                    
+                    return
+                }
+                if cursor != nil {
+                    self.tempCursor = cursor
+                }
+                self.nowCursor = cursor
+                
+                DispatchQueue.main.async {
+                    btnLoadMore.configuration?.showsActivityIndicator = false
+                    btnLoadMore.setTitle("Load more ...", for: .normal)
+                }
+                
+                updateSnapshot()
+            }
+            
+            pubDatabase.add(nextQueryOperation)
+        }
+    }
+    
     // MARK: - Diffable Data Source
     
     func configureDataSource() -> UITableViewDiffableDataSource<Section, CKRecord> {
@@ -237,20 +235,24 @@ class DiscoverTableViewController: UITableViewController {
             tableView: tableView,
             cellProvider: {tableView, indexPath, restaurant in
                 
-                let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+                let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! DiscoverTableViewCell
         
-                cell.textLabel?.text = restaurant.object(forKey: "name")  as? String
+                cell.nameLabel.text = restaurant.object(forKey: "name")  as? String
+                cell.typeLabel.text = restaurant.object(forKey: "type")  as? String
+                cell.locationLabel.text = restaurant.object(forKey: "location")  as? String
+                cell.descriptionLabel.text = restaurant.object(forKey: "description")  as? String
+                
                 
                 // 預設圖片設定
-                cell.imageView?.image = UIImage(systemName: "photo.fill")
-                cell.imageView?.tintColor = .black
+                cell.thumbnailImageView.image = UIImage(systemName: "photo.fill")
+                cell.thumbnailImageView.tintColor = .black
                 
                 // 確認圖片有無快取
                 if let imageURL = self.imageCache.object(forKey: restaurant.recordID) {
                     
                     print("Get image from cache")
                     if let imageData = try? Data.init(contentsOf: imageURL as URL) {
-                        cell.imageView?.image = UIImage(data: imageData)
+                        cell.thumbnailImageView.image = UIImage(data: imageData)
                     }
                 }
                 else {
@@ -273,7 +275,7 @@ class DiscoverTableViewController: UITableViewController {
                                 
                                 if let imageData = try? Data.init(contentsOf: imageAsset.fileURL!) {
                                     DispatchQueue.main.async {
-                                        cell.imageView?.image = UIImage(data: imageData)
+                                        cell.thumbnailImageView.image = UIImage(data: imageData)
                                         cell.setNeedsLayout()
                                     }
                                     
