@@ -9,7 +9,7 @@ import UIKit
 
 class TwoColumnCell: UITableViewCell {
 
-    // MARK: IBOutlet
+    // MARK: - IBOutlet
 
     // address title label
     @IBOutlet var column1TitleLabel: UILabel! {

@@ -9,7 +9,7 @@ import UIKit
 
 class RestaurantTableViewCell: UITableViewCell {
     
-    // MARK: IBOutlet
+    // MARK: - IBOutlet
 
     @IBOutlet var nameLabel: UILabel! {
         didSet {

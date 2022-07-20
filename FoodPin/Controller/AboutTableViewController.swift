@@ -21,7 +21,7 @@ class AboutTableViewController: UITableViewController {
         var image: String
     }
     
-    // MARK: Properties
+    // MARK: - Properties
     
     var sectionContent = [ [LinkItem(text: "Rate us on App Store", link: "https://www.apple.com/ios/app-store/", image: "store"),
                             LinkItem(text: "Tell us your feedback", link: "http://www.appcoda.com/contact", image: "chat")],
@@ -33,7 +33,7 @@ class AboutTableViewController: UITableViewController {
 
     lazy var dataSource = configureDataSource()
     
-    // MARK: Lifecycle
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,7 +81,7 @@ class AboutTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    // MARK: UITableView Diffable Data Source
+    // MARK: - Diffable Data Source
     
     func configureDataSource() -> UITableViewDiffableDataSource<Section, LinkItem> {
         
@@ -103,6 +103,8 @@ class AboutTableViewController: UITableViewController {
         return dataSource
     }
     
+    // MARK: - Snapshot
+    
     func updateSnapshot() {
         
         // create snapshot and populate the data
@@ -114,7 +116,7 @@ class AboutTableViewController: UITableViewController {
         dataSource.apply(snapshot, animatingDifferences: false)
     }
     
-    // MARK: Navigation
+    // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showWebView" {

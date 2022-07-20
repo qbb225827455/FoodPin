@@ -7,14 +7,15 @@
 
 import UIKit
 import CoreData
+import CloudKit
 
 class NewRestaurantController: UITableViewController {
     
-    // MARK: Properties
+    // MARK: - Properties
     
     var restaurant: Restaurant!
 
-    // MARK: IBOutlet
+    // MARK: - IBOutlet
     
     @IBOutlet var nameTextField: RoundedTextField! {
         didSet {
@@ -60,7 +61,7 @@ class NewRestaurantController: UITableViewController {
         }
     }
     
-    // MARK: IBAction
+    // MARK: - IBAction
 
     @IBAction func saveNewRestaurant(sender: UIButton) {
         
@@ -92,10 +93,11 @@ class NewRestaurantController: UITableViewController {
             }
             
             dismiss(animated: true, completion: nil)
+            saveRestaurantToCloud(restaurant: restaurant)
         }
     }
     
-    // MARK: Lifecycle
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -177,7 +179,44 @@ class NewRestaurantController: UITableViewController {
             self.present(photoSourceRequestController, animated: true, completion: nil)
         }
     }
-
+    
+    // MARK: - Save restaurant to Cloud
+    
+    func saveRestaurantToCloud(restaurant: Restaurant) {
+        
+        let record = CKRecord(recordType: "Restaurant")
+        record.setValue(restaurant.name, forKey: "name")
+        record.setValue(restaurant.type, forKey: "type")
+        record.setValue(restaurant.summary, forKey: "description")
+        record.setValue(restaurant.location, forKey: "location")
+        record.setValue(restaurant.phone, forKey: "phone")
+        
+        // 調整圖片尺寸
+        let imageData = restaurant.image as Data
+        let orignImage = UIImage(data: imageData)!
+        let scalingFactor = (orignImage.size.width > 1024) ? (1024 / orignImage.size.width) : 1.0
+        let scaledImage = UIImage(data: imageData, scale: scalingFactor)!
+        
+        // 將圖片寫入本地檔案作為暫時使用
+        let imageFilePath = NSTemporaryDirectory() + restaurant.name
+        let imageFileURL = URL(fileURLWithPath: imageFilePath)
+        try? scaledImage.jpegData(compressionQuality: 0.8)?.write(to: imageFileURL)
+        
+        let imageAsset = CKAsset(fileURL: imageFileURL)
+        record.setValue(imageAsset, forKey: "image")
+        
+        let contaioner = CKContainer.default()
+        let pubDatabase = contaioner.publicCloudDatabase
+        pubDatabase.save(record, completionHandler: {record, error -> Void in
+            
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            
+            // 移除本地檔案
+            try? FileManager.default.removeItem(at: imageFileURL)
+        })
+    }
 }
 
 // MARK: - UITextFieldDelegate

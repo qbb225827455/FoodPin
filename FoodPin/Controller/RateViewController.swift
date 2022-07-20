@@ -9,17 +9,17 @@ import UIKit
 
 class RateViewController: UIViewController {
 
-    // MARK: Properties
+    // MARK: - Properties
     
     var restaurant = Restaurant()
     
-    // MARK: IBOutlet
+    // MARK: - IBOutlet
     
     @IBOutlet var backgroundImageView: UIImageView!
     @IBOutlet var rateBtn: [UIButton]!
     @IBOutlet var closeBtn: UIButton!
     
-    // MARK: Livecycle
+    // MARK: - Livecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +29,7 @@ class RateViewController: UIViewController {
         // 背景模糊
         let blurEffect = UIBlurEffect(style: .dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = view.bounds
+        blurEffectView.frame = view.frame
         backgroundImageView.addSubview(blurEffectView)
         
         // RateBtn tranform
@@ -65,12 +65,21 @@ class RateViewController: UIViewController {
         }, completion: nil)
     }
     
+    // MARK: - 裝置有無旋轉
+    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        updateblurEffectView()
+        print("viewWillTransition -> width:\(view.frame.width), height:\(view.frame.height)")
     }
+    override func viewWillLayoutSubviews() {
+        updateblurEffectView()
+        print("viewWillLayoutSubviews -> width:\(view.frame.width), height:\(view.frame.height)")
+    }
+    
+    // MARK: - 更新背景圖片大小
     
     func updateblurEffectView() {
         
+        // remove all UIVisualEffectView subview
         for subview in backgroundImageView.subviews {
             if subview is UIVisualEffectView {
                 subview.removeFromSuperview()
@@ -79,7 +88,8 @@ class RateViewController: UIViewController {
         
         let blurEffect = UIBlurEffect(style: .dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = CGRect(x: 0, y: 0, width: view.frame.height, height: view.frame.width)
+        blurEffectView.frame = view.frame
+        
         backgroundImageView.addSubview(blurEffectView)
     }
 }
