@@ -32,7 +32,7 @@ class RateViewController: UIViewController {
         blurEffectView.frame = view.frame
         backgroundImageView.addSubview(blurEffectView)
         
-        // RateBtn tranform
+        // rateBtn tranform
         let moveRightTransform = CGAffineTransform.init(translationX: 600, y: 0)
         let scaleUpTransform = CGAffineTransform.init(scaleX: 5, y: 5)
         let moveScaleTransform = scaleUpTransform.concatenating(moveRightTransform)
