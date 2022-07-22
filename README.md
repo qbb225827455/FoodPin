@@ -16,6 +16,7 @@
   ##### - 新增 評價功能
   ##### - 評價畫面的評價按鈕動畫
   ##### - 修正 畫面旋轉後評價畫面的模糊背景沒有全螢幕顯示
+  ##### - 修正 畫面旋轉後按鈕沒有正常顯示  
 - [X] Static Table Views, Camera and NSLayoutConstraint
   ##### - 新增 增加餐廳的功能
 - [X] Core Data
