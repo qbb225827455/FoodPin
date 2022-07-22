@@ -3,8 +3,10 @@
 ### :bookmark: Checklist
 
 - [X] Customize Table Views use Prototype Cell & Diffable Data Source
+  ##### - 新增 主畫面
 - [X] Use UIAlertController interact with Table Views 
 - [X] MVC & Table Row Deletion, Swipe action, UIActivivityViewController
+  ##### - 新增 刪除跟分享的功能
 - [X] Navigation Controller & Segue
   ##### - 新增 顯示餐廳細節的畫面
 - [X] Improve Detail View, Custom Fonts & Self Sizing Cell
