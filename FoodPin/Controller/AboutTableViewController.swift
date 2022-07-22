@@ -10,21 +10,10 @@ import SafariServices
 
 class AboutTableViewController: UITableViewController {
     
-    enum Section {
-        case feedback
-        case followus
-    }
-    
-    struct LinkItem: Hashable {
-        var text: String
-        var link: String
-        var image: String
-    }
-    
     // MARK: - Properties
     
-    var sectionContent = [ [LinkItem(text: "Rate us on App Store", link: "https://www.apple.com/ios/app-store/", image: "store"),
-                            LinkItem(text: "Tell us your feedback", link: "http://www.appcoda.com/contact", image: "chat")],
+    var sectionContent = [ [LinkItem(text: String(localized: "Rate us on App Store"), link: "https://www.apple.com/ios/app-store/", image: "store"),
+                            LinkItem(text: String(localized: "Tell us your feedback"), link: "http://www.appcoda.com/contact", image: "chat")],
                            
                            [LinkItem(text: "Twitter", link: "https://twitter.com/", image: "twitter"),
                             LinkItem(text: "Facebook", link: "https://facebook.com/", image: "facebook"),
@@ -83,11 +72,11 @@ class AboutTableViewController: UITableViewController {
 
     // MARK: - Diffable Data Source
     
-    func configureDataSource() -> UITableViewDiffableDataSource<Section, LinkItem> {
+    func configureDataSource() -> AboutViewDataSource {
         
         let cellIdentifier = "aboutcell"
         
-        let dataSource = UITableViewDiffableDataSource<Section, LinkItem>(
+        let dataSource = AboutViewDataSource(
             
             tableView: tableView,
             cellProvider: {tableView, indexPath, linkItem in
@@ -108,7 +97,7 @@ class AboutTableViewController: UITableViewController {
     func updateSnapshot() {
         
         // create snapshot and populate the data
-        var snapshot = NSDiffableDataSourceSnapshot<Section, LinkItem>()
+        var snapshot = NSDiffableDataSourceSnapshot<AboutSection, LinkItem>()
         snapshot.appendSections([.feedback, .followus])
         snapshot.appendItems(sectionContent[0], toSection: .feedback)
         snapshot.appendItems(sectionContent[1], toSection: .followus)

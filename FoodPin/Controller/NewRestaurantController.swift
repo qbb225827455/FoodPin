@@ -67,7 +67,7 @@ class NewRestaurantController: UITableViewController {
         
         if nameTextField.text == "" || typeTextField.text == "" || addressTextField.text == "" || phoneTextField.text == "" || descriptionTextView.text == "" {
             
-            let alertController = UIAlertController(title: "!", message: "We can't proceed because one of the fields is blank. Please note that all fields are required", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "!", message: String(localized: "We can't proceed because one of the fields is blank. Please note that all fields are required"), preferredStyle: .alert)
             let alertAct = UIAlertAction(title: "OK", style: .default, handler: nil)
             
             alertController.addAction(alertAct)
@@ -137,9 +137,9 @@ class NewRestaurantController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.row == 0 {
-            let photoSourceRequestController = UIAlertController(title: "", message: "Choose your photo source", preferredStyle: .actionSheet)
+            let photoSourceRequestController = UIAlertController(title: "", message: String(localized: "Choose your photo source"), preferredStyle: .actionSheet)
 
-            let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: { action in
+            let cameraAction = UIAlertAction(title: String(localized: "Camera"), style: .default, handler: { action in
                 
                 if UIImagePickerController.isSourceTypeAvailable(.camera) {
                     let imagePicker = UIImagePickerController()
@@ -152,7 +152,7 @@ class NewRestaurantController: UITableViewController {
             })
             photoSourceRequestController.addAction(cameraAction)
             
-            let photoLibaryAction = UIAlertAction(title: "Photo library", style: .default, handler: { action in
+            let photoLibaryAction = UIAlertAction(title: String(localized: "Photo library"), style: .default, handler: { action in
                 
                 if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
                     let imagePicker = UIImagePickerController()
@@ -165,7 +165,7 @@ class NewRestaurantController: UITableViewController {
             })
             photoSourceRequestController.addAction(photoLibaryAction)
             
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            let cancelAction = UIAlertAction(title: String(localized: "Cancel"), style: .cancel, handler: nil)
             photoSourceRequestController.addAction(cancelAction)
             
             // for ipad

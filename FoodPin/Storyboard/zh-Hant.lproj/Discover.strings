@@ -1,0 +1,24 @@
+/* Class = "UIButton"; configuration.title = "Load more ..."; ObjectID = "7wa-fc-8Fb"; */
+"7wa-fc-8Fb.configuration.title" = "顯示更多...";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "7wa-fc-8Fb"; */
+"7wa-fc-8Fb.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "location"; ObjectID = "eSU-hD-pWD"; */
+"eSU-hD-pWD.text" = "location";
+
+/* Class = "UILabel"; text = "type"; ObjectID = "fnu-DV-rXo"; */
+"fnu-DV-rXo.text" = "type";
+
+/* Class = "UILabel"; text = "description"; ObjectID = "hvE-g9-o3Z"; */
+"hvE-g9-o3Z.text" = "description";
+
+/* Class = "UITabBarItem"; title = "Discover"; ObjectID = "Ig9-5N-PqI"; */
+"Ig9-5N-PqI.title" = "探索";
+
+/* Class = "UINavigationItem"; title = "Discover"; ObjectID = "OKV-ls-jBT"; */
+"OKV-ls-jBT.title" = "Discover";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "P5s-a6-ujk"; */
+"P5s-a6-ujk.text" = "Name";
+

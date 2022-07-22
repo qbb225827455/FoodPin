@@ -80,7 +80,7 @@ class RestaurantTableViewController: UITableViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         
         searchController.searchBar.tintColor = UIColor(named: "NavBarTitle")
-        searchController.searchBar.placeholder = "Search..."
+        searchController.searchBar.placeholder = String(localized: "Search...")
         //searchController.searchBar.prompt = "123"
         
         fetchRestaurantData()
@@ -163,7 +163,7 @@ class RestaurantTableViewController: UITableViewController {
         }
         
         // 刪除動作
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") {
+        let deleteAction = UIContextualAction(style: .destructive, title: String(localized: "Delete")) {
             (action, sourceView, completionHandler) in
             
             if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
@@ -183,10 +183,10 @@ class RestaurantTableViewController: UITableViewController {
         deleteAction.image = UIImage(systemName: "trash")
         
         // 分享動作
-        let shareAction = UIContextualAction(style: .normal, title: "Share") {
+        let shareAction = UIContextualAction(style: .normal, title: String(localized: "Share")) {
             (action, sourceView, completionHandler) in
             
-            let defaultText = "Just checking in at " + restaurant.name
+            let defaultText = String(localized: "Just checking in at ") + restaurant.name
             let activityController: UIActivityViewController
             
             if let imageToShare = UIImage(data: restaurant.image) {
