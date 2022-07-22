@@ -1,0 +1,9 @@
+/* Bundle name */
+"CFBundleName" = "FoodPin";
+
+/* Privacy - Camera Usage Description */
+"NSCameraUsageDescription" = "您需要允許應用程式使用您的相機才能拍攝照片。";
+
+/* Privacy - Photo Library Usage Description */
+"NSPhotoLibraryUsageDescription" = "您需要允許應用程式使用您的相簿才能選擇照片。";
+

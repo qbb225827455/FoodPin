@@ -1,0 +1,18 @@
+/* Class = "UIButton"; configuration.title = "NEXT"; ObjectID = "F3F-i8-awK"; */
+"F3F-i8-awK.configuration.title" = "下一步";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "F3F-i8-awK"; */
+"F3F-i8-awK.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "HEADING"; ObjectID = "orA-TT-Kom"; */
+"orA-TT-Kom.text" = "HEADING";
+
+/* Class = "UIButton"; configuration.title = "Skip"; ObjectID = "PaQ-Br-qMt"; */
+"PaQ-Br-qMt.configuration.title" = "直接開始";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "PaQ-Br-qMt"; */
+"PaQ-Br-qMt.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Subheading"; ObjectID = "ZBT-MP-bSF"; */
+"ZBT-MP-bSF.text" = "Subheading";
+

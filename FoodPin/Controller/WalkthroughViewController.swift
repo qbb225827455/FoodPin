@@ -76,11 +76,11 @@ class WalkthroughViewController: UIViewController {
         if let index = walkthroughPageViewController?.currentIndex {
             switch index {
             case 0...1:
-                nextBtn.setTitle("NEXT", for: .normal)
+                nextBtn.setTitle(String(localized: "NEXT"), for: .normal)
                 skipBtn.isHidden = false
                 
             case 2:
-                nextBtn.setTitle("GET STARTED", for: .normal)
+                nextBtn.setTitle(String(localized: "GET STARTED"), for: .normal)
                 skipBtn.isHidden = true
                 
             default:
