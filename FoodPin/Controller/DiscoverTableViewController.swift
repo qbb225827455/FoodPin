@@ -20,7 +20,7 @@ class DiscoverTableViewController: UITableViewController {
     var spinner = UIActivityIndicatorView()
     
     var nowCursor: CKQueryOperation.Cursor?
-    var tempCursor: CKQueryOperation.Cursor?
+    var tempCursor: CKQueryOperation.Cursor? = nil
     var fetchTime: Int = 0
     
     // MARK: - IBOutlet
@@ -127,6 +127,10 @@ class DiscoverTableViewController: UITableViewController {
                     self.tempCursor = cursor
                 }
                 self.nowCursor = cursor
+            } else {
+                if cursor != nil {
+                    self.tempCursor = cursor
+                }
             }
             
             updateSnapshot()
@@ -212,7 +216,7 @@ class DiscoverTableViewController: UITableViewController {
                 }
                 self.nowCursor = cursor
                 
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [self] in
                     btnLoadMore.configuration?.showsActivityIndicator = false
                     btnLoadMore.setTitle("Load more ...", for: .normal)
                 }
@@ -221,6 +225,11 @@ class DiscoverTableViewController: UITableViewController {
             }
             
             pubDatabase.add(nextQueryOperation)
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in
+                btnLoadMore.configuration?.showsActivityIndicator = false
+                btnLoadMore.setTitle("Load more ...", for: .normal)
+            }
         }
     }
     
