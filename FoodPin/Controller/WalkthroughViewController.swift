@@ -38,6 +38,7 @@ class WalkthroughViewController: UIViewController {
                 
             case 2:
                 UserDefaults.standard.set(true, forKey: "hasViewedWalkthrough")
+                addTestData()
                 dismiss(animated: true, completion: nil)
                 
             default:
@@ -50,6 +51,7 @@ class WalkthroughViewController: UIViewController {
     
     @IBAction func skipBtnTapped(sender: UIButton) {
         UserDefaults.standard.set(true, forKey: "hasViewedWalkthrough")
+        addTestData()
         dismiss(animated: true, completion: nil)
     }
     

@@ -45,6 +45,7 @@
 		EEE40647288B040F0085EB75 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEE40649288B040F0085EB75 /* Onboarding.storyboard */; };
 		EEE4064E288B0EB30085EB75 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEE4064C288B0EB30085EB75 /* InfoPlist.strings */; };
 		EEE40651288B0EB30085EB75 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEE4064F288B0EB30085EB75 /* Localizable.strings */; };
+		EEE40653288C3ACA0085EB75 /* addTestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE40652288C3ACA0085EB75 /* addTestData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +95,7 @@
 		EEE4064B288B04400085EB75 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Onboarding.strings"; sourceTree = "<group>"; };
 		EEE4064D288B0EB30085EB75 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		EEE40650288B0EB30085EB75 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		EEE40652288C3ACA0085EB75 /* addTestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addTestData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +208,7 @@
 				EEDF6ABC2857549400D44A18 /* Restaurant.swift */,
 				EEDF6AC4285772A000D44A18 /* RestaurantDiffableDataSource.swift */,
 				EEE4063D288AEDF40085EB75 /* AboutViewDataSource.swift */,
+				EEE40652288C3ACA0085EB75 /* addTestData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 				EEE4063C288872C50085EB75 /* DiscoverTableViewCell.swift in Sources */,
 				EE80DB4C2858D7EB00DEE292 /* RestaurantDetailTextCell.swift in Sources */,
 				EE3C1DA0287D60D900823D6B /* WalkthroughPageViewController.swift in Sources */,
+				EEE40653288C3ACA0085EB75 /* addTestData.swift in Sources */,
 				EE3C1DA9287DD97400823D6B /* AboutTableViewController.swift in Sources */,
 				EE3C1D972876E9EE00823D6B /* NewRestaurantController.swift in Sources */,
 				EE1300212848F92600F5EB49 /* RestaurantTableViewCell.swift in Sources */,
