@@ -218,7 +218,7 @@ class DiscoverTableViewController: UITableViewController {
                 
                 DispatchQueue.main.async { [self] in
                     btnLoadMore.configuration?.showsActivityIndicator = false
-                    btnLoadMore.setTitle("Load more ...", for: .normal)
+                    btnLoadMore.setTitle(String(localized: "Load more ..."), for: .normal)
                 }
                 
                 updateSnapshot()
@@ -228,7 +228,7 @@ class DiscoverTableViewController: UITableViewController {
         } else {
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in
                 btnLoadMore.configuration?.showsActivityIndicator = false
-                btnLoadMore.setTitle("Load more ...", for: .normal)
+                btnLoadMore.setTitle(String(localized: "Load more ..."), for: .normal)
             }
         }
     }
