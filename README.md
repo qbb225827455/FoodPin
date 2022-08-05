@@ -37,7 +37,7 @@
   ##### - 改善 Perceived perfromance
 - [X] Localizing App to reach more users
 
-- [ ] Deploy and testing App on a iOS device
+- [X] Deploy and testing App on a iOS device
 - [ ] Beta Testing with TestFlight and CloudKit release deployment
 - [ ] Submit App to App Store
 - [ ] Haptoic Touch & Content Menu
