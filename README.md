@@ -36,9 +36,9 @@
   ##### - 新增 探索畫面顯示更多餐廳細節
   ##### - 改善 Perceived perfromance
 - [X] Localizing App to reach more users
-
 - [X] Deploy and testing App on a iOS device
-- [ ] Beta Testing with TestFlight and CloudKit release deployment
-- [ ] Submit App to App Store
-- [ ] Haptoic Touch & Content Menu
+- [X] Beta Testing with TestFlight and CloudKit release deployment
+- [X] Submit App to App Store
+- [X] Haptoic Touch & Content Menu
+
 - [ ] User Notifications
