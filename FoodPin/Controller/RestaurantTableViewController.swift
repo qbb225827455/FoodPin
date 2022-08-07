@@ -273,6 +273,78 @@ class RestaurantTableViewController: UITableViewController {
         }
     }
     
+    // MARK: - 建立內容選單
+    
+    override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        
+        guard let restaurant = self.dataSource.itemIdentifier(for: indexPath) else {
+            return nil
+        }
+        
+        let config = UIContextMenuConfiguration(identifier: indexPath.row as NSCopying, previewProvider: {
+            
+            guard let restaurantDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "RestaurantDetailViewController") as? RestaurantDetailViewController else {
+                return nil
+            }
+            
+            restaurantDetailVC.restaurant = restaurant
+            return restaurantDetailVC
+            
+        }, actionProvider: { _ in
+            
+            let favAction = UIAction(title: self.restaurants[indexPath.row].isFavorite ? String(localized: "Remove from favorite") : String(localized: "Save as favorite"), image: UIImage(systemName: "heart")) { _ in
+                let cell = tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
+                self.restaurants[indexPath.row].isFavorite.toggle()
+                cell.favoriteImage.isHidden = !self.restaurants[indexPath.row].isFavorite
+            }
+            
+            let shareAction = UIAction(title: String(localized: "Share"), image: UIImage(systemName: "square.and.arrow.up")) { _ in
+                let defaultText = String(localized: "Just checking in at ") + restaurant.name
+                let activityController: UIActivityViewController
+                
+                if let imageToShare = UIImage(data: restaurant.image) {
+                    activityController = UIActivityViewController(activityItems: [defaultText, imageToShare], applicationActivities: nil)
+                } else {
+                    activityController = UIActivityViewController(activityItems: [defaultText], applicationActivities: nil)
+                }
+                self.present(activityController, animated: true, completion: nil)
+            }
+            
+            let deleteAction = UIAction(title: String(localized: "Delete"), image: UIImage(systemName: "trash"), attributes: .destructive) { _ in
+                if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                    let context = appDelegate.persistentContainer.viewContext
+                    let deleteRestaurant = self.fetchResultController.object(at: indexPath)
+                    
+                    // delete item
+                    context.delete(deleteRestaurant)
+                    appDelegate.saveContext()
+                }
+            }
+            
+            return UIMenu(title: "", children: [favAction, shareAction, deleteAction])
+        })
+        
+        return config
+    }
+    
+    override func tableView(_ tableView: UITableView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
+        
+        guard let selectedRow = configuration.identifier as? Int else {
+            return
+        }
+        
+        guard let restaurantDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "RestaurantDetailViewController") as? RestaurantDetailViewController else {
+            return
+        }
+        
+        restaurantDetailVC.restaurant = self.restaurants[selectedRow]
+        
+        animator.preferredCommitStyle = .pop
+        animator.addCompletion {
+            self.show(restaurantDetailVC, sender: nil)
+        }
+    }
+    
     // MARK: - UIAlertController
 //
 //    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
