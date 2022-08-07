@@ -52,6 +52,7 @@ class WalkthroughViewController: UIViewController {
                 
             case 2:
                 UserDefaults.standard.set(true, forKey: "hasViewedWalkthrough")
+                createQucikAction()
                 addTestData()
                 dismiss(animated: true, completion: nil)
                 
@@ -65,6 +66,7 @@ class WalkthroughViewController: UIViewController {
     
     @IBAction func skipBtnTapped(sender: UIButton) {
         UserDefaults.standard.set(true, forKey: "hasViewedWalkthrough")
+        createQucikAction()
         addTestData()
         dismiss(animated: true, completion: nil)
     }
