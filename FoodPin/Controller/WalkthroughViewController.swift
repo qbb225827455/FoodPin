@@ -7,6 +7,20 @@
 
 import UIKit
 
+func createQucikAction() {
+    
+    // 加入快速動作
+    if let bundleID = Bundle.main.bundleIdentifier {
+        
+        let shortcutItem1 = UIApplicationShortcutItem(type: "\(bundleID).openFavorites", localizedTitle: String(localized: "Show Favorites"), localizedSubtitle: nil, icon: UIApplicationShortcutIcon(systemImageName: "tag"), userInfo: nil)
+        let shortcutItem2 = UIApplicationShortcutItem(type: "\(bundleID).openDiscover", localizedTitle: String(localized: "Discover Restaurants"), localizedSubtitle: nil, icon: UIApplicationShortcutIcon(systemImageName: "eyes"), userInfo: nil)
+        let shortcutItem3 = UIApplicationShortcutItem(type: "\(bundleID).newRestaurant", localizedTitle: String(localized: "New Restaurant"), localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .add), userInfo: nil)
+        let shortcutItem4 = UIApplicationShortcutItem(type: "\(bundleID).openAbout", localizedTitle: String(localized: "About"), localizedSubtitle: nil, icon: UIApplicationShortcutIcon(systemImageName: "info.circle"), userInfo: nil)
+        
+        UIApplication.shared.shortcutItems = [shortcutItem1, shortcutItem2, shortcutItem3, shortcutItem4]
+    }
+}
+
 class WalkthroughViewController: UIViewController {
 
     // MARK: - Properties
