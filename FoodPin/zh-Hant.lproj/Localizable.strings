@@ -1,4 +1,7 @@
 /* No comment provided by engineer. */
+"About" = "關於";
+
+/* No comment provided by engineer. */
 "Camera" = "相機";
 
 /* No comment provided by engineer. */
@@ -17,6 +20,9 @@
 "DISCOVER GREAT RESTAURANTS" = "發現更多美食餐廳";
 
 /* No comment provided by engineer. */
+"Discover Restaurants" = "探索更多餐廳";
+
+/* No comment provided by engineer. */
 "Find restaurants shared by your friends and other foodies" = "透過您的朋友及其他人尋找餐廳";
 
 /* No comment provided by engineer. */
@@ -27,6 +33,9 @@
 
 /* No comment provided by engineer. */
 "Load more ..." = "顯示更多...";
+
+/* No comment provided by engineer. */
+"New Restaurant" = "新增餐廳";
 
 /* No comment provided by engineer. */
 "NEXT" = "下一步";
@@ -41,6 +50,12 @@
 "Rate us on App Store" = "在 App Store 給我們評價";
 
 /* No comment provided by engineer. */
+"Remove from favorite" = "從我的最愛中刪除";
+
+/* No comment provided by engineer. */
+"Save as favorite" = "新增到我的最愛";
+
+/* No comment provided by engineer. */
 "Search and locate your favourite restaurant on Maps" = "在地圖上尋找並找到您喜歡的餐廳";
 
 /* No comment provided by engineer. */
@@ -48,6 +63,9 @@
 
 /* No comment provided by engineer. */
 "Share" = "分享";
+
+/* No comment provided by engineer. */
+"Show Favorites" = "顯示主畫面";
 
 /* No comment provided by engineer. */
 "SHOW YOU THE LOCATION" = "顯示餐廳位置";
