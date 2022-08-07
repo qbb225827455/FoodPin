@@ -709,7 +709,7 @@
         <!--Map View Controller-->
         <scene sceneID="d2L-fe-V7Y">
             <objects>
-                <viewController id="vFn-Cq-r0W" customClass="MapViewController" customModule="FoodPin" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapViewController" id="vFn-Cq-r0W" customClass="MapViewController" customModule="FoodPin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WWx-Qe-Lg9">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
