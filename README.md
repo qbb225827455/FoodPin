@@ -31,14 +31,18 @@
   ##### - 新增 關於畫面
 - [X] WKWebView and SFSafariViewController
 - [X] CloudKit
-  ##### - 新增 上傳餐廳資料到 iCloud
-  ##### - 新增 讀取更多資料的功能
+  ##### - 新增 上傳餐廳資料到 iCloud 的 PublicDatabase
   ##### - 新增 探索畫面顯示更多餐廳細節
   ##### - 改善 Perceived perfromance
-- [X] Localizing App to reach more users
 - [X] Deploy and testing App on a iOS device
 - [X] Beta Testing with TestFlight and CloudKit release deployment
 - [X] Submit App to App Store
 - [X] Haptoic Touch & Content Menu
+  ##### - 新增 長案 APP 圖示的快速動作：顯示主畫面、新增資料、顯示探索畫面、顯示關於畫面
+  ##### - 新增 長案 TableViewCell 的內容選單功能：新增最愛、分享、地圖標示
+- [X] User Notifications
 
-- [ ] User Notifications
+TODO: 
+- [X] 1.語言支援：英文、中文
+- [ ] 2.儲存探索畫面的餐廳資料
+- [ ] 3.探索畫面上拉讀取更多資料
