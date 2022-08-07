@@ -9,9 +9,9 @@ import UIKit
 import CoreData
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UISceneDelegate {
 
-
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -32,6 +32,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UITabBar.appearance().tintColor = UIColor(named: "NavBarTitle")
         UITabBar.appearance().standardAppearance = tabBarAppearence
+        
+        return true
+    }
+    
+    
+    // iOS 13 之前,觸發快速動作的方法
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        
+        completionHandler(handleQuickaction(shortcutItem: shortcutItem))
+    }
+    
+    private func handleQuickaction(shortcutItem: UIApplicationShortcutItem) -> Bool {
+        
+        let shortcutType = shortcutItem.type
+        guard let shortcutID = QuickAction(fullIdentifier: shortcutType) else {
+            return false
+        }
+        
+        guard let tabBarController = window?.rootViewController as? UITabBarController else {
+            return false
+        }
+        
+        switch shortcutID {
+            
+        case .OpenFavorites:
+            tabBarController.selectedIndex = 0
+            
+        case .OpenDiscover:
+            tabBarController.selectedIndex = 1
+            
+        case .NewRestaurant:
+            if let navController = tabBarController.viewControllers?[0] {
+                
+                let restaurantTableViewController = navController.children[0]
+                restaurantTableViewController.performSegue(withIdentifier: "addRestaurant", sender: restaurantTableViewController)
+            }
+            else {
+                return false
+            }
+        case .OpenAbout:
+            tabBarController.selectedIndex = 2
+        }
         
         return true
     }

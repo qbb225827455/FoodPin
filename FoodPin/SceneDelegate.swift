@@ -7,10 +7,26 @@
 
 import UIKit
 
+enum QuickAction: String {
+    
+    case OpenFavorites = "openFavorites"
+    case OpenDiscover = "openDiscover"
+    case NewRestaurant = "newRestaurant"
+    case OpenAbout = "openAbout"
+
+    init?(fullIdentifier: String) {
+
+        guard let shortcutIdentifier = fullIdentifier.components(separatedBy: ".").last else {
+            return nil
+        }
+
+        self.init(rawValue: shortcutIdentifier)
+    }
+}
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -46,7 +62,45 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
+    
+    func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        
+        completionHandler(handleQuickaction(shortcutItem: shortcutItem))
+    }
 
-
+    private func handleQuickaction(shortcutItem: UIApplicationShortcutItem) -> Bool {
+        
+        let shortcutType = shortcutItem.type
+        guard let shortcutID = QuickAction(fullIdentifier: shortcutType) else {
+            return false
+        }
+        
+        guard let tabBarController = window?.rootViewController as? UITabBarController else {
+            return false
+        }
+        
+        switch shortcutID {
+            
+        case .OpenFavorites:
+            tabBarController.selectedIndex = 0
+            
+        case .OpenDiscover:
+            tabBarController.selectedIndex = 1
+            
+        case .NewRestaurant:
+            if let navController = tabBarController.viewControllers?[0] {
+                
+                let restaurantTableViewController = navController.children[0]
+                restaurantTableViewController.performSegue(withIdentifier: "addRestaurant", sender: restaurantTableViewController)
+            }
+            else {
+                return false
+            }
+        case .OpenAbout:
+            tabBarController.selectedIndex = 2
+        }
+        
+        return true
+    }
 }
 
