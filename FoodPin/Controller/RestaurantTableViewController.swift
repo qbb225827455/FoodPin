@@ -310,6 +310,35 @@ class RestaurantTableViewController: UITableViewController {
                 self.present(activityController, animated: true, completion: nil)
             }
             
+            let showMapAction = UIAction(title: String(localized: "Show in map"), image: UIImage(systemName: "mappin.and.ellipse")) { _ in
+                guard let MapVC = self.storyboard?.instantiateViewController(withIdentifier: "MapViewController") as? MapViewController else {
+                    return
+                }
+                
+                MapVC.resaurant = self.restaurants[indexPath.row]
+                
+                let largeConfig = UIImage.SymbolConfiguration(pointSize: 150)
+
+                let backBtn = UIButton(type: .custom)
+                MapVC.view.addSubview(backBtn)
+                
+                backBtn.translatesAutoresizingMaskIntoConstraints = false
+                backBtn.topAnchor.constraint(equalTo: MapVC.view.topAnchor, constant: 25).isActive = true
+                backBtn.trailingAnchor.constraint(equalTo: MapVC.view.trailingAnchor, constant: -25).isActive = true
+                backBtn.widthAnchor.constraint(equalToConstant: 45).isActive = true
+                backBtn.heightAnchor.constraint(equalToConstant: 45).isActive = true
+                
+                backBtn.setImage(UIImage(systemName: "xmark.circle", withConfiguration: largeConfig), for: .normal)
+                backBtn.tintColor = .white
+                backBtn.addTarget(self, action: #selector(self.backBtnAction), for: .touchUpInside)
+                
+                
+                self.present(MapVC, animated: true)
+                
+                //MapVC.hidesBottomBarWhenPushed.toggle()
+                //self.navigationController?.pushViewController(MapVC, animated: true)
+            }
+            
             let deleteAction = UIAction(title: String(localized: "Delete"), image: UIImage(systemName: "trash"), attributes: .destructive) { _ in
                 if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
                     let context = appDelegate.persistentContainer.viewContext
@@ -321,7 +350,7 @@ class RestaurantTableViewController: UITableViewController {
                 }
             }
             
-            return UIMenu(title: "", children: [favAction, shareAction, deleteAction])
+            return UIMenu(title: "", children: [favAction, shareAction, showMapAction, deleteAction])
         })
         
         return config
@@ -343,6 +372,10 @@ class RestaurantTableViewController: UITableViewController {
         animator.addCompletion {
             self.show(restaurantDetailVC, sender: nil)
         }
+    }
+    
+    @objc func backBtnAction() {
+        dismiss(animated: true)
     }
     
     // MARK: - UIAlertController
