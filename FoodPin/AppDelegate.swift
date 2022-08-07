@@ -7,13 +7,16 @@
 
 import UIKit
 import CoreData
+import UserNotifications
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UISceneDelegate {
 
     var window: UIWindow?
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        UNUserNotificationCenter.current().delegate = self
         
         let navBarAppearance = UINavigationBarAppearance()
         
@@ -32,6 +35,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISceneDelegate {
         
         UITabBar.appearance().tintColor = UIColor(named: "NavBarTitle")
         UITabBar.appearance().standardAppearance = tabBarAppearence
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
+            granted, error in
+            
+            if granted {
+                print("User notifications are allowed.")
+            } else {
+                print("User notifications are not allowed.")
+            }
+        }
         
         return true
     }
@@ -137,5 +150,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISceneDelegate {
         }
     }
 
+}
+
+// MARK: - UNUserNotificationCenterDelegate
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        print(response.actionIdentifier)
+        if response.actionIdentifier == "foodpin.reserveAction" {
+            
+            let content = response.notification.request.content
+            
+            if let phone = content.userInfo["phone"] {
+                let telURL = "tel://\(phone)"
+                if let url = URL(string: telURL) {
+                    if UIApplication.shared.canOpenURL(url) {
+                        UIApplication.shared.open(url)
+                    }
+                }
+            }
+        }
+        
+        completionHandler()
+    }
 }
 

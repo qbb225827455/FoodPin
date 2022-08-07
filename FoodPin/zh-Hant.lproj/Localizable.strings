@@ -29,7 +29,13 @@
 "GET STARTED" = "讓我們開始吧！";
 
 /* No comment provided by engineer. */
+"I recommend you to check out %@. The restaurant is one of your favorites. It is located ar %@. Would you like to give it a try?" = "我建議您看看喜愛的餐廳之一「 %@ 」。它位於「 %@ 」你想試一試嗎？";
+
+/* No comment provided by engineer. */
 "Just checking in at " = "Just checking in at ";
+
+/* No comment provided by engineer. */
+"Later" = "稍後";
 
 /* No comment provided by engineer. */
 "Load more ..." = "顯示更多...";
@@ -51,6 +57,12 @@
 
 /* No comment provided by engineer. */
 "Remove from favorite" = "從我的最愛中刪除";
+
+/* No comment provided by engineer. */
+"Reserve a table" = "訂位";
+
+/* No comment provided by engineer. */
+"Restaurant Recommendation" = "餐廳推薦";
 
 /* No comment provided by engineer. */
 "Save as favorite" = "新增到我的最愛";
@@ -75,6 +87,9 @@
 
 /* No comment provided by engineer. */
 "Tell us your feedback" = "告訴我們您的意見";
+
+/* No comment provided by engineer. */
+"Try new food today" = "嘗嘗新食物吧！";
 
 /* No comment provided by engineer. */
 "We can't proceed because one of the fields is blank. Please note that all fields are required" = "請確認是否有欄位沒有填入內容。";

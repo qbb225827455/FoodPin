@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import UserNotifications
 
 class RestaurantTableViewController: UITableViewController {
 
@@ -65,6 +66,8 @@ class RestaurantTableViewController: UITableViewController {
         //searchController.searchBar.prompt = "123"
         
         fetchRestaurantData()
+        
+        prepareNotification()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -376,6 +379,55 @@ class RestaurantTableViewController: UITableViewController {
     
     @objc func backBtnAction() {
         dismiss(animated: true)
+    }
+    
+    // MARK: - UserNotifications
+    
+    func prepareNotification() {
+        
+        if restaurants.isEmpty {
+            return
+        }
+        
+        let chooseRandomRestaurant = Int.random(in: 0..<restaurants.count)
+        let suggestedRestaurant = restaurants[chooseRandomRestaurant]
+        
+        // 建立通知
+        let content = UNMutableNotificationContent()
+        content.title = String(localized: "Restaurant Recommendation")
+        content.subtitle = String(localized: "Try new food today")
+        content.body = String(localized: "I recommend you to check out \(suggestedRestaurant.name). The restaurant is one of your favorites. It is located ar \(suggestedRestaurant.location). Would you like to give it a try?")
+        
+        let tmpDirURL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+        let tmpFileURL = tmpDirURL.appendingPathComponent("suggest-restaurant.jpg")
+        
+        if let image = UIImage(data: suggestedRestaurant.image as Data) {
+            
+            try? image.jpegData(compressionQuality: 1.0)?.write(to: tmpFileURL)
+            if let restaurantImage = try? UNNotificationAttachment(identifier: "restaurantImage", url: tmpFileURL, options: nil) {
+                content.attachments = [restaurantImage]
+            }
+        }
+        
+        let categoryIdentifier = "foodpin.restaurantaction"
+        
+        let reserveActionIcon = UNNotificationActionIcon(systemImageName: "phone")
+        let reserveAction = UNNotificationAction(identifier: "foodpin.reserveAction", title: String(localized: "Reserve a table"), options: [.foreground], icon: reserveActionIcon)
+        
+        let cancelActionIcon = UNNotificationActionIcon(systemImageName: "x.square")
+        let cancelAction = UNNotificationAction(identifier: "foodpin.cancelAction", title: String(localized: "Later"), options: [], icon: cancelActionIcon)
+        
+        let category = UNNotificationCategory(identifier: categoryIdentifier, actions: [reserveAction, cancelAction], intentIdentifiers: [], options: [])
+        content.categoryIdentifier = categoryIdentifier
+        
+        content.sound = UNNotificationSound.default
+        content.userInfo = ["phone": suggestedRestaurant.phone]
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
+        let request = UNNotificationRequest(identifier: "foodpin.resaurantSuggestion", content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        UNUserNotificationCenter.current().setNotificationCategories([category])
     }
     
     // MARK: - UIAlertController
