@@ -33,6 +33,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISceneDelegate {
         UITabBar.appearance().tintColor = UIColor(named: "NavBarTitle")
         UITabBar.appearance().standardAppearance = tabBarAppearence
         
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
+            granted, error in
+            
+            if granted {
+                print("User notifications are allowed.")
+            } else {
+                print("User notifications are not allowed.")
+            }
+        }
+        
         return true
     }
     
