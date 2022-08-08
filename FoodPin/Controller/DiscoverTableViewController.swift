@@ -317,5 +317,56 @@ class DiscoverTableViewController: UITableViewController {
         
         dataSource.apply(snapshot, animatingDifferences: false)
     }
+    
+    // MARK: - 建立內容選單
+    
+    override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        
+        guard let restaurantRecord = self.dataSource.itemIdentifier(for: indexPath) else {
+            return nil
+        }
+        
+        let config = UIContextMenuConfiguration(identifier: indexPath.row as NSCopying, previewProvider: {
+            
+            guard let ContentMenuPreviewVC = self.storyboard?.instantiateViewController(withIdentifier: "ContentMenuPreviewViewController") as? ContentMenuPreviewViewController else {
+                return nil
+            }
+            
+            
+            DispatchQueue.main.async {
+                ContentMenuPreviewVC.contentMenuPreviewView.nameLabel.text = restaurantRecord.object(forKey: "name") as? String
+                ContentMenuPreviewVC.contentMenuPreviewView.typeLabel.text = restaurantRecord.object(forKey: "type") as? String
+            }
+            
+            let cloudContainer = CKContainer.default()
+            let pubDatabase = cloudContainer.publicCloudDatabase
+            
+            let fetchRecordsImageOperation = CKFetchRecordsOperation(recordIDs: [restaurantRecord.recordID])
+            fetchRecordsImageOperation.desiredKeys = ["image"]
+            fetchRecordsImageOperation.queuePriority = .veryHigh
+            
+            fetchRecordsImageOperation.perRecordResultBlock = { recordID, result in
+                
+                do {
+                    let restaurantRecord = try result.get()
+                    
+                    if let image = restaurantRecord.object(forKey: "image"),
+                       let imageAsset = image as? CKAsset,
+                       let imageData = try? Data.init(contentsOf: imageAsset.fileURL!) {
+                        
+                        DispatchQueue.main.async {
+                            ContentMenuPreviewVC.contentMenuPreviewView.restaurantImageView.image = UIImage(data: imageData)
+                        }
+                    }
+                    
+                } catch {
+                    print("Fail to get image - \(error.localizedDescription)")
+                }
+            }
+            
+            pubDatabase.add(fetchRecordsImageOperation)
+            
+            return ContentMenuPreviewVC
+            
 
 }
