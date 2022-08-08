@@ -67,7 +67,7 @@ class RestaurantTableViewController: UITableViewController {
         
         fetchRestaurantData()
         
-        prepareNotification()
+        //prepareNotification()
     }
     
     override func viewWillAppear(_ animated: Bool) {
