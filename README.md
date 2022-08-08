@@ -41,7 +41,7 @@
     - 新增 長案 TableViewCell 的內容選單功能：新增最愛、分享
 - [X] User Notifications
 
-TODO: 
+## :pushpin: TODO: 
 - [X] 語言支援：英文、中文
 - [X] 探索畫面顯示更多餐廳細節
 - [X] 長案 TableViewCell 的內容選單功能：地圖標示
