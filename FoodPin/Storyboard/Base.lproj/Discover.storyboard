@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -99,6 +100,70 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dpG-5w-7QC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1543" y="795"/>
+        </scene>
+        <!--Content Menu Preview View Controller-->
+        <scene sceneID="NSU-y2-9Lf">
+            <objects>
+                <viewController storyboardIdentifier="ContentMenuPreviewViewController" id="zPF-zC-Ezd" customClass="ContentMenuPreviewViewController" customModule="FoodPin" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BJI-yC-ha6" customClass="ContentMenuPreviweView" customModule="FoodPin" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="500"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fA1-It-WUk" userLabel="Restaurant Image View">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="500"/>
+                            </imageView>
+                            <view alpha="0.20000000298023224" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lQS-HK-rt9" userLabel="Dim View">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="500"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="l2n-DQ-UxR">
+                                <rect key="frame" x="20" y="423" width="244" height="57"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gYa-1L-jWR">
+                                        <rect key="frame" x="0.0" y="0.0" width="64" height="30"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o2o-oH-eFc">
+                                        <rect key="frame" x="0.0" y="40" width="33.5" height="17"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="9DS-kE-xuN"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="fA1-It-WUk" secondAttribute="trailing" id="9ac-Hc-kMC"/>
+                            <constraint firstItem="9DS-kE-xuN" firstAttribute="trailing" secondItem="l2n-DQ-UxR" secondAttribute="trailing" constant="150" id="F0L-wQ-rJH"/>
+                            <constraint firstItem="lQS-HK-rt9" firstAttribute="leading" secondItem="BJI-yC-ha6" secondAttribute="leading" id="Prl-Ww-rcd"/>
+                            <constraint firstAttribute="bottom" secondItem="lQS-HK-rt9" secondAttribute="bottom" id="SUd-Is-B9L"/>
+                            <constraint firstItem="l2n-DQ-UxR" firstAttribute="leading" secondItem="9DS-kE-xuN" secondAttribute="leading" constant="20" id="Ss0-Vd-8D3"/>
+                            <constraint firstAttribute="bottom" secondItem="fA1-It-WUk" secondAttribute="bottom" id="f4P-Rq-O10"/>
+                            <constraint firstItem="fA1-It-WUk" firstAttribute="leading" secondItem="BJI-yC-ha6" secondAttribute="leading" id="gU7-6w-D7F"/>
+                            <constraint firstItem="lQS-HK-rt9" firstAttribute="top" secondItem="BJI-yC-ha6" secondAttribute="top" id="hsc-qm-uuo"/>
+                            <constraint firstItem="fA1-It-WUk" firstAttribute="top" secondItem="BJI-yC-ha6" secondAttribute="top" id="ohw-S4-Pvr"/>
+                            <constraint firstItem="9DS-kE-xuN" firstAttribute="bottom" secondItem="l2n-DQ-UxR" secondAttribute="bottom" constant="20" id="t87-Qp-dpg"/>
+                            <constraint firstAttribute="trailing" secondItem="lQS-HK-rt9" secondAttribute="trailing" id="vCq-ay-ZXH"/>
+                        </constraints>
+                        <connections>
+                            <outlet property="nameLabel" destination="gYa-1L-jWR" id="hSF-Vr-8BM"/>
+                            <outlet property="restaurantImageView" destination="fA1-It-WUk" id="RrC-c4-7Pe"/>
+                            <outlet property="typeLabel" destination="o2o-oH-eFc" id="IQ6-Uu-OIC"/>
+                        </connections>
+                    </view>
+                    <size key="freeformSize" width="414" height="500"/>
+                    <connections>
+                        <outlet property="contentMenuPreviewView" destination="BJI-yC-ha6" id="mal-tH-HSx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zmc-Jl-600" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2236" y="795"/>
         </scene>
         <!--Discover-->
         <scene sceneID="Z2O-3D-QDf">
