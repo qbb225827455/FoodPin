@@ -368,5 +368,56 @@ class DiscoverTableViewController: UITableViewController {
             
             return ContentMenuPreviewVC
             
+        }, actionProvider: { _ in
+            
+            let addAction = UIAction(title: String(localized: "Save restaurant"), image: UIImage(systemName: "plus")) { _ in
+                
+                if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
 
+                    var restaurant: Restaurant = Restaurant()
+
+                    restaurant = Restaurant(context: appDelegate.persistentContainer.viewContext)
+                    restaurant.name = (restaurantRecord.object(forKey: "name") as? String)!
+                    restaurant.type = (restaurantRecord.object(forKey: "type") as? String)!
+                    restaurant.location = (restaurantRecord.object(forKey: "location") as? String)!
+                    restaurant.phone = (restaurantRecord.object(forKey: "phone") as? String)!
+                    restaurant.summary = (restaurantRecord.object(forKey: "description") as? String)!
+                    restaurant.isFavorite = false
+
+                    let cloudContainer = CKContainer.default()
+                    let pubDatabase = cloudContainer.publicCloudDatabase
+                    
+                    let fetchRecordsImageOperation = CKFetchRecordsOperation(recordIDs: [restaurantRecord.recordID])
+                    fetchRecordsImageOperation.desiredKeys = ["image"]
+                    fetchRecordsImageOperation.queuePriority = .veryHigh
+                    
+                    fetchRecordsImageOperation.perRecordResultBlock = { recordID, result in
+                        
+                        do {
+                            let restaurantRecord = try result.get()
+                            
+                            if let image = restaurantRecord.object(forKey: "image"),
+                               let imageAsset = image as? CKAsset,
+                               let imageData = try? Data.init(contentsOf: imageAsset.fileURL!) {
+                                
+                                restaurant.image = imageData
+                            }
+                            
+                            print("-----Saving data to context...-----")
+                            appDelegate.saveContext()
+                            
+                        } catch {
+                            print("Fail to get image - \(error.localizedDescription)")
+                        }
+                    }
+                    
+                    pubDatabase.add(fetchRecordsImageOperation)
+                }
+            }
+            
+            return UIMenu(title: "", children: [addAction])
+        })
+        
+        return config
+    }
 }
