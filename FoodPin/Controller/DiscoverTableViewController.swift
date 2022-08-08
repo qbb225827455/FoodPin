@@ -100,7 +100,7 @@ class DiscoverTableViewController: UITableViewController {
         query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         
         let queryOperation = CKQueryOperation(query: query)
-        queryOperation.desiredKeys = ["name", "location", "type", "description"]
+        queryOperation.desiredKeys = ["name", "location", "type", "description", "phone"]
         queryOperation.queuePriority = .veryHigh
         queryOperation.resultsLimit = 10
         queryOperation.recordMatchedBlock = {recordID, result -> Void in
@@ -189,7 +189,7 @@ class DiscoverTableViewController: UITableViewController {
         if let cursor = self.nowCursor {
             
             let nextQueryOperation = CKQueryOperation(cursor: cursor)
-            nextQueryOperation.desiredKeys = ["name", "location", "type", "description"]
+            nextQueryOperation.desiredKeys = ["name", "location", "type", "description", "phone"]
             nextQueryOperation.queuePriority = .veryHigh
             nextQueryOperation.resultsLimit = 10
             nextQueryOperation.recordMatchedBlock = {recordID, result -> Void in
