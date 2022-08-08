@@ -46,6 +46,8 @@
 		EEE4064E288B0EB30085EB75 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEE4064C288B0EB30085EB75 /* InfoPlist.strings */; };
 		EEE40651288B0EB30085EB75 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEE4064F288B0EB30085EB75 /* Localizable.strings */; };
 		EEE40653288C3ACA0085EB75 /* addTestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE40652288C3ACA0085EB75 /* addTestData.swift */; };
+		EEE4065928A170FB0085EB75 /* ContentMenuPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE4065828A170FB0085EB75 /* ContentMenuPreviewViewController.swift */; };
+		EEE4065B28A1712E0085EB75 /* ContentMenuPreviweView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE4065A28A1712E0085EB75 /* ContentMenuPreviweView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +98,8 @@
 		EEE4064D288B0EB30085EB75 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		EEE40650288B0EB30085EB75 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		EEE40652288C3ACA0085EB75 /* addTestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addTestData.swift; sourceTree = "<group>"; };
+		EEE4065828A170FB0085EB75 /* ContentMenuPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentMenuPreviewViewController.swift; sourceTree = "<group>"; };
+		EEE4065A28A1712E0085EB75 /* ContentMenuPreviweView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentMenuPreviweView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +202,7 @@
 				EE3C1DA8287DD97400823D6B /* AboutTableViewController.swift */,
 				EE3C1DAA287DE9C600823D6B /* WebViewController.swift */,
 				EE3C1DAF288580FA00823D6B /* DiscoverTableViewController.swift */,
+				EEE4065828A170FB0085EB75 /* ContentMenuPreviewViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -223,6 +228,7 @@
 				EE417E1A2874542E00274C66 /* RestaurantDetailMapCell.swift */,
 				EE3C1D942876E72600823D6B /* RoundedTextField.swift */,
 				EEE4063B288872C50085EB75 /* DiscoverTableViewCell.swift */,
+				EEE4065A28A1712E0085EB75 /* ContentMenuPreviweView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -332,9 +338,11 @@
 				EE417E1428732BA900274C66 /* UIColor+Ext.swift in Sources */,
 				EE13000D2848BD0E00F5EB49 /* SceneDelegate.swift in Sources */,
 				EEDF6AC5285772A000D44A18 /* RestaurantDiffableDataSource.swift in Sources */,
+				EEE4065928A170FB0085EB75 /* ContentMenuPreviewViewController.swift in Sources */,
 				EE4409A028587C900059AAB2 /* RestaurantDetailViewController.swift in Sources */,
 				EE4409A82858A93A0059AAB2 /* RestaurantDetailHeaderView.swift in Sources */,
 				EE3C1DAB287DE9C600823D6B /* WebViewController.swift in Sources */,
+				EEE4065B28A1712E0085EB75 /* ContentMenuPreviweView.swift in Sources */,
 				EE3C1D9E287D5EF000823D6B /* WalkthroughContentViewController.swift in Sources */,
 				EE3C1D952876E72600823D6B /* RoundedTextField.swift in Sources */,
 				EE3C1DA2287D680700823D6B /* WalkthroughViewController.swift in Sources */,
