@@ -133,7 +133,8 @@ class RestaurantTableViewController: UITableViewController {
         tableView.backgroundView?.isHidden = restaurants.count == 0 ? false : true
     }
     
-    // MARK: - 處理「向左滑動」動作
+    // MARK: - TableView Delegate
+    // MARK: 處理「向左滑動」動作
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
@@ -200,7 +201,7 @@ class RestaurantTableViewController: UITableViewController {
         return swipeConfiguration
     }
     
-    // MARK: - 處理「向右滑動」動作
+    // MARK: 處理「向右滑動」動作
     
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
@@ -231,52 +232,7 @@ class RestaurantTableViewController: UITableViewController {
         return swipeConfiguration
     }
     
-    // MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showRestaurantDetail" {
-            if let indexPath = tableView.indexPathForSelectedRow {
-                let destnationController = segue.destination as! RestaurantDetailViewController
-                destnationController.restaurant = self.restaurants[indexPath.row]
-                destnationController.hidesBottomBarWhenPushed = true
-            }
-        }
-    }
-
-    @IBAction func closeAddView(segue: UIStoryboardSegue) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    // MARK: - Core Data
-    
-    func fetchRestaurantData(searchText: String = "") {
-        
-        // get data
-        let fetchRequest: NSFetchRequest<Restaurant> = Restaurant.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        
-        if !searchText.isEmpty {
-            fetchRequest.predicate = NSPredicate(format: "name CONTAINS[c] %@ OR location CONTAINS[c] %@", searchText, searchText)
-        }
-        
-        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-            let context = appDelegate.persistentContainer.viewContext
-            
-            fetchResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-            fetchResultController.delegate = self
-            
-            do {
-                try fetchResultController.performFetch()
-                updateSnapshot(animatingChange: searchText.isEmpty ? false : true)
-            }
-            catch {
-                print(error)
-            }
-        }
-    }
-    
-    // MARK: - 建立內容選單
+    // MARK: 建立內容選單
     
     override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         
@@ -379,6 +335,66 @@ class RestaurantTableViewController: UITableViewController {
     
     @objc func backBtnAction() {
         dismiss(animated: true)
+    }
+    
+    // MARK: TableViewCell 淡入動畫
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        let cellTransform = CATransform3DTranslate(CATransform3DIdentity, -200, 0, 0)
+        
+        cell.alpha = 0
+        cell.layer.transform = cellTransform
+        
+        UIView.animate(withDuration: 1.0, delay: 0, options: [], animations: {
+            cell.layer.transform = CATransform3DIdentity;
+            cell.alpha = 1
+        }, completion: nil)
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showRestaurantDetail" {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let destnationController = segue.destination as! RestaurantDetailViewController
+                destnationController.restaurant = self.restaurants[indexPath.row]
+                destnationController.hidesBottomBarWhenPushed = true
+            }
+        }
+    }
+
+    @IBAction func closeAddView(segue: UIStoryboardSegue) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: - Core Data
+    
+    func fetchRestaurantData(searchText: String = "") {
+        
+        // get data
+        let fetchRequest: NSFetchRequest<Restaurant> = Restaurant.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        if !searchText.isEmpty {
+            fetchRequest.predicate = NSPredicate(format: "name CONTAINS[c] %@ OR location CONTAINS[c] %@", searchText, searchText)
+        }
+        
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            let context = appDelegate.persistentContainer.viewContext
+            
+            fetchResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchResultController.delegate = self
+            
+            do {
+                try fetchResultController.performFetch()
+                updateSnapshot(animatingChange: searchText.isEmpty ? false : true)
+            }
+            catch {
+                print(error)
+            }
+        }
     }
     
     // MARK: - UserNotifications

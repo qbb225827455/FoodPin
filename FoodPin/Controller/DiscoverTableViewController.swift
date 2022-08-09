@@ -318,7 +318,8 @@ class DiscoverTableViewController: UITableViewController {
         dataSource.apply(snapshot, animatingDifferences: false)
     }
     
-    // MARK: - 建立內容選單
+    // MARK: - TableView Delegate
+    // MARK: 建立內容選單
     
     override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         
@@ -419,5 +420,16 @@ class DiscoverTableViewController: UITableViewController {
         })
         
         return config
+    }
+    
+    // MARK: TableViewCell 淡入動畫
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        cell.alpha = 0
+        
+        UIView.animate(withDuration: 2, delay: 0, options: [], animations: {
+            cell.alpha = 1
+        }, completion: nil)
     }
 }
