@@ -74,13 +74,17 @@ extension MapViewController: MKMapViewDelegate {
         
         if annotationView == nil {
             annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            annotationView?.canShowCallout = true
         }
         
-        annotationView?.glyphText = "🍽"
+        annotationView?.glyphText = "😋"
         //annotationView?.glyphImage = UIImage(systemName: "arrowtriangle.down.circle")
         annotationView?.markerTintColor = UIColor.orange
         
+        let leftIconView = UIImageView(frame: CGRect.init(x: 0, y: 0, width: 53, height: 53))
+        leftIconView.image = UIImage(data: resaurant.image)
+        annotationView?.leftCalloutAccessoryView = leftIconView
+        
         return annotationView
     }
-    
 }
