@@ -12,6 +12,7 @@ class RateViewController: UIViewController {
     // MARK: - Properties
     
     var restaurant = Restaurant()
+    var blurEffectView: UIVisualEffectView?
     
     // MARK: - IBOutlet
     
@@ -28,9 +29,9 @@ class RateViewController: UIViewController {
         
         // 背景模糊
         let blurEffect = UIBlurEffect(style: .dark)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = view.frame
-        backgroundImageView.addSubview(blurEffectView)
+        blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView?.frame = view.bounds
+        backgroundImageView.addSubview(blurEffectView!)
         
         // rateBtn tranform
         let moveRightTransform = CGAffineTransform.init(translationX: 600, y: 0)
@@ -65,31 +66,7 @@ class RateViewController: UIViewController {
         }, completion: nil)
     }
     
-    // MARK: - 裝置有無旋轉
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        print("viewWillTransition -> width:\(view.frame.width), height:\(view.frame.height)")
-    }
-    override func viewWillLayoutSubviews() {
-        updateblurEffectView()
-        print("viewWillLayoutSubviews -> width:\(view.frame.width), height:\(view.frame.height)")
-    }
-    
-    // MARK: - 更新背景圖片大小
-    
-    func updateblurEffectView() {
-        
-        // remove all UIVisualEffectView subview
-        for subview in backgroundImageView.subviews {
-            if subview is UIVisualEffectView {
-                subview.removeFromSuperview()
-            }
-        }
-        
-        let blurEffect = UIBlurEffect(style: .dark)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = view.frame
-        
-        backgroundImageView.addSubview(blurEffectView)
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        blurEffectView?.frame = view.bounds
     }
 }
