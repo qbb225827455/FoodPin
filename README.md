@@ -1,5 +1,7 @@
 # FoodPin
 
+Demo video: https://youtu.be/hWwuo1uG8j4
+
 ## :bookmark: Checklist
 
 - [X] Customize Table Views use Prototype Cell & Diffable Data Source
